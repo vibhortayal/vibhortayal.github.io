@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" href="data:," />
+  <title>Competitive Landscape</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#10141a;--muted:#515b69;--line:#d9dee5;--paper:#f6f7f9;--white:#fff;
+      --monitor:#315efb;--optimize:#ed6541;--citation:#9a5c00;--feed:#0d8a73;--protocol:#6936c8;--attrib:#c22d68;
+      --green:#08755f;--amber:#9a5c00;--red:#ae2c2c;--shadow:0 12px 30px rgba(16,20,26,.08)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,system-ui,sans-serif;line-height:1.5}
+    a{color:inherit;text-underline-offset:3px}
+    button{font:inherit}
+    .wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+    .hero{padding:70px 0 44px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%,#f6f7f9 100%)}
+    .meta{font:600 12px/1.3 "IBM Plex Mono",monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--optimize)}
+    h1{font-size:clamp(40px,7vw,86px);line-height:.98;letter-spacing:-.055em;max-width:960px;margin:22px 0 26px;font-weight:800}
+    .hero-copy{max-width:790px;font-size:clamp(18px,2vw,23px);line-height:1.55;color:#303947;margin:0}
+    .hero-copy strong{color:var(--ink)}
+    .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;margin-top:54px;align-items:end}
+    .thesis{border-left:4px solid var(--optimize);padding:3px 0 3px 22px;font-size:17px;color:#303947}
+    .thesis strong{display:block;font-size:22px;color:var(--ink);margin-bottom:5px}
+    .snapshot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+    .stat{background:#fff;padding:18px}.stat b{display:block;font-size:29px;letter-spacing:-.04em}.stat span{font-size:12px;color:var(--muted)}
+    .section{padding:72px 0;border-bottom:1px solid var(--line)}
+    .section-head{display:grid;grid-template-columns:220px 1fr;gap:34px;margin-bottom:34px;align-items:start}
+    .section-label{font:600 12px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    h2{font-size:clamp(28px,4vw,48px);line-height:1.08;letter-spacing:-.04em;margin:0;max-width:800px}
+    .lede{font-size:17px;color:var(--muted);max-width:760px;margin:14px 0 0}
+    .lanes{display:grid;gap:10px}
+    .lane{display:grid;grid-template-columns:45px 210px minmax(140px,1fr) 160px;gap:16px;align-items:center;background:white;border:1px solid var(--line);padding:15px 18px}
+    .lane-code{font:600 13px "IBM Plex Mono",monospace}
+    .lane-name{font-weight:700}
+    .bar{height:12px;background:#e9ecf0;position:relative;overflow:hidden}.bar i{display:block;height:100%;background:var(--c);width:var(--w)}
+    .lane-status{text-align:right;font:600 12px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--c)}
+    .lane small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .note{margin-top:18px;color:var(--muted);font-size:13px}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 24px}
+    .filter{border:1px solid #bac1cb;background:#fff;padding:9px 13px;border-radius:999px;cursor:pointer;font-weight:700;font-size:13px;color:#3e4754}
+    .filter:hover,.filter:focus-visible{border-color:var(--ink);outline:none}.filter.active{background:var(--ink);color:white;border-color:var(--ink)}
+    .companies{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .company{background:white;border:1px solid var(--line);padding:22px;display:flex;flex-direction:column;min-height:260px}
+    .company[hidden]{display:none}
+    .company-top{display:flex;justify-content:space-between;gap:16px;align-items:start}
+    .company h3{font-size:23px;letter-spacing:-.025em;margin:0}.tier{font:600 10px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;margin-top:5px}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+    .tag{font:600 10px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.04em;padding:5px 7px;border:1px solid color-mix(in srgb,var(--c) 45%,white);color:var(--c);background:color-mix(in srgb,var(--c) 8%,white)}
+    .company p{margin:0;color:#303947;font-size:14px}
+    .fact{margin-top:16px;padding-top:14px;border-top:1px solid #e6e9ed;display:grid;grid-template-columns:90px 1fr;gap:10px;font-size:13px}.fact b{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+    .company footer{margin-top:auto;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .source{font-size:12px;font-weight:700;color:#273f9c}.detail-btn{border:0;background:none;padding:4px 0;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer;text-underline-offset:3px}
+    .more{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+    .no-results{background:white;border:1px solid var(--line);padding:28px;color:var(--muted)}
+    .gap-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+    .priority{background:#10141a;color:#fff;padding:32px}.priority .rank{font:600 12px "IBM Plex Mono",monospace;color:#ff9477;text-transform:uppercase;letter-spacing:.09em}.priority h3{font-size:32px;line-height:1.1;letter-spacing:-.035em;margin:12px 0}.priority p{color:#c8ced7;margin:0 0 22px}.moat{border-top:1px solid #40454e;padding-top:18px}.moat b{display:block;color:#fff;font-size:13px}.moat span{font-size:13px;color:#c8ced7}
+    .gap-list{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+    .gap{background:#fff;padding:18px 20px}.gap-num{font:600 11px "IBM Plex Mono",monospace;color:var(--muted)}.gap h3{font-size:17px;margin:4px 0}.gap p{font-size:13px;color:var(--muted);margin:0}
+    .path{margin-top:22px;background:white;border:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr)}
+    .phase{padding:24px;border-right:1px solid var(--line)}.phase:last-child{border-right:0}.phase b{font:600 11px "IBM Plex Mono",monospace;color:var(--optimize);text-transform:uppercase}.phase h3{margin:8px 0;font-size:18px}.phase p{margin:0;color:var(--muted);font-size:13px}
+    .timeline{position:relative;padding-left:28px;display:grid;gap:0}.timeline:before{content:"";position:absolute;left:5px;top:7px;bottom:8px;width:1px;background:#bfc5cd}.event{position:relative;padding:0 0 28px 22px}.event:last-child{padding-bottom:0}.event:before{content:"";position:absolute;left:-28px;top:7px;width:11px;height:11px;border:3px solid var(--paper);background:var(--ink);border-radius:50%}.event time{font:600 11px "IBM Plex Mono",monospace;color:var(--muted);text-transform:uppercase}.event h3{margin:4px 0;font-size:18px}.event p{margin:0;color:var(--muted);font-size:14px;max-width:760px}
+    .platform-strip{margin-top:34px;border-top:1px solid var(--line);padding-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.platform h3{font-size:16px;margin:0 0 8px}.platform p{font-size:13px;color:var(--muted);margin:0}
+    .caveats{background:#fff;border:1px solid var(--line);padding:25px;columns:2;column-gap:45px}.caveats p{break-inside:avoid;margin:0 0 16px;font-size:13px;color:var(--muted)}.caveats strong{color:var(--ink)}
+    .sources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 22px}.sources a{font-size:12px;color:#384151;text-decoration-color:#aeb4bd;overflow-wrap:anywhere}
+    .footer{padding:38px 0 56px;color:var(--muted);font-size:12px}.footer .wrap{display:flex;justify-content:space-between;gap:20px;align-items:start}.stamp{font-family:"IBM Plex Mono",monospace}
+    @media(max-width:800px){
+      .wrap{width:min(100% - 28px,1180px)}.hero{padding:48px 0 34px}.hero-grid,.section-head,.gap-grid{grid-template-columns:1fr;gap:26px}.hero-grid{margin-top:38px}.section{padding:52px 0}.section-head{margin-bottom:28px}.companies{grid-template-columns:1fr}.lane{grid-template-columns:36px 1fr auto;gap:9px 12px}.lane .bar{grid-column:2/4}.lane-status{grid-column:3}.path{grid-template-columns:1fr}.phase{border-right:0;border-bottom:1px solid var(--line)}.phase:last-child{border-bottom:0}.platform-strip{grid-template-columns:1fr}.caveats{columns:1}.sources{grid-template-columns:1fr}.footer .wrap{flex-direction:column}.company{min-height:0}
+    }
+    @media(max-width:420px){h1{font-size:43px}.snapshot{grid-template-columns:1fr}.lane{padding:14px 12px}.lane-name{font-size:14px}.lane-status{font-size:10px}.company{padding:18px}.priority{padding:24px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="meta"><span>Market map</span><span class="dot"></span><span>September 2026 snapshot</span></div>
+      <h1>The market is crowded at observation. Sparse at action.</h1>
+      <p class="hero-copy">More than twenty companies now monitor how brands appear in AI answers. Far fewer can <strong>earn third-party citations, syndicate catalogs into agent channels, or tie a recommendation to revenue.</strong> That is the opening.</p>
+      <div class="hero-grid">
+        <div class="thesis"><strong>Founder thesis</strong>Do not build another share-of-answer dashboard. Start with a downstream job a CFO or commerce lead can buy: distribution, executed fixes, or attributable revenue.</div>
+        <div class="snapshot" aria-label="Market snapshot">
+          <div class="stat"><b>20+</b><span>visibility-monitoring tools</span></div>
+          <div class="stat"><b>$1B</b><span>Profound valuation, Feb 2026</span></div>
+          <div class="stat"><b>$1.9B</b><span>Adobe–Semrush announced deal</span></div>
+          <div class="stat"><b>2–3</b><span>serious attribution players</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="lanes">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">01 / Market density</div>
+          <div><h2>Six lanes. Only one is saturated.</h2><p class="lede">The category’s center of gravity is shifting from monitoring answers to changing outcomes. Counts are approximate, based on the researched set rather than a complete census.</p></div>
+        </div>
+        <div class="lanes">
+          <div class="lane" style="--c:var(--monitor);--w:100%"><div class="lane-code">A</div><div><div class="lane-name">Visibility monitoring</div><small>Profound, Peec, Otterly + long tail</small></div><div class="bar" aria-label="Very crowded"><i></i></div><div class="lane-status">Very crowded · 20+</div></div>
+          <div class="lane" style="--c:var(--optimize);--w:62%"><div class="lane-code">B</div><div><div class="lane-name">On-page optimization</div><small>AirOps, Frase, Writesonic</small></div><div class="bar" aria-label="Moderately crowded"><i></i></div><div class="lane-status">Moderate · 8–10</div></div>
+          <div class="lane" style="--c:var(--citation);--w:24%"><div class="lane-code">C</div><div><div class="lane-name">Citation & outreach</div><small>AirOps Offsite; partnerships; agencies</small></div><div class="bar" aria-label="Thin"><i></i></div><div class="lane-status">Thin · 3–4</div></div>
+          <div class="lane" style="--c:var(--feed);--w:26%"><div class="lane-code">D</div><div><div class="lane-name">Agent feed distribution</div><small>Genrise, Lantern, feed incumbents</small></div><div class="bar" aria-label="Thin"><i></i></div><div class="lane-status">Thin · 3–5</div></div>
+          <div class="lane" style="--c:var(--protocol);--w:18%"><div class="lane-code">E</div><div><div class="lane-name">Protocol infrastructure</div><small>Platforms own rails; brand layer open</small></div><div class="bar" aria-label="Startup whitespace"><i></i></div><div class="lane-status">Whitespace</div></div>
+          <div class="lane" style="--c:var(--attrib);--w:18%"><div class="lane-code">F</div><div><div class="lane-name">Revenue attribution</div><small>Petra Labs, Goodie, AthenaHQ</small></div><div class="bar" aria-label="Thin"><i></i></div><div class="lane-status">Thin · 2–3</div></div>
+        </div>
+        <p class="note">Monitoring entry prices have compressed to roughly $29–99/month across the long tail, while enterprise leaders remain sales-led. This is a directional pricing pattern; individual figures below preserve their source caveats.</p>
+      </div>
+    </section>
+
+    <section class="section" id="companies">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">02 / Company map</div>
+          <div><h2>Who owns what — and where they stop.</h2><p class="lede">Filter by lane. Each company is placed by what it actually ships, not by its broadest marketing claim.</p></div>
+        </div>
+        <div class="filters" role="group" aria-label="Filter companies by lane">
+          <button class="filter active" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" data-filter="a" aria-pressed="false">A · Monitor</button>
+          <button class="filter" data-filter="b" aria-pressed="false">B · Optimize</button>
+          <button class="filter" data-filter="c" aria-pressed="false">C · Citations</button>
+          <button class="filter" data-filter="d" aria-pressed="false">D · Feeds</button>
+          <button class="filter" data-filter="e" aria-pressed="false">E · Protocols</button>
+          <button class="filter" data-filter="f" aria-pressed="false">F · Attribution</button>
+        </div>
+        <div class="companies" id="companyGrid">
+          <article class="company" data-lanes="a b"><div class="company-top"><h3>Profound</h3><span class="tier">Category leader</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--optimize)">B · optimize</span></div><p>Enterprise full suite: answer insights, prompt volumes, agent analytics, shopping analysis and autonomous research/content/publishing agents.</p><div class="fact"><b>Funding</b><span>$96M Series C at a reported $1B valuation; about $155M total.</span></div><footer><a class="source" href="https://techfundingnews.com/profound-96m-series-c-1b-valuation-ai-marketing/" target="_blank" rel="noopener">TechFundingNews · Feb 2026 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Reported traction: 700+ enterprise customers, 2,000+ marketers and roughly 10% of the Fortune 500. Pricing is sales-led and not public.</div></article>
+
+          <article class="company" data-lanes="a"><div class="company-top"><h3>Peec AI</h3><span class="tier">Mid-market leader</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span></div><p>Visibility, sentiment and source-influence tracking across major answer engines, positioned as the accessible alternative to enterprise suites.</p><div class="fact"><b>Funding</b><span>$21M Series A; $29M total. Valuation undisclosed but reported above $100M.</span></div><footer><a class="source" href="https://techcrunch.com/2025/11/17/as-ai-search-upends-brand-discovery-peec-ai-hits-4m-arr-and-raises-21m/" target="_blank" rel="noopener">TechCrunch · Nov 2025 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Reported more than $4M ARR in ten months, 1,300+ customers and about 300 additions per month. A secondary source placed pricing near $95/month for three engines; treat that figure cautiously.</div></article>
+
+          <article class="company" data-lanes="a b c"><div class="company-top"><h3>AirOps</h3><span class="tier">Closed-loop leader</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--optimize)">B · optimize</span><span class="tag" style="--c:var(--citation)">C · citations</span></div><p>The closest player to an end-to-end fix loop. Page360 and Quill cover owned content; Offsite adds third-party influence scoring and managed outreach.</p><div class="fact"><b>Position</b><span>Only funded pure-play researched that sells citation building as a managed service.</span></div><footer><a class="source" href="https://www.businesswire.com/news/home/20260203347763/en/AirOps-Launches-Offsite-Extending-AI-Search-Visibility-Beyond-Owned-Content" target="_blank" rel="noopener">BusinessWire · Feb 2026 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>$40M Series B in Nov 2025 at a reported $225M post-money valuation, followed by a reported $55.5M May 2026 round. Sacra estimates about $13M 2025 ARR; its total-funding figure conflicts with stale company boilerplate and should be treated cautiously.</div></article>
+
+          <article class="company" data-lanes="a e"><div class="company-top"><h3>Scrunch AI</h3><span class="tier">Acquired</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--protocol)">E · infra-adjacent</span></div><p>Agent Experience Platform at the CDN layer: detects AI crawler traffic and serves compressed, machine-readable pages, alongside an MCP server.</p><div class="fact"><b>Exit</b><span>Sitecore acquisition, June 2026; approximately $225M reported by Bloomberg, not officially confirmed.</span></div><footer><a class="source" href="https://www.techtarget.com/enterprise-software/news/366643973/Sitecore-acquires-Scrunch-for-answer-engine-optimization" target="_blank" rel="noopener">TechTarget · Jun 2026 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Had raised $26M and reported 500+ customers including Lenovo, Skims and Headspace. The stand-alone product continues while features move into SitecoreAI.</div></article>
+
+          <article class="company" data-lanes="a"><div class="company-top"><h3>OtterlyAI</h3><span class="tier">Bootstrapped</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span></div><p>Broad AI-search monitoring with a self-serve posture. Partnerships with Storyblok, Press Ranger and Noble begin to bridge monitoring into earned-media workflow.</p><div class="fact"><b>Traction</b><span>40,000 marketing professionals reported in August 2026; no VC raise found.</span></div><footer><a class="source" href="https://www.cmswire.com/digital-experience/storyblok-otterlyai-partner-for-ai-search-optimization/" target="_blank" rel="noopener">CMSWire · Feb 2026 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Founded in Austria in 2024 by former Storyblok and Usersnap operators. Named a Gartner Cool Vendor in 2025 and a European Search Awards winner in 2026.</div></article>
+
+          <article class="company" data-lanes="a b f"><div class="company-top"><h3>Goodie AI</h3><span class="tier">Commerce vertical</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--optimize)">B · optimize</span><span class="tag" style="--c:var(--attrib)">F · attribution</span></div><p>Commerce-oriented GEO with coverage that includes Amazon Rufus, shopping agents, content recommendations and GA4/Adobe attribution integrations.</p><div class="fact"><b>Evidence</b><span>Funding undisclosed; pricing custom. Conversion-lift figures are vendor claims.</span></div><footer><a class="source" href="https://higoodie.com/blog/best-geo-tools/" target="_blank" rel="noopener">Goodie product overview ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Notable differentiators include commerce-engine coverage, an AEO Content Writer, optimization actions and SOC 2 Type II. Source is self-published and should be read accordingly.</div></article>
+
+          <article class="company" data-lanes="a b c"><div class="company-top"><h3>Writesonic</h3><span class="tier">AI-writing pivot</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--optimize)">B · optimize</span><span class="tag" style="--c:var(--citation)">C · adjacent</span></div><p>Recast its writing platform as a GEO suite: ten-engine monitoring, Action Center, AI shopping tracking, MCP integration and citation tactics.</p><div class="fact"><b>Pricing</b><span>Basic plan reported from about $79/month annually; no-card trial.</span></div><footer><a class="source" href="https://writesonic.com/pricing" target="_blank" rel="noopener">Writesonic pricing ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Its promised one-click optimization was listed as “coming soon” in the researched material. Enterprise unlocks wider engine coverage.</div></article>
+
+          <article class="company" data-lanes="a b"><div class="company-top"><h3>Frase</h3><span class="tier">SEO incumbent</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--optimize)">B · optimize</span></div><p>Deepest fix loop among SEO incumbents: dual SEO/GEO scoring, per-query diagnosis, Content Guard drafts and republishes approved fixes, plus a read-write MCP server.</p><div class="fact"><b>Pricing</b><span>$49 / $129 / $299 per month reported across plans; seven-day trial.</span></div><footer><a class="source" href="https://frase.io/blog/best-ai-seo-agents-2026" target="_blank" rel="noopener">Frase · 2026 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Closed-loop positioning is explicit: turn tracking into a published change, not another dashboard. Competitive coverage claims come from Frase’s own pages and may be contested.</div></article>
+
+          <article class="company" data-lanes="a b"><div class="company-top"><h3>Adobe + Semrush</h3><span class="tier">Incumbent bundle</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--optimize)">B · optimize</span></div><p>GEO becomes a module inside a large marketing stack, pressuring stand-alone monitoring on price and distribution.</p><div class="fact"><b>M&amp;A</b><span>$1.9B all-cash acquisition announced Nov 19, 2025; $12/share, about 77.5% premium.</span></div><footer><a class="source" href="https://www.reuters.com/business/adobe-nears-19-billion-deal-software-provider-semrush-wsj-reports-2025-11-19/" target="_blank" rel="noopener">Reuters · Nov 2025 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>The deal was expected to close in the first half of 2026. Semrush had roughly 118,000 paying customers and $376.8M FY2024 revenue. Adobe explicitly framed GEO as a growth channel alongside SEO.</div></article>
+
+          <article class="company" data-lanes="a b"><div class="company-top"><h3>geoSurge</h3><span class="tier">New category bet</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · corpus monitor</span><span class="tag" style="--c:var(--optimize)">B · prescribe</span></div><p>“Corpus engineering” measures how brands are encoded in model memory and flags visibility shocks between model releases.</p><div class="fact"><b>Funding</b><span>$12M seed reported in July 2026, led by AlbionVC.</span></div><footer><a class="source" href="https://www.pymnts.com/news/investment-tracker/2026/geosurge-raises-12-million-to-help-brands-secure-ai-visibility/" target="_blank" rel="noopener">PYMNTS · Jul 2026 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>The wedge is resilience: detect when a model update makes a brand disappear, then prescribe actions to stabilize representation. Emerged from stealth in Dec 2025.</div></article>
+
+          <article class="company" data-lanes="b d"><div class="company-top"><h3>Genrise</h3><span class="tier">Catalog specialist</span></div><div class="tags"><span class="tag" style="--c:var(--optimize)">B · optimize</span><span class="tag" style="--c:var(--feed)">D · feeds</span></div><p>An always-on digital shelf for enterprise CPG, shaping product detail pages for people, shopping assistants and autonomous purchase agents.</p><div class="fact"><b>Integrations</b><span>PIM, shelf analytics and syndication systems including Akeneo, CommerceIQ, Salsify and 1WorldSync.</span></div><footer><a class="source" href="https://genrise.ai/" target="_blank" rel="noopener">Genrise product site ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Funding is undisclosed; no public raise was found. Hinge Commerce partnership reported. The product touches protocol readiness from the catalog-content side rather than owning transaction rails.</div></article>
+
+          <article class="company" data-lanes="f"><div class="company-top"><h3>Petra Labs</h3><span class="tier">Attribution specialist</span></div><div class="tags"><span class="tag" style="--c:var(--attrib)">F · attribution</span></div><p>Measurement platform plus embedded experts and custom “last-mile” models connecting AI visibility to AI-referred traffic and revenue.</p><div class="fact"><b>Funding</b><span>$5.2M seed led by Work-Bench, announced July 22, 2026.</span></div><footer><a class="source" href="https://www.businesswire.com/news/home/20260722868575/en/Petra-Labs-Raises-%245.2M-to-Connect-AI-Search-to-Revenue-for-Enterprise-Brands" target="_blank" rel="noopener">BusinessWire · Jul 2026 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>The services-heavy model validates pain but leaves room for software-led attribution. Work-Bench argues the prompt × model × channel space has no single AEO algorithm, making causal measurement structurally harder than SEO.</div></article>
+
+          <article class="company" data-lanes="a b"><div class="company-top"><h3>Yolando</h3><span class="tier">Competitive intel</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--optimize)">B · optimize</span></div><p>Continuous competitor monitoring, strategic recommendations and on-brand content generation spanning AI and traditional search.</p><div class="fact"><b>Funding</b><span>$8.5M total from Drive Capital; commercial launch Jan 26, 2026.</span></div><footer><a class="source" href="https://www.businesswire.com/news/home/20260126519752/en/" target="_blank" rel="noopener">BusinessWire · Jan 2026 ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>The researched evidence supports positioning and total funding, but not public pricing or detailed customer traction.</div></article>
+
+          <article class="company" data-lanes="a f"><div class="company-top"><h3>AthenaHQ</h3><span class="tier">Emerging</span></div><div class="tags"><span class="tag" style="--c:var(--monitor)">A · monitor</span><span class="tag" style="--c:var(--attrib)">F · adjacent</span></div><p>YC-backed platform from former Google Search and DeepMind staff, positioned around unified GEO scoring and revenue-linked enterprise monitoring.</p><div class="fact"><b>Caveat</b><span>Customer and pricing claims were found only in secondary comparison lists.</span></div><footer><a class="source" href="https://github.com/adamgtm/aeo-stack-report" target="_blank" rel="noopener">Secondary source ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>Lists report 70+ customers, ten-fold AI-traffic increases and pricing near $295/month. These figures were not independently verified and should not be used as underwriting facts.</div></article>
+
+          <article class="company" data-lanes="d f"><div class="company-top"><h3>Lantern</h3><span class="tier">Emerging</span></div><div class="tags"><span class="tag" style="--c:var(--feed)">D · feeds</span><span class="tag" style="--c:var(--attrib)">F · adjacent</span></div><p>Agentic commerce performance: an Agent Ready Score, AI visibility and automated catalog-level fixes.</p><div class="fact"><b>Caveat</b><span>Positioning found in secondary curations; funding and traction not verified.</span></div><footer><a class="source" href="https://github.com/vibetags/awesome-geo-tools" target="_blank" rel="noopener">Secondary source ↗</a><button class="detail-btn" aria-expanded="false">More</button></footer><div class="more" hidden>The lane is strategically important but evidence on this specific entrant is thin. Treat it as an emerging signal, not an established benchmark.</div></article>
+        </div>
+        <div class="no-results" id="noResults" hidden>No companies in this researched set match that lane.</div>
+      </div>
+    </section>
+
+    <section class="section" id="opportunity">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">03 / Founder opportunity</div>
+          <div><h2>Best wedge: build the brand-side agent layer.</h2><p class="lede">A product can start by making a merchant legible and transactable across agent channels, then use the resulting transaction data to own attribution.</p></div>
+        </div>
+        <div class="gap-grid">
+          <article class="priority"><span class="rank">Recommended wedge</span><h3>Protocol onboarding + catalog syndication</h3><p>Stand up discovery files, structured catalog endpoints, product MCP surfaces and purchase integrations for ACP/UCP-compatible channels — without forcing mid-market brands to assemble the plumbing themselves.</p><div class="moat"><b>Defensible moat</b><span>Deep commerce integrations, normalized product identity, protocol change management and — over time — the system of record for agent-originated transactions.</span></div></article>
+          <div class="gap-list">
+            <article class="gap"><span class="gap-num">01 · Largest whitespace</span><h3>Third-party citation engine</h3><p>Turn source influence into measurable outreach and placements. AirOps Offsite is the only funded managed-service benchmark in the researched set.</p></article>
+            <article class="gap"><span class="gap-num">02 · Validated pain</span><h3>AI-revenue attribution</h3><p>Petra Labs validates demand, but the field remains services-heavy and per-client. Software-led incrementality is open.</p></article>
+            <article class="gap"><span class="gap-num">03 · Execution gap</span><h3>Detect → fix → re-measure</h3><p>Frase, AirOps and Profound own pieces. Nobody clearly owns the loop across both owned and earned surfaces with revenue accountability.</p></article>
+            <article class="gap"><span class="gap-num">04 · Enterprise risk</span><h3>Model-update resilience</h3><p>geoSurge has the clearest position. Competition is sparse, but the buyer and proof standard are enterprise-grade.</p></article>
+          </div>
+        </div>
+        <div class="path" aria-label="Suggested product expansion path">
+          <div class="phase"><b>Wedge</b><h3>Agent-ready audit + deploy</h3><p>Diagnose structured catalog and protocol gaps; ship the missing brand-side surface rather than only scoring it.</p></div>
+          <div class="phase"><b>Expand</b><h3>Cross-channel syndication</h3><p>Normalize one catalog into the protocol and marketplace formats agents already query.</p></div>
+          <div class="phase"><b>Own</b><h3>Attribution graph</h3><p>Connect exposure, agent recommendation, checkout and revenue so optimization can be priced on outcomes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="moves">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-label">04 / Strategic moves</div>
+          <div><h2>Execution assets get acquired. Dashboards get bundled.</h2><p class="lede">The two major exits and the protocol land-grab point in the same direction: value is migrating toward infrastructure and action.</p></div>
+        </div>
+        <div class="timeline">
+          <article class="event"><time>Sep 2025</time><h3>OpenAI + Stripe launch ACP and Instant Checkout</h3><p>OpenAI open-sourced the Agentic Commerce Protocol and launched US Instant Checkout with Etsy sellers; Shopify merchants were announced as coming. <a href="https://openai.com/index/buy-it-in-chatgpt/" target="_blank" rel="noopener">OpenAI source ↗</a></p></article>
+          <article class="event"><time>Nov 19, 2025</time><h3>Adobe announces $1.9B Semrush acquisition</h3><p>Adobe explicitly names GEO as a new growth channel alongside SEO. The deal creates distribution pressure for stand-alone visibility tools. <a href="https://www.reuters.com/business/adobe-nears-19-billion-deal-software-provider-semrush-wsj-reports-2025-11-19/" target="_blank" rel="noopener">Reuters ↗</a></p></article>
+          <article class="event"><time>Jan 11, 2026</time><h3>Google launches Universal Commerce Protocol</h3><p>Co-developed with Shopify, Etsy, Wayfair, Target and Walmart; endorsed across major payment networks. <a href="https://www.pymnts.com/google/2026/google-debuts-universal-protocol-for-agentic-commerce/" target="_blank" rel="noopener">PYMNTS ↗</a></p></article>
+          <article class="event"><time>Feb 3, 2026</time><h3>AirOps launches Offsite</h3><p>GEO moves beyond owned content into publisher influence scoring and managed third-party outreach. <a href="https://www.businesswire.com/news/home/20260203347763/en/AirOps-Launches-Offsite-Extending-AI-Search-Visibility-Beyond-Owned-Content" target="_blank" rel="noopener">BusinessWire ↗</a></p></article>
+          <article class="event"><time>Jun 3, 2026</time><h3>Sitecore acquires Scrunch</h3><p>The first specialist AEO exit. Bloomberg reported roughly $225M; both companies left terms undisclosed. <a href="https://www.adweek.com/media/sitecore-snaps-up-geo-startup-scrunch-for-225m/" target="_blank" rel="noopener">Adweek ↗</a></p></article>
+          <article class="event"><time>Jul 22, 2026</time><h3>Petra Labs raises $5.2M for attribution</h3><p>A purpose-built entrant appears in the thinnest measurement lane, pairing software with embedded experts. <a href="https://www.businesswire.com/news/home/20260722868575/en/Petra-Labs-Raises-%245.2M-to-Connect-AI-Search-to-Revenue-for-Enterprise-Brands" target="_blank" rel="noopener">BusinessWire ↗</a></p></article>
+        </div>
+        <div class="platform-strip">
+          <div class="platform"><h3>Google</h3><p>UCP, AP2, AI Mode checkout, Business Agent and Merchant Center attributes. Open standards, but platform-owned distribution.</p></div>
+          <div class="platform"><h3>OpenAI + Stripe</h3><p>ACP, Shared Payment Tokens and Instant Checkout. Merchant choice includes availability, price, quality and checkout status.</p></div>
+          <div class="platform"><h3>Amazon</h3><p>Buy for Me and Shop Direct feeds, alongside adversarial action against outside agents. A powerful but proprietary channel.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="caveats">
+      <div class="wrap">
+        <div class="section-head"><div class="section-label">05 / Evidence quality</div><div><h2>What not to overclaim.</h2><p class="lede">The market is young, vendor-reported metrics are common and several 2026 figures remain secondary or contested.</p></div></div>
+        <div class="caveats">
+          <p><strong>Scrunch exit value.</strong> Approximately $225M comes from Bloomberg reporting; official terms were undisclosed.</p>
+          <p><strong>Profound total.</strong> Sources vary between $154.5M and $155M because of rounding.</p>
+          <p><strong>AirOps total.</strong> Sacra’s roughly $118M estimate conflicts with stale company boilerplate saying $55.5M to date.</p>
+          <p><strong>Goodie and Genrise.</strong> No public funding round found. Goodie’s lift metric is vendor-claimed.</p>
+          <p><strong>Emerging players.</strong> AthenaHQ, Lantern, Promptwatch, Bluefish and Adobe’s “300M prompts” claim rely partly on secondary curations.</p>
+          <p><strong>Market-size stats.</strong> Directionally useful, but highly contested; excluded from the core recommendation.</p>
+          <p><strong>Pricing comparisons.</strong> Frequently self-published and subject to rapid change. Use as positioning evidence, not procurement quotes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="wrap">
+        <div class="section-head"><div class="section-label">06 / Selected sources</div><div><h2>Primary evidence behind the map.</h2><p class="lede">All sources were read September 11, 2026. Company pages are used for product details; funding and M&amp;A lean on press and reputable trade coverage.</p></div></div>
+        <div class="sources">
+          <a href="https://techfundingnews.com/profound-96m-series-c-1b-valuation-ai-marketing/" target="_blank" rel="noopener">TechFundingNews — Profound Series C, Feb 2026</a>
+          <a href="https://techcrunch.com/2025/11/17/as-ai-search-upends-brand-discovery-peec-ai-hits-4m-arr-and-raises-21m/" target="_blank" rel="noopener">TechCrunch — Peec AI Series A, Nov 2025</a>
+          <a href="https://www.vcaonline.com/news/2025111003/airops-raises-40m-to-redefine-how-brands-compete-in-the-era-of-ai-search/" target="_blank" rel="noopener">VCAOnline — AirOps Series B, Nov 2025</a>
+          <a href="https://www.businesswire.com/news/home/20260203347763/en/AirOps-Launches-Offsite-Extending-AI-Search-Visibility-Beyond-Owned-Content" target="_blank" rel="noopener">BusinessWire — AirOps Offsite, Feb 2026</a>
+          <a href="https://www.techtarget.com/enterprise-software/news/366643973/Sitecore-acquires-Scrunch-for-answer-engine-optimization" target="_blank" rel="noopener">TechTarget — Sitecore acquires Scrunch, Jun 2026</a>
+          <a href="https://www.reuters.com/business/adobe-nears-19-billion-deal-software-provider-semrush-wsj-reports-2025-11-19/" target="_blank" rel="noopener">Reuters — Adobe–Semrush, Nov 2025</a>
+          <a href="https://www.businesswire.com/news/home/20260722868575/en/Petra-Labs-Raises-%245.2M-to-Connect-AI-Search-to-Revenue-for-Enterprise-Brands" target="_blank" rel="noopener">BusinessWire — Petra Labs seed, Jul 2026</a>
+          <a href="https://www.pymnts.com/news/investment-tracker/2026/geosurge-raises-12-million-to-help-brands-secure-ai-visibility/" target="_blank" rel="noopener">PYMNTS — geoSurge seed, Jul 2026</a>
+          <a href="https://www.pymnts.com/google/2026/google-debuts-universal-protocol-for-agentic-commerce/" target="_blank" rel="noopener">PYMNTS — Google UCP, Jan 2026</a>
+          <a href="https://openai.com/index/buy-it-in-chatgpt/" target="_blank" rel="noopener">OpenAI — ACP and Instant Checkout</a>
+          <a href="https://stripe.com/gb/newsroom/news/stripe-openai-instant-checkout" target="_blank" rel="noopener">Stripe — Instant Checkout, Sep 2025</a>
+          <a href="https://www.emarketer.com/content/amazon-expands-shop-direct-product-feeds-rufus-ai-strategy" target="_blank" rel="noopener">eMarketer — Amazon Shop Direct, Mar 2026</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap"><span>Independent research synthesis for founder strategy. No market-size forecast is used in the recommendation.</span><span class="stamp">Snapshot · 2026-09-11</span></div></footer>
+
+  <script>
+    const filters = [...document.querySelectorAll('.filter')];
+    const companies = [...document.querySelectorAll('.company')];
+    const noResults = document.getElementById('noResults');
+    filters.forEach(button => button.addEventListener('click', () => {
+      const selected = button.dataset.filter;
+      filters.forEach(b => { b.classList.toggle('active', b === button); b.setAttribute('aria-pressed', b === button ? 'true' : 'false'); });
+      let visible = 0;
+      companies.forEach(card => {
+        const matches = selected === 'all' || card.dataset.lanes.split(' ').includes(selected);
+        card.hidden = !matches;
+        if (matches) visible++;
+      });
+      noResults.hidden = visible > 0;
+    }));
+    document.querySelectorAll('.detail-btn').forEach(button => button.addEventListener('click', () => {
+      const detail = button.closest('.company').querySelector('.more');
+      const open = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!open));
+      button.textContent = open ? 'More' : 'Less';
+      detail.hidden = open;
+    }));
+  </script>
+</body>
+</html>
