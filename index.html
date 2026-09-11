@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibhor Tayal — I build apps in days, not quarters</title>
+<meta name="description" content="Portfolio of Vibhor Tayal: LineCall, Brewlog, Home Recipes and other projects built fast with Meta Muse.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="#top">Vibhor Tayal</a>
+    <nav class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#log">Build log</a>
+      <a href="#method">How I work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-small" href="#contact">Say hi</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="eyebrow">Portfolio · Updated September 2026</p>
+    <h1>I build apps in days,<br>not quarters.</h1>
+    <p class="lede">I&rsquo;m Vibhor &mdash; a stand-up comic who makes his own software. No CS degree, no dev team. I describe what I want, build it with Meta&nbsp;Muse as my pair programmer, and ship from my phone.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#projects">See the projects</a>
+      <a class="btn btn-ghost" href="#collaborate">Work with me</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>6</strong><span>projects</span></div>
+      <div><strong>3</strong><span>live</span></div>
+      <div><strong>1</strong><span>in progress</span></div>
+    </div>
+  </section>
+
+  <!-- NOW -->
+  <section class="now">
+    <div class="now-inner">
+      <p class="eyebrow eyebrow-light">Right now</p>
+      <p class="now-text"><strong>LineCall</strong> &mdash; an iOS app that calls tennis lines out loud. Currently proving the vision engine on real match footage before anything ships.</p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <p class="eyebrow">Selected work</p>
+    <h2 class="section-title">Projects</h2>
+
+    <!-- LineCall -->
+    <article class="project">
+      <div class="project-media">
+        <img src="assets/hero.png" alt="LineCall concept: a phone on the fence calling tennis lines" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-head">
+          <h3>LineCall</h3>
+          <span class="pill pill-building">Building</span>
+        </div>
+        <p>An iPhone app that watches your tennis match and yells line calls through a Bluetooth speaker. Before writing the app, I proved the vision engine &mdash; ball tracking, bounce detection, court mapping &mdash; on real footage in Python.</p>
+        <ul class="tags">
+          <li>Expo</li><li>React Native</li><li>CoreML</li><li>Python / OpenCV</li>
+        </ul>
+        <p class="project-note">iOS app &mdash; in progress, not shipped yet.</p>
+      </div>
+    </article>
+
+    <!-- Brewlog -->
+    <article class="project project-flip">
+      <div class="project-media">
+        <div class="mock mock-brewlog" aria-hidden="true">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-screen">
+            <p class="mock-title">Brewlog</p>
+            <p class="mock-timer">2:30</p>
+            <p class="mock-sub">V60 · 20g → 320g · 1:16</p>
+            <div class="mock-row"><span>Freshness</span><strong>6 days ✓</strong></div>
+            <div class="mock-row"><span>Grind</span><strong>Medium-fine</strong></div>
+            <div class="mock-cta">Diagnose my cup</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-head">
+          <h3>Brewlog</h3>
+          <span class="pill pill-live">Live</span>
+        </div>
+        <p>A coffee helper for home baristas: bean library, brew timer, and a troubleshooter that actually diagnoses your bad cup &mdash; freshness first, then grind. Brainstorm to deployed in a day.</p>
+        <ul class="tags">
+          <li>React</li><li>TypeScript</li><li>Supabase</li><li>Vercel</li>
+        </ul>
+        <a class="text-link" href="https://brewlog-inky.vercel.app/" target="_blank" rel="noopener">Open the app &rarr;</a>
+      </div>
+    </article>
+
+    <!-- Home Recipes -->
+    <article class="project">
+      <div class="project-media">
+        <div class="mock mock-recipes" aria-hidden="true">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-screen">
+            <p class="mock-title">Home Recipes</p>
+            <div class="mock-search">Search recipes…</div>
+            <div class="mock-item"><span>Protein Pancakes</span><em>Breakfast</em></div>
+            <div class="mock-item"><span>Keema <i>· Phopo's</i></span><em>Meals</em></div>
+            <div class="mock-item"><span>Ponderosa Cake</span><em>Desserts</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-head">
+          <h3>Home Recipes</h3>
+          <span class="pill pill-live">Live</span>
+        </div>
+        <p>My family&rsquo;s recipe book on the web. Search, tags, video embeds &mdash; and an editor with on-device photo OCR and AI cleanup, so a photographed recipe becomes a real entry in seconds.</p>
+        <ul class="tags">
+          <li>JavaScript</li><li>Tesseract.js</li><li>Vercel serverless</li>
+        </ul>
+        <a class="text-link" href="https://home-recipes-mauve.vercel.app/" target="_blank" rel="noopener">Open the app &rarr;</a>
+      </div>
+    </article>
+  </section>
+
+  <!-- BUILD LOG -->
+  <section id="log" class="section section-tight">
+    <p class="eyebrow">Changelog</p>
+    <h2 class="section-title">Build log</h2>
+    <ol class="log">
+      <li><time>Sep 11, 2026</time><p><strong>LineCall</strong> vision engine: fixed a false-positive FAULT yell on a deep rally ball; full simulator pass on the latest build. Started writing the build story.</p></li>
+      <li><time>Sep 10, 2026</time><p><strong>Brewlog</strong> troubleshooter v2: freshness gate first, method-aware fixes. 55 tests green.</p></li>
+      <li><time>Sep 10, 2026</time><p><strong>Home Recipes</strong> editor: on-device photo OCR and AI caption cleanup, plus a quick-add gap check.</p></li>
+      <li><time>Sep 10, 2026</time><p><strong>LineCall:</strong> 4-tap court calibration with a CoreML court model bundled in-app.</p></li>
+      <li><time>Sep 09, 2026</time><p>Trading bot goes <strong>paper-only</strong> &mdash; live brokerage path deleted. <strong>Set&nbsp;Diff:</strong> laughter detector fixed, 75 false positives &rarr; 0.</p></li>
+    </ol>
+  </section>
+
+  <!-- METHOD -->
+  <section id="method" class="section section-tight">
+    <p class="eyebrow">Principles</p>
+    <h2 class="section-title">How I work</h2>
+    <div class="principles">
+      <div class="principle">
+        <p class="principle-num">01</p>
+        <h3>Prove the risky part first.</h3>
+        <p>For LineCall I built the vision prototype before the app. If the core idea doesn&rsquo;t work, nothing else matters.</p>
+      </div>
+      <div class="principle">
+        <p class="principle-num">02</p>
+        <h3>Never invent. Stay silent when uncertain.</h3>
+        <p>The app only yells calls it&rsquo;s confident about. Same rule for every project: no fake data, every estimate labeled.</p>
+      </div>
+      <div class="principle">
+        <p class="principle-num">03</p>
+        <h3>Describe, don&rsquo;t code.</h3>
+        <p>I spec it in plain words from my phone. Muse builds, the cloud deploys, I test. The whole loop fits between sets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLABORATE -->
+  <section id="collaborate" class="collab">
+    <div class="collab-inner">
+      <p class="eyebrow eyebrow-light">Collaborate</p>
+      <h2>Want to build something together?</h2>
+      <p>I like small, fast, slightly unreasonable projects &mdash; tools people actually use, built in days. If you&rsquo;ve got an idea, or want a hand with yours, let&rsquo;s talk.</p>
+      <a class="btn btn-light" href="#contact">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section section-tight">
+    <p class="eyebrow">Say hello</p>
+    <h2 class="section-title">Contact me</h2>
+    <p class="contact-lede">The fastest way to reach me is GitHub &mdash; that&rsquo;s where everything I make lives.</p>
+    <div class="contact-links">
+      <a class="btn" href="https://github.com/vibhortayal" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        GitHub
+      </a>
+    </div>
+    <p class="contact-fine">Prefer email? Tell me and I&rsquo;ll add it here.</p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 Vibhor Tayal &middot; Built with Meta Muse &middot; Set in Fraunces &amp; Inter</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
