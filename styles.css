@@ -125,6 +125,7 @@ a { color: inherit; }
 .pill-live { background: #E2F2E7; color: var(--green); }
 .pill-building { background: #FaEFD6; color: var(--amber); }
 .pill-paused { background: #E5E1D8; color: #6B655C; }
+.pill-oss { background: #E7E2D4; color: var(--ink-soft); }
 .project-body p { color: var(--ink-soft); margin-bottom: 20px; }
 .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
 .tags li {
