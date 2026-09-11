@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibhor Tayal — I build apps in days, not quarters</title>
-<meta name="description" content="Portfolio of Vibhor Tayal: LineCall, Brewlog, Home Recipes and other projects built fast with Meta Muse.">
+<meta name="description" content="Portfolio of Vibhor Tayal: LineCall, Brewlog, Home Recipes and other side projects.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,6 +18,7 @@
     <nav class="nav-links">
       <a href="#projects">Projects</a>
       <a href="#log">Build log</a>
+      <a href="#shelf">On the shelf</a>
       <a href="#method">How I work</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -141,6 +142,26 @@
       <li><time>Sep 10, 2026</time><p><strong>LineCall:</strong> 4-tap court calibration with a CoreML court model bundled in-app.</p></li>
       <li><time>Sep 09, 2026</time><p>Trading bot goes <strong>paper-only</strong> &mdash; live brokerage path deleted. <strong>Set&nbsp;Diff:</strong> laughter detector fixed, 75 false positives &rarr; 0.</p></li>
     </ol>
+  </section>
+
+  <!-- ON THE SHELF -->
+  <section id="shelf" class="section section-tight">
+    <p class="eyebrow">On hold</p>
+    <h2 class="section-title">On the shelf</h2>
+    <p class="shelf-lede">Not everything ships. These are parked &mdash; and what they taught me.</p>
+    <article class="project">
+      <div class="project-body">
+        <div class="project-head">
+          <h3>Set Diff</h3>
+          <span class="pill pill-paused">On hold</span>
+        </div>
+        <p>A stand-up set analyzer: upload a recording of your set, see where the laughs land, get a transcript.</p>
+        <p class="shelf-label">Why it&rsquo;s shelved</p>
+        <p>Its transcription API started returning empty transcripts, and a full day of debugging went nowhere &mdash; the failure was on the provider&rsquo;s side, out of my reach.</p>
+        <p class="shelf-label">What it taught me</p>
+        <p>Stop debugging someone else&rsquo;s black box. I pivoted to local open-source transcription, which worked &mdash; and keeping everything on-device turned a privacy constraint into a better architecture. Parked until the local pipeline is worth productizing.</p>
+      </div>
+    </article>
   </section>
 
   <!-- METHOD -->
