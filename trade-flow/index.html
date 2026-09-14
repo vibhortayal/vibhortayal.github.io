@@ -722,7 +722,6 @@ HARD RULES
           </details>
         </div>
         <div class="faq">
-          <span class="kicker">Troubleshooting</span>
           <h3>Things that broke for us.</h3>
           <details>
             <summary>Pairing never completes</summary>
@@ -733,8 +732,16 @@ HARD RULES
             <p>Open TCP 3001 in the VM's firewall ingress rules. Also run the services as the same user that installed Chrome — a different user won't find the browser binary.</p>
           </details>
           <details>
+            <summary>Oracle says "out of capacity" when creating the VM</summary>
+            <p>Always Free capacity in a region comes and goes — we hit this in us-sanjose-1 for both free shapes. Retry, or try the other shape. What unblocked us: upgrading the tenancy to Pay As You Go (card on file, still free-tier eligible) with a budget alert as a safety net.</p>
+          </details>
+          <details>
             <summary>The reader pulls no messages</summary>
             <p>The chat list takes up to a minute to load after linking — the reader polls for it. Also check the group name in the setup UI matches the WhatsApp group exactly.</p>
+          </details>
+          <details>
+            <summary>The reader fails: Chromium won't start</summary>
+            <p>The <code>chromium</code> snap's launcher wrapper refuses to run inside a systemd service — point <code>PUPPETEER_EXECUTABLE_PATH</code> at the real binary (<code>/snap/chromium/current/usr/lib/chromium-browser/chrome</code>). The installer already does this; it mostly bites hand-rolled setups.</p>
           </details>
           <details>
             <summary>Parse errors or quota failures</summary>
