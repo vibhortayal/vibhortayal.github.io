@@ -462,7 +462,7 @@
       <div class="hero-copy">
       <div class="eyebrow">Free and open source · MIT</div>
       <h1>Your trading chat, made legible.</h1>
-      <p>Trade Flow turns a WhatsApp group into a structured trade tape — what the crowd is trading, who's active, and how those calls played out. Runs on your hardware. Read-only: it watches and scores, never trades.</p>
+      <p>Point Trade Flow at a WhatsApp trading group and it builds a trade tape from the chat: what people are trading, and whether those calls worked. Runs on your hardware, read-only. It never places trades.</p>
       <div class="actions">
       <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Explore the live demo <span aria-hidden="true">↗</span></a>
       </div>
@@ -481,7 +481,7 @@
         <div class="panel-head">
           <span class="kicker">Overview</span>
           <h2>See what your group looks like as data.</h2>
-          <p>The live demo is the real dashboard on sample data — trade tape, outcome badges, crowd insights, per-trader cards. Fully anonymized.</p>
+          <p>The live demo is the real dashboard running on sample data. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
         </div>
         <div class="live-stats" aria-label="Real usage numbers">
           <div><strong>36</strong><span>members in the group it runs on</span></div>
@@ -501,28 +501,28 @@
           <article class="card">
             <span class="card-num">01</span>
             <h3>What did the group trade?</h3>
-            <p>A chronological tape separates actual actions from questions, reactions, and chatter. Filter by symbol, instrument, action, outcome, or trader.</p>
+            <p>One chronological tape of actual trades, minus the questions and chatter around them. Filter by symbol, instrument, action, outcome, or trader.</p>
           </article>
           <article class="card">
             <span class="card-num">02</span>
             <h3>Where is the crowd leaning?</h3>
-            <p>Opening vs. closing activity, put/call balance, the most active symbols, and clusters where several members converge on the same name.</p>
+            <p>Whether the group is opening or closing, put/call balance, the busiest symbols, and names several members are piling into.</p>
           </article>
           <article class="card">
             <span class="card-num">03</span>
             <h3>Did the call work?</h3>
-            <p>Five-trading-day direction checks label favorable, unfavorable, and flat outcomes. Round trips and stated targets get their own treatment — options are scored on underlying direction, never fictional premium P&amp;L.</p>
+            <p>Every call gets a five-trading-day direction check: favorable, unfavorable, or flat. Round trips and stated targets are tracked separately. Options are scored on the stock's direction, not the contract's profit.</p>
           </article>
           <article class="card">
             <span class="card-num">04</span>
             <h3>Who contributes useful flow?</h3>
-            <p>The Traders view compares activity, active days, favorite symbols, and scored outcomes without exposing member identities. Small samples stay labeled.</p>
+            <p>The Traders view compares activity, active days, favorite symbols, and scored outcomes. Nobody's identity is exposed, and small samples stay labeled.</p>
           </article>
         </div>
         <div class="score-band">
           <span class="kicker">Outcome scoring</span>
           <h3>Every call, checked against the market.</h3>
-          <p>Each action is scored against real daily market data (TradingView or Yahoo Finance, your choice), feeding per-trader scorecards and crowd insights.</p>
+          <p>Each action is scored against real daily market data — TradingView or Yahoo Finance, your pick. The scores show up on per-trader scorecards and in crowd insights.</p>
           <div class="score-cols">
             <div class="score-col">
               <h4>Real market data</h4>
@@ -555,8 +555,8 @@
         </div>
         <div class="privacy-strip">
           <span class="kicker">Privacy by design</span>
-          <h3>Your server. Your schedule. Your keys.</h3>
-          <p>Raw chat and WhatsApp identities never reach the dashboard. Each message goes to the language model you configure for extraction; only structured, pseudonymized trade records are stored.</p>
+          <h3>It runs on your machine.</h3>
+          <p>Raw chat and WhatsApp identities never reach the dashboard. Each message goes to the language model you pick for extraction, and only structured, pseudonymized trade records get stored.</p>
           <ul>
             <li>Stable pseudonyms replace names and phone numbers</li>
             <li>Secrets and the WhatsApp session stay on your machine</li>
@@ -565,7 +565,7 @@
           </ul>
         </div>
         <div class="demo-nudge">
-          <p><strong>Like what you see?</strong> Point it at your own group — setup takes an afternoon; the prompt does the heavy lifting.</p>
+          <p><strong>Like what you see?</strong> Point it at your own group. Setup takes an afternoon, and the prompt walks through every step.</p>
           <a class="btn btn-secondary" data-tab="start">Get started &rarr;</a>
         </div>
       </div>
@@ -576,8 +576,8 @@
       <div class="wrap">
         <div class="panel-head">
           <span class="kicker">How it works</span>
-          <h2>The complete pipeline, yours to inspect.</h2>
-          <p>The repository includes the reader, parser, outcome scorer, setup UI, database schema, and dashboard. Runs on your own hardware — a free Oracle Cloud VM is enough.</p>
+          <h2>The whole pipeline, in the open.</h2>
+          <p>The repo has the reader, parser, outcome scorer, setup UI, database schema, and dashboard. It runs on your own hardware; a free Oracle Cloud VM is enough.</p>
         </div>
         <div class="flow" aria-label="Data pipeline">
           <div class="flow-step"><b>01</b><h3>Pull</h3><p>Connect as a linked device, fetch messages since the last checkpoint, disconnect. Hourly, 06:00–18:00.</p></div>
@@ -598,12 +598,12 @@
           <article class="card">
             <span class="card-num">Language model</span>
             <h3>Gemini API <span style="color:var(--mint-deep);font-size:14px">· free tier</span></h3>
-            <p>Turns messy chat messages into structured trade records — symbol, action, instrument, strike, expiry, quoted context included. Any OpenAI-compatible LLM works instead.</p>
+            <p>Turns chat messages into structured trade records: symbol, action, instrument, strike, expiry, quoted context. Any OpenAI-compatible LLM works.</p>
           </article>
           <article class="card">
             <span class="card-num">Market data</span>
             <h3>TradingView</h3>
-            <p>Daily bars power the five-trading-day outcome scoring, round-trip detection, and target-hit checks. Yahoo Finance (free, no key) works as a drop-in alternative.</p>
+            <p>Daily bars for the five-day outcome scoring, round-trip detection, and target checks. Yahoo Finance (free, no key) is a drop-in alternative.</p>
           </article>
           <article class="card">
             <span class="card-num">Database</span>
@@ -634,10 +634,10 @@
           <p>Gather the checklist, then hand the setup prompt to your AI agent. Every step matches the installer and setup UI.</p>
         </div>
         <ul class="check-list">
-          <li><span class="tick">✓</span><div><strong>Oracle Cloud account</strong><span>Always Free tier, suggested default — any Ubuntu VM works. Ubuntu 24.04, Ampere A1 (4 OCPUs / 24 GB RAM), public subnet with TCP ingress on port 3001.</span></div></li>
+          <li><span class="tick">✓</span><div><strong>Oracle Cloud account</strong><span>Always Free tier (any Ubuntu VM works). Ubuntu 24.04, Ampere A1, 4 OCPUs / 24 GB RAM, public subnet with TCP ingress on port 3001.</span></div></li>
           <li><span class="tick">✓</span><div><strong>WhatsApp on your phone</strong><span>The bot pairs as a linked device with a one-time code. No spare SIM, no number changes.</span></div></li>
           <li><span class="tick">✓</span><div><strong>Gemini API key</strong><span>Free tier from Google AI Studio — or any OpenAI-compatible LLM (base URL + key + model) via the setup UI.</span></div></li>
-          <li><span class="tick">✓</span><div><strong>Supabase project</strong><span>Free tier, suggested default — or any PostgREST database. You need the project URL and service_role key; the schema ships in the repo and the setup UI.</span></div></li>
+          <li><span class="tick">✓</span><div><strong>Supabase project</strong><span>Free tier — or any PostgREST database. You need the project URL and service_role key. The schema is in the repo and the setup UI.</span></div></li>
           <li><span class="tick">✓</span><div><strong>TradingView account<span class="opt-tag">OPTIONAL</span></strong><span>Optional. Yahoo Finance (free, no key) needs no setup, and the pipeline runs without either — outcome scoring is simply skipped.</span></div></li>
         </ul>
         <div class="prompt-head">
