@@ -487,9 +487,9 @@
           <p>The live demo is the real dashboard running on live data from a real trading group. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
         </div>
         <div class="live-stats" aria-label="Real usage numbers">
-          <div><strong>36</strong><span>members in the group it runs on</span></div>
-          <div><strong>242</strong><span>trade actions parsed</span></div>
-          <div><strong>217</strong><span>outcomes scored</span></div>
+          <div><strong id="statMembers">21</strong><span>active traders tracked</span></div>
+          <div><strong id="statActions">242</strong><span>trade actions parsed</span></div>
+          <div><strong id="statScored">217</strong><span>outcomes scored</span></div>
         </div>
         <div class="demo-cta">
           <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open the live demo <span aria-hidden="true">↗</span></a>
@@ -876,6 +876,29 @@ HARD RULES
       document.getElementById('copyPrompt').scrollIntoView({ behavior: 'smooth', block: 'center' });
       copyBtn.click();
     });
+    // Live stats: refresh the headline numbers from the public read-only
+    // Supabase endpoint (same one the demo dashboard uses). The baked-in
+    // numbers above stay as the fallback if the fetch fails.
+    (function () {
+      const els = {
+        members: document.getElementById('statMembers'),
+        actions: document.getElementById('statActions'),
+        scored: document.getElementById('statScored')
+      };
+      if (!els.members || !els.actions || !els.scored) return;
+      const ANON_KEY = 'sb_publishable_r2fiWknUdG1k6ImlRpk5ww_VQlVGghY';
+      fetch('https://wzaafasvbzpgakyyscjx.supabase.co/rest/v1/wa_trades?select=id,trader,outcome', {
+        headers: { apikey: ANON_KEY, Authorization: 'Bearer ' + ANON_KEY }
+      })
+        .then((r) => { if (!r.ok) throw new Error('stats fetch failed'); return r.json(); })
+        .then((rows) => {
+          if (!Array.isArray(rows) || !rows.length) return;
+          els.actions.textContent = rows.length.toLocaleString('en-US');
+          els.scored.textContent = rows.filter((t) => t.outcome && t.outcome.scored).length.toLocaleString('en-US');
+          els.members.textContent = new Set(rows.map((t) => t.trader)).size.toLocaleString('en-US');
+        })
+        .catch(() => { /* keep the baked-in fallback numbers */ });
+    })();
   </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="6d4c020c-affc-474c-aed2-271abfde1035"></script>
 </body>
