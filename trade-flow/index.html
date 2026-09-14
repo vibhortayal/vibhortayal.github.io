@@ -466,9 +466,6 @@
       <div class="hero-copy">
       <h1>Your trading chat, made legible.</h1>
       <p>TradeFlow turns a WhatsApp group into a structured trade tape — what the crowd is trading, who's active, and how those calls played out. Runs on your hardware. Read-only: it watches and scores, never trades.</p>
-      <div class="actions">
-      <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Explore the live demo <span aria-hidden="true">↗</span></a>
-      </div>
       <div class="proof" aria-label="Key characteristics">
       <span><i></i> Runs on a free Oracle Cloud VM</span>
       <span><i></i> Only pseudonymized records published</span>
@@ -511,22 +508,8 @@
         </div>
         <div class="panel-head">
           <span class="kicker">Overview</span>
-          <h2>See what your group looks like as data.</h2>
-          <p>The live demo is the real dashboard running on live data from a real trading group. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
+          <h2>What it shows.</h2>
         </div>
-        <div class="live-stats" aria-label="Real usage numbers">
-          <div><strong id="statMembers">21</strong><span>active traders tracked</span></div>
-          <div><strong id="statActions">242</strong><span>trade actions parsed</span></div>
-          <div><strong id="statScored">217</strong><span>outcomes scored</span></div>
-        </div>
-        <div class="demo-cta">
-          <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open the live demo <span aria-hidden="true">↗</span></a>
-          <p class="demo-note">No sign-up, no keys — it's a static site reading live data, refreshed hourly. Your own deployment reads from your database.</p>
-        </div>
-        <figure class="shot">
-          <img src="demo-screenshot.png" alt="Trading Floor dashboard showing the trade tape, outcome badges, and trader stats" width="1440" height="900" />
-          <figcaption>The <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">live demo</a> — the real dashboard, fully anonymized.</figcaption>
-        </figure>
         <div class="cards signal-grid">
           <article class="card">
             <span class="card-num">01</span>
@@ -594,6 +577,24 @@
             <li>Every data boundary is inspectable in the source</li>
           </ul>
         </div>
+        <div class="panel-head">
+          <span class="kicker">Live demo</span>
+          <h2>See what your group looks like as data.</h2>
+          <p>Below is Trading Floor, a dashboard built with TradeFlow, running on live data from a real trading group. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
+        </div>
+        <div class="live-stats" aria-label="Real usage numbers">
+          <div><strong id="statMembers">21</strong><span>active traders tracked</span></div>
+          <div><strong id="statActions">242</strong><span>trade actions parsed</span></div>
+          <div><strong id="statScored">217</strong><span>outcomes scored</span></div>
+        </div>
+        <div class="demo-cta">
+          <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open the live demo <span aria-hidden="true">↗</span></a>
+          <p class="demo-note">No sign-up, no keys — it's a static site reading live data, refreshed hourly. Your own deployment reads from your database.</p>
+        </div>
+        <figure class="shot">
+          <img src="demo-screenshot.png" alt="Trading Floor dashboard showing the trade tape, outcome badges, and trader stats" width="1440" height="900" />
+          <figcaption>The <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">live demo</a> — the real dashboard, fully anonymized.</figcaption>
+        </figure>
         <div class="demo-nudge">
           <p><strong>Like what you see?</strong> Point it at your own group — the Get started tab has the checklist and the setup prompt.</p>
           <a class="btn btn-secondary" data-tab="start">Get started &rarr;</a>
