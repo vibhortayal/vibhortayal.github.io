@@ -162,17 +162,6 @@
     .btn-primary:hover { background: #27312f; }
     .btn-secondary { border: 1px solid #aeb6ad; background: rgba(255,255,255,.38); }
     .btn svg { width: 18px; height: 18px; }
-    .proof {
-      margin-top: 25px;
-      display: flex;
-      gap: 19px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font: 500 12px/1.4 "IBM Plex Mono", monospace;
-    }
-    .proof span { display: inline-flex; gap: 7px; align-items: center; }
-    .proof i { width: 6px; height: 6px; background: var(--mint-deep); border-radius: 50%; }
-
     .tab-panel { display: none; }
     .tab-panel.active { display: block; animation: panelIn .28s ease; }
     @keyframes panelIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
@@ -583,13 +572,6 @@
           <img src="demo-screenshot.png" alt="Trading Floor dashboard showing the trade tape, outcome badges, and trader stats" width="1440" height="900" />
           <figcaption>The <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">live demo</a> — the real dashboard, fully anonymized.</figcaption>
         </figure>
-        <div class="proof" aria-label="Key characteristics" style="margin: 28px 0 0;">
-        <span><i></i> Runs on a free Oracle Cloud VM</span>
-        <span><i></i> Only pseudonymized records published</span>
-        <span><i></i> No permanent WhatsApp session</span>
-        <span><i></i> Read-only — places no trades</span>
-        <span><i></i> Calls scored against real market data</span>
-        </div>
         <div class="demo-nudge">
           <p><strong>Like what you see?</strong> Point it at your own WhatsApp group — the Get started tab has the checklist and the setup prompt.</p>
           <a class="btn btn-secondary" data-tab="start">Get started &rarr;</a>
@@ -602,9 +584,13 @@
           <p>Raw chat and WhatsApp identities never reach the dashboard. Each message goes to the language model you pick for extraction, and only structured, pseudonymized trade records get stored.</p>
           <ul>
             <li>Stable pseudonyms replace names and phone numbers</li>
+            <li>Only pseudonymized records published</li>
             <li>Secrets and the WhatsApp session stay on your machine</li>
             <li>Hourly pull-and-disconnect — no permanent session</li>
             <li>Every data boundary is inspectable in the source</li>
+            <li>Runs on a free Oracle Cloud VM</li>
+            <li>Read-only — places no trades</li>
+            <li>Calls scored against real market data</li>
           </ul>
         </div>
       </div>
