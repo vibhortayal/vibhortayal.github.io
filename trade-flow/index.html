@@ -582,7 +582,7 @@
           <p>The repo has the reader, parser, outcome scorer, setup UI, database schema, and dashboard. It runs on your own hardware; a free Oracle Cloud VM is enough.</p>
         </div>
         <div class="flow" aria-label="Data pipeline">
-          <div class="flow-step"><b>01</b><h3>Pull</h3><p>Connect as a linked device, fetch messages since the last checkpoint, disconnect. Hourly, 06:00–18:00.</p></div>
+          <div class="flow-step"><b>01</b><h3>Pull</h3><p>Connect as a linked device, fetch messages since the last checkpoint, disconnect. Hourly 8:30am–5pm ET, plus a midnight run.</p></div>
           <div class="flow-step"><b>02</b><h3>Parse</h3><p>Split buys, sells, plans, options, and quoted context into structured trade actions.</p></div>
           <div class="flow-step"><b>03</b><h3>Score</h3><p>Check five-trading-day direction against market data.</p></div>
           <div class="flow-step"><b>04</b><h3>Explore</h3><p>Review flow, outcomes, clusters, and trader activity on the dashboard.</p></div>
@@ -697,7 +697,7 @@ In the UI press "Run a cycle now" — or over SSH: MANUAL_RUN=1 bash ~/wa-trade-
 It pulls recent messages, parses trades, scores outcomes, and pushes to Supabase. Verify the cycle exits 0 and new rows appear in the wa_trades table.
 
 8. CONFIRM THE SCHEDULE
-sudo systemctl status wa-trade-bot-cycle.timer — the hourly pipeline runs 06:00–18:00 America/Los_Angeles only. Never schedule it overnight.
+sudo systemctl status wa-trade-bot-cycle.timer — the hourly pipeline runs 08:30–17:00 America/New_York plus a midnight ET run.
 
 9. DEPLOY THE DASHBOARD
 Vercel is the dashboard's canonical home — the bot only runs the pipeline and the setup UI. Edit dashboard/supabase-config.js with your Supabase project URL and anon key, commit, and push. In Vercel, import the repo with the root directory set to dashboard/ — it redeploys automatically on every push. Open the Vercel URL; it reads live from Supabase.
@@ -725,7 +725,7 @@ HARD RULES
             <li><span class="tick">✓</span><div><strong>A cycle exits 0</strong><span>"Run a cycle now" finishes; the log tail says so.</span></div></li>
             <li><span class="tick">✓</span><div><strong>Rows land in Supabase</strong><span>New records appear in the <code>wa_trades</code> table.</span></div></li>
             <li><span class="tick">✓</span><div><strong>The dashboard shows your tape</strong><span>Open the Vercel URL — it reads live from Supabase.</span></div></li>
-            <li><span class="tick">✓</span><div><strong>The timer is set</strong><span><code>sudo systemctl status wa-trade-bot-cycle.timer</code> — hourly, 06:00–18:00 PT, never overnight.</span></div></li>
+            <li><span class="tick">✓</span><div><strong>The timer is set</strong><span><code>sudo systemctl status wa-trade-bot-cycle.timer</code> — hourly, 08:30–17:00 ET plus a midnight run.</span></div></li>
           </ul>
         </div>
         <div class="faq">
@@ -774,8 +774,8 @@ HARD RULES
             <p>One bad batch never blocks the rest: the parser retries failed batches smaller, and messages it can't parse are marked and skipped. The usual cause is the Gemini free tier's rate limit. Easiest fixes first: add a backup Gemini key in the setup UI (it fails over automatically when the primary hits quota), wait for the quota to reset, or point the setup UI at any OpenAI-compatible model instead.</p>
           </details>
           <details>
-            <summary>Cycle skipped: "outside 06:00–18:00 window"</summary>
-            <p>Not an error — the timer only runs 06:00–18:00 America/Los_Angeles by design; nothing runs overnight. For an immediate run, "Run a cycle now" in the setup UI bypasses the time gate.</p>
+            <summary>Cycle skipped: "outside 08:30–17:00 ET + midnight ET window"</summary>
+            <p>Not an error — the timer only runs 08:30–17:00 America/New_York plus a midnight run by design. For an immediate run, "Run a cycle now" in the setup UI bypasses the time gate.</p>
           </details>
           <details>
             <summary>Dashboard looks stale</summary>
