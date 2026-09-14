@@ -6,10 +6,10 @@
   <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#f4f3ee" />
   <link rel="icon" href="data:," />
-  <title>Trading Floor — Free, open-source WhatsApp trade intelligence</title>
+  <title>TradeFlow — Free, open-source WhatsApp trade intelligence</title>
   <meta name="description" content="Free and open source: turn a WhatsApp trading group into a privacy-first trade tape on hardware you control." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Trading Floor — Free, open-source WhatsApp trade intelligence" />
+  <meta property="og:title" content="TradeFlow — Free, open-source WhatsApp trade intelligence" />
   <meta property="og:description" content="Turn a WhatsApp trading group into a structured, anonymized trade tape with outcome scoring. Open source, read-only, runs on your own hardware." />
   <meta property="og:url" content="https://vibhortayal.github.io/trade-flow/" />
   <meta property="og:image" content="https://vibhortayal.github.io/trade-flow/demo-screenshot.png" />
@@ -447,7 +447,7 @@
 <body>
   <header class="topnav">
     <nav class="wrap topnav-inner" aria-label="Page navigation">
-      <a class="brand" data-tab="demo"><i aria-hidden="true"></i>Trading Floor</a>
+      <a class="brand" data-tab="demo"><i aria-hidden="true"></i>TradeFlow</a>
       <div class="toplinks" role="tablist" aria-label="Page sections">
         <a data-tab="demo" role="tab" aria-selected="true" class="active">Overview</a>
         <a data-tab="how" role="tab" aria-selected="false">How it works</a>
@@ -465,7 +465,7 @@
       <section class="hero wrap">
       <div class="hero-copy">
       <h1>Your trading chat, made legible.</h1>
-      <p>Trading Floor turns a WhatsApp group into a structured trade tape — what the crowd is trading, who's active, and how those calls played out. Runs on your hardware. Read-only: it watches and scores, never trades.</p>
+      <p>TradeFlow turns a WhatsApp group into a structured trade tape — what the crowd is trading, who's active, and how those calls played out. Runs on your hardware. Read-only: it watches and scores, never trades.</p>
       <div class="actions">
       <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Explore the live demo <span aria-hidden="true">↗</span></a>
       </div>
@@ -682,7 +682,7 @@
           <h3>The setup prompt</h3>
           <button class="btn btn-secondary" id="copyPrompt" type="button">Copy prompt</button>
         </div>
-        <div class="terminal prompt-scroll" aria-label="Setup prompt"><div class="terminal-bar"><i></i><i></i><i></i></div><span id="setupPrompt">Set up Trading Floor end to end: https://github.com/vibhortayal/wa-trade-bot
+        <div class="terminal prompt-scroll" aria-label="Setup prompt"><div class="terminal-bar"><i></i><i></i><i></i></div><span id="setupPrompt">Set up TradeFlow end to end: https://github.com/vibhortayal/wa-trade-bot
 
 WHAT IT IS: an hourly pipeline on a VM. A WhatsApp linked-device reader pulls new messages from one trading group, an LLM (Gemini by default, any OpenAI-compatible API works) extracts structured trade actions, market data (TradingView by default, Yahoo Finance works too) scores each outcome over five trading days, and pseudonymized records land in Postgres (Supabase by default, any PostgREST endpoint works) for a static dashboard.
 
