@@ -567,7 +567,7 @@
         </div>
         <div class="demo-cta">
           <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open the live demo <span aria-hidden="true">↗</span></a>
-          <p class="demo-note">No sign-up, no keys — it's a static site reading live data, refreshed hourly. Your own deployment reads from your database.</p>
+          <p class="demo-note">No sign-up, no keys — it's a simple web page reading live data, refreshed hourly. Your own deployment reads from your database.</p>
         </div>
         <figure class="shot">
           <img src="demo-screenshot.png" alt="Trading Floor dashboard showing the trade tape, outcome badges, and trader stats" width="1440" height="900" />
@@ -582,14 +582,14 @@
         </div>
         <div class="privacy-strip">
           <h3>It runs on your machine.</h3>
-          <p>Raw chat and WhatsApp identities never reach the dashboard. Each message goes to the language model you pick for extraction, and only structured, pseudonymized trade records get stored.</p>
+          <p>Raw chat and WhatsApp identities never reach the dashboard. An AI reads each message and pulls out the trade — only anonymous trade records get stored.</p>
           <ul>
-            <li>Stable pseudonyms replace names and phone numbers</li>
-            <li>Only pseudonymized records published</li>
+            <li>Names and phone numbers become anonymous labels (Trader 01, Trader 02…)</li>
+            <li>Only anonymous records are published</li>
             <li>Secrets and the WhatsApp session stay on your machine</li>
             <li>Hourly pull-and-disconnect — no permanent session</li>
-            <li>Every data boundary is inspectable in the source</li>
-            <li>Runs on a free Oracle Cloud VM</li>
+            <li>The code is public — you can check what goes where</li>
+            <li>Runs on a free Oracle cloud server</li>
             <li>Read-only — places no trades</li>
             <li>Calls scored against real market data</li>
           </ul>
@@ -601,12 +601,12 @@
     <section class="panel tab-panel" data-panel="how">
       <div class="wrap">
         <div class="panel-head">
-          <h2>The whole pipeline, in the open.</h2>
-          <p>The repo has the reader, parser, outcome scorer, setup UI, database schema, and dashboard. It runs on your own hardware; a free Oracle Cloud VM is enough.</p>
+          <h2>What happens every hour.</h2>
+          <p>The code includes the reader, parser, outcome scorer, setup UI, database, and dashboard. It runs on your own hardware — a free Oracle cloud server is enough.</p>
         </div>
         <div class="flow" aria-label="Data pipeline">
-          <div class="flow-step"><b>01</b><h3>Pull</h3><p>Connect as a linked device, fetch messages since the last checkpoint, disconnect. Hourly 8:30am–5pm ET, plus a midnight run.</p></div>
-          <div class="flow-step"><b>02</b><h3>Parse</h3><p>Split buys, sells, plans, options, and quoted context into structured trade actions.</p></div>
+          <div class="flow-step"><b>01</b><h3>Pull</h3><p>Connect as a linked device, get new messages since the last check, disconnect. Hourly 8:30am–5pm ET, plus a midnight run.</p></div>
+          <div class="flow-step"><b>02</b><h3>Parse</h3><p>Turn buys, sells, plans, options, and quoted replies into organized trade records.</p></div>
           <div class="flow-step"><b>03</b><h3>Score</h3><p>Check five-trading-day direction against market data.</p></div>
           <div class="flow-step"><b>04</b><h3>Explore</h3><p>Review flow, outcomes, clusters, and trader activity on the dashboard.</p></div>
         </div>
@@ -618,32 +618,32 @@
           <article class="card">
             <span class="card-num">Chat reader</span>
             <h3><a href="https://github.com/pedroslopez/whatsapp-web.js" target="_blank" rel="noopener">whatsapp-web.js</a></h3>
-            <p>Connects as a linked device, pulls messages since the last checkpoint, and disconnects. No permanent session, no spare phone.</p>
+            <p>Connects as a linked device, pulls messages since the last check, and disconnects. No permanent session, no spare phone.</p>
           </article>
           <article class="card">
-            <span class="card-num">Language model</span>
+            <span class="card-num">AI</span>
             <h3><a href="https://aistudio.google.com/" target="_blank" rel="noopener">Gemini API</a> <span style="color:var(--mint-deep);font-size:14px">· free tier</span></h3>
-            <p>Turns chat messages into structured trade records: symbol, action, instrument, strike, expiry, quoted context. Any OpenAI-compatible LLM works.</p>
+            <p>Reads chat messages and pulls out the trade details: symbol, action, instrument, strike, expiry, quoted context. Any OpenAI-compatible AI works.</p>
           </article>
           <article class="card">
             <span class="card-num">Market data</span>
             <h3><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a></h3>
-            <p>Daily bars for the five-day outcome scoring, round-trip detection, and target checks. Yahoo Finance (free, no key) is a drop-in alternative.</p>
+            <p>Daily prices for the five-day outcome scoring, round-trip detection, and target checks. Yahoo Finance (free, no key) works as a replacement.</p>
           </article>
           <article class="card">
             <span class="card-num">Database</span>
             <h3><a href="https://supabase.com/" target="_blank" rel="noopener">Supabase</a> <span style="color:var(--mint-deep);font-size:14px">· free tier</span></h3>
-            <p>Postgres stores the pseudonymized trade records and sync metadata. The dashboard reads it live; row-level security keeps writes server-side. Any PostgREST-compatible database works.</p>
+            <p>Stores the anonymous trade records. The dashboard reads them live; only the hourly job can write. Any compatible database works.</p>
           </article>
           <article class="card">
             <span class="card-num">Runtime</span>
             <h3><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a> + <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a></h3>
-            <p>Node drives the WhatsApp reader and setup UI; Python handles extraction, scoring, and the database push. It all runs on your VM — one shell script per cycle, fired hourly by a systemd timer.</p>
+            <p>Node.js runs the WhatsApp reader and setup UI; Python handles reading the trades, scoring them, and saving to the database. It all runs on your server — one script per cycle, on an hourly schedule.</p>
           </article>
           <article class="card">
             <span class="card-num">Hosting</span>
             <h3><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> + <a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener">Oracle Cloud</a> <span style="color:var(--mint-deep);font-size:14px">· free</span></h3>
-            <p>The dashboard is a dependency-free static site on Vercel; the pipeline runs on an Oracle Cloud Always Free VM. Any Ubuntu VM works as the host.</p>
+            <p>The dashboard is a simple page on Vercel; the hourly job runs on a free Oracle cloud server. Any Ubuntu server works as the host.</p>
           </article>
         </div>
         <div class="stack-note">The above is the free-tier default, not a requirement.</div>
@@ -652,7 +652,7 @@
           <h2 style="font-size:clamp(28px,3.4vw,40px)">How the pieces connect.</h2>
         </div>
         <figure class="shot">
-          <img src="arch-overview.png" alt="System overview: WhatsApp group feeds the Oracle VM pipeline, which talks to the LLM and market data, pushes anonymized records to Supabase, and serves the public dashboard; the setup UI manages the VM." width="1632" height="426" loading="lazy" />
+          <img src="arch-overview.png" alt="System overview: the WhatsApp group feeds the hourly job on the Oracle server, which talks to the AI and market data, saves anonymous records to Supabase, and serves the public dashboard; the setup UI manages the server." width="1632" height="426" loading="lazy" />
         </figure>
       </div>
     </section>
@@ -665,12 +665,12 @@
           <p>Gather the checklist, then hand the setup prompt to your AI agent. Every step matches the installer and setup UI.</p>
         </div>
         <ul class="check-list">
-          <li><span class="tick">✓</span><div><strong><a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener">Oracle Cloud</a> account</strong><span>Always Free tier (any Ubuntu VM works). Ubuntu 24.04, Ampere A1, 4 OCPUs / 24 GB RAM, public subnet with TCP ingress on port 3001.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener">Oracle Cloud</a> account</strong><span>Always Free tier (any Ubuntu server works). Ubuntu 24.04, Ampere A1, 4 OCPUs / 24 GB RAM, with port 3001 open to the internet.</span></div></li>
           <li><span class="tick">✓</span><div><strong><a href="https://www.whatsapp.com/" target="_blank" rel="noopener">WhatsApp</a> on your phone</strong><span>The bot pairs as a linked device with a one-time code. No spare SIM, no number changes.</span></div></li>
-          <li><span class="tick">✓</span><div><strong>Gemini API key</strong><span>Free tier from <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google AI Studio</a> — or any OpenAI-compatible LLM (base URL + key + model) via the setup UI.</span></div></li>
-          <li><span class="tick">✓</span><div><strong><a href="https://supabase.com/" target="_blank" rel="noopener">Supabase</a> project</strong><span>Free tier — or any PostgREST database. You need the project URL and service_role key. The schema is in the repo and the setup UI.</span></div></li>
-          <li><span class="tick">✓</span><div><strong><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Yahoo Finance (free, no key) needs no setup, and the pipeline runs without either — outcome scoring is simply skipped.</span></div></li>
-          <li><span class="tick">✓</span><div><strong><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> account</strong><span>Free tier. The dashboard's canonical home — import the repo with root directory <code>dashboard/</code> and it deploys on every push. Point <code>dashboard/supabase-config.js</code> at your Supabase project first.</span></div></li>
+          <li><span class="tick">✓</span><div><strong>Gemini API key</strong><span>Free tier from <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google AI Studio</a> — or any OpenAI-compatible AI (base URL + key + model) via the setup UI.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://supabase.com/" target="_blank" rel="noopener">Supabase</a> project</strong><span>Free tier — or any compatible database. You need the project URL and service_role key; the setup UI shows the tables to create.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Yahoo Finance (free, no key) needs no setup, and the hourly job runs without either — outcome scoring is simply skipped.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> account</strong><span>Free tier. Where the dashboard lives — import the code with root directory <code>dashboard/</code> and it deploys on every push. Point <code>dashboard/supabase-config.js</code> at your Supabase project first.</span></div></li>
         </ul>
         <div class="prompt-head">
           <h3>The setup prompt</h3>
@@ -678,13 +678,13 @@
         </div>
         <div class="terminal prompt-scroll" aria-label="Setup prompt"><div class="terminal-bar"><i></i><i></i><i></i></div><span id="setupPrompt">Set up TradeFlow end to end: https://github.com/vibhortayal/wa-trade-bot
 
-WHAT IT IS: an hourly pipeline on a VM. A WhatsApp linked-device reader pulls new messages from one WhatsApp trading group, an LLM (Gemini by default, any OpenAI-compatible API works) extracts structured trade actions, market data (TradingView by default, Yahoo Finance works too) scores each outcome over five trading days, and pseudonymized records land in Postgres (Supabase by default, any PostgREST endpoint works) for a static dashboard.
+WHAT IT IS: an hourly job on a server. A WhatsApp linked-device reader pulls new messages from one WhatsApp trading group, an AI (Gemini by default, any OpenAI-compatible API works) extracts structured trade actions, market data (TradingView by default, Yahoo Finance works too) scores each outcome over five trading days, and anonymous records land in the database (Supabase by default, any PostgREST endpoint works) for a static dashboard.
 
 PREREQUISITES — I have all of these ready:
-- Oracle Cloud Always Free account (any Ubuntu VM works; Oracle is the free suggestion)
-- Ubuntu 24.04 ARM VM (Ampere A1: 4 OCPUs / 24 GB RAM) with a public IP; subnet security list allows TCP ingress on port 3001 from 0.0.0.0/0
+- Oracle Cloud Always Free account (any Ubuntu server works; Oracle is the free suggestion)
+- Ubuntu 24.04 ARM server (Ampere A1: 4 OCPUs / 24 GB RAM) with a public IP; subnet security list allows TCP ingress on port 3001 from 0.0.0.0/0
 - My WhatsApp account on my phone (I can type in a pairing code)
-- Gemini API key (free tier; or any OpenAI-compatible LLM base URL + key + model)
+- Gemini API key (free tier; or any OpenAI-compatible AI base URL + key + model)
 - Supabase project URL + service_role key (or any PostgREST endpoint)
 - TradingView account (optional — for outcome scoring; or use free Yahoo Finance instead)
 - Vercel account (free tier — hosts the dashboard)
@@ -692,7 +692,7 @@ PREREQUISITES — I have all of these ready:
 DO THIS IN ORDER. Verify each step before moving on.
 
 1. DEPLOY THE CODE
-Copy the repo to the VM. The VM directory is NOT a git repo — always deploy with scp, never git pull there:
+Copy the repo to the server. The server directory is NOT a git repo — always deploy with scp, never git pull there:
   scp -r . ubuntu@&lt;VM-IP&gt;:~/wa-trade-bot
 SSH in and install (Node 20, Python 3, Chromium, systemd units). It asks for a setup-UI admin password — have me choose one:
   ssh ubuntu@&lt;VM-IP&gt;
@@ -719,10 +719,10 @@ In the UI press "Run a cycle now" — or over SSH: MANUAL_RUN=1 bash ~/wa-trade-
 It pulls recent messages, parses trades, scores outcomes, and pushes to Supabase. Verify the cycle exits 0 and new rows appear in the wa_trades table.
 
 8. CONFIRM THE SCHEDULE
-sudo systemctl status wa-trade-bot-cycle.timer — the hourly pipeline runs 08:30–17:00 America/New_York plus a midnight ET run.
+sudo systemctl status wa-trade-bot-cycle.timer — the hourly job runs 08:30–17:00 America/New_York plus a midnight ET run.
 
 9. DEPLOY THE DASHBOARD
-Vercel is the dashboard's canonical home — the bot only runs the pipeline and the setup UI. Edit dashboard/supabase-config.js with your Supabase project URL and anon key, commit, and push. In Vercel, import the repo with the root directory set to dashboard/ — it redeploys automatically on every push. Open the Vercel URL; it reads live from Supabase.
+Vercel is the dashboard's canonical home — the bot only runs the hourly job and the setup UI. Edit dashboard/supabase-config.js with your Supabase project URL and anon key, commit, and push. In Vercel, import the repo with the root directory set to dashboard/ — it redeploys automatically on every push. Open the Vercel URL; it reads live from Supabase.
 
 HARD RULES
 - Never print, log, or commit: .env contents, data/messages.jsonl (raw chat), data/pseudonyms.json, phone numbers, sender names, WhatsApp group IDs, API keys, the admin password, or pairing codes. They are gitignored — keep them that way.
@@ -732,9 +732,9 @@ HARD RULES
 - If anything fails, show me the exact error plus the log tail (the UI "Status" section, or logs/cycle.log on the VM) before retrying.</span></div>
         <div class="faq">
           <h3>After the prompt runs: the setup UI.</h3>
-          <p>The agent does the deploying and installing. Three steps need you: typing the pairing code into WhatsApp on your phone, pasting your API keys, and running the Supabase schema once. It all happens in the setup UI, section by section:</p>
+          <p>The agent does the deploying and installing. Three steps need you: typing the pairing code into WhatsApp on your phone, pasting your API keys, and creating the Supabase tables once. It all happens in the setup UI, section by section:</p>
           <ul class="check-list">
-            <li><span class="n">S</span><div><strong>Status — the at-a-glance check</strong><span>Yes/no pills for WhatsApp linked, LLM keys, Supabase, and market data, plus counts of messages pulled and trade actions parsed, with last pull and parse times. When something looks wrong, start here.</span></div></li>
+            <li><span class="n">S</span><div><strong>Status — the at-a-glance check</strong><span>Yes/no pills for WhatsApp linked, AI keys, Supabase, and market data, plus counts of messages pulled and trade actions parsed, with last pull and parse times. When something looks wrong, start here.</span></div></li>
             <li><span class="n">1</span><div><strong>Link WhatsApp — the one step that needs your phone</strong><span>Enter your number, take the code, type it into WhatsApp → Settings → Linked devices → "Link with phone number instead". Done when Status reads <em>WhatsApp linked: yes</em>. If a code expires or the link stalls, "Get a fresh code" wipes the half-finished session and starts over.</span></div></li>
             <li><span class="n">2</span><div><strong>API keys &amp; WhatsApp group</strong><span>Paste the Gemini key (or any OpenAI-compatible base URL + key + model), the Supabase URL + service_role key, and the WhatsApp trading group's name. Each field shows whether it's set — change or reset any of them later.</span></div></li>
             <li><span class="n">2b</span><div><strong>Database tables — one-time</strong><span>Copy the SQL from the box into the Supabase SQL editor and run it. Creates the tables with read-only public access.</span></div></li>
@@ -743,7 +743,7 @@ HARD RULES
           </ul>
           <p><strong>How to know it worked:</strong></p>
           <ul class="check-list">
-            <li><span class="tick">✓</span><div><strong>Status shows all yes</strong><span>WhatsApp linked, LLM keys, Supabase, market data.</span></div></li>
+            <li><span class="tick">✓</span><div><strong>Status shows all yes</strong><span>WhatsApp linked, AI keys, Supabase, market data.</span></div></li>
             <li><span class="tick">✓</span><div><strong>A cycle exits 0</strong><span>"Run a cycle now" finishes; the log tail says so.</span></div></li>
             <li><span class="tick">✓</span><div><strong>Rows land in Supabase</strong><span>New records appear in the <code>wa_trades</code> table.</span></div></li>
             <li><span class="tick">✓</span><div><strong>The dashboard shows your tape</strong><span>Open the Vercel URL — it reads live from Supabase.</span></div></li>
@@ -766,21 +766,21 @@ HARD RULES
           </details>
           <details>
             <summary>What does it cost to run?</summary>
-            <p>$0 a month on free tiers: an Oracle Cloud Always Free VM, the Gemini free tier, Supabase free tier, and Vercel free tier. Every layer is swappable if you'd rather use your own providers.</p>
+            <p>$0 a month on free tiers: an Oracle Cloud Always Free server, the Gemini free tier, Supabase free tier, and Vercel free tier. Every layer is swappable if you'd rather use your own providers.</p>
           </details>
         </div>
         <div class="faq">
           <h3>Things that broke for us.</h3>
           <details>
             <summary>Pairing never completes</summary>
-            <p>Pairing is a round trip: the setup UI shows a code, you type it into WhatsApp on your phone, and WhatsApp confirms back to the VM. The link only counts once the UI reports <code>wa_paired: true</code>. Type the code in right away — codes expire within minutes — and wait for that confirmation before moving on. If it keeps failing, the VM is holding a stale half-paired session: click "Get a fresh code" in the setup UI, which wipes it and starts clean.</p>
+            <p>Pairing is a round trip: the setup UI shows a code, you type it into WhatsApp on your phone, and WhatsApp confirms back to the server. The link only counts once the UI reports <code>wa_paired: true</code>. Type the code in right away — codes expire within minutes — and wait for that confirmation before moving on. If it keeps failing, the server is holding a stale half-paired session: click "Get a fresh code" in the setup UI, which wipes it and starts clean.</p>
           </details>
           <details>
             <summary>Can't reach the setup UI on port 3001</summary>
             <p>The page at <code>http://&lt;VM-IP&gt;:3001/setup.html</code> won't load. Oracle blocks all ports by default — the subnet's security list needs a TCP ingress rule for port 3001 (source <code>0.0.0.0/0</code>). Add it in the Oracle console under Networking → Security Lists; the checklist above has the exact rule.</p>
           </details>
           <details>
-            <summary>Oracle says "out of capacity" when creating the VM</summary>
+            <summary>Oracle says "out of capacity" when creating the server</summary>
             <p>Always Free capacity in a region comes and goes — we hit this in us-sanjose-1 for both free shapes. Retry, or try the other shape. What unblocked us: upgrading the tenancy to Pay As You Go (card on file, still free-tier eligible) with a budget alert as a safety net.</p>
           </details>
           <details>
@@ -801,7 +801,7 @@ HARD RULES
           </details>
           <details>
             <summary>Dashboard looks stale</summary>
-            <p>Check Status first. If "Last pull" is old, the pipeline isn't running — check the timer and the cycle log. If the tape is fresh but outcome badges are missing, that's the market-data source: scoring failures never block new trades, so an expired TradingView token or an unreachable Yahoo just leaves scores blank. Reconnect it in §3 of the setup UI.</p>
+            <p>Check Status first. If "Last pull" is old, the hourly job isn't running — check the timer and the cycle log. If the tape is fresh but outcome badges are missing, that's the market-data source: scoring failures never block new trades, so an expired TradingView token or an unreachable Yahoo just leaves scores blank. Reconnect it in §3 of the setup UI.</p>
           </details>
         </div>
         <section class="cta" aria-label="Get started">
@@ -827,11 +827,11 @@ HARD RULES
           <p>The pipeline handles messy chat — but a few WhatsApp group habits make the tape cleaner and the scores more meaningful.</p>
         </div>
         <ul class="check-list">
-          <li><span class="n">1</span><div><strong>Point it at a signal-dense WhatsApp group</strong><span>The reader watches one WhatsApp group — make it one where people post actual trades, not memes and market chatter. Less noise means a cleaner tape, faster cycles, and fewer wasted language-model calls.</span></div></li>
+          <li><span class="n">1</span><div><strong>Point it at a signal-dense WhatsApp group</strong><span>The reader watches one WhatsApp group — make it one where people post actual trades, not memes and market chatter. Less noise means a cleaner tape, faster cycles, and fewer wasted AI calls.</span></div></li>
           <li><span class="n">2</span><div><strong>Agree on a post format</strong><span><code>ACTION SYMBOL details</code> — e.g. <code>ADD AMZN $300 call</code> or <code>EXIT TSLA shares</code>. The parser handles free text, but consistent posts extract reliably. Pin the format to the WhatsApp group.</span></div></li>
           <li><span class="n">3</span><div><strong>Quote the trade you're following up on</strong><span>When you trim or exit, quote the original message. Quoted replies get linked automatically, so follow-ups attach to the right entry — and exits score on the actual return.</span></div></li>
           <li><span class="n">4</span><div><strong>Post targets with plans</strong><span><code>PLAN AMZN target 300</code>. The dashboard checks whether stated targets get hit — but a plan without a target can't be scored.</span></div></li>
-          <li><span class="n">5</span><div><strong>Share the dashboard back with the WhatsApp group</strong><span>A visible scoreboard improves post quality on its own. Keep the pseudonyms intact — never de-anonymize anyone publicly.</span></div></li>
+          <li><span class="n">5</span><div><strong>Share the dashboard back with the WhatsApp group</strong><span>A visible scoreboard improves post quality on its own. Keep the anonymous labels intact — never de-anonymize anyone publicly.</span></div></li>
           <li><span class="n">6</span><div><strong>Judge on samples, not single calls</strong><span>The Traders tab flags small samples for a reason. Give a member 10+ scored trades before weighting their calls — and remember &#10003;/&#10007; is five-day underlying direction, not premium P&amp;L.</span></div></li>
           <li><span class="n">7</span><div><strong>Review weekly, not hourly</strong><span>Outcomes need five trading days to mature. The tape is for today; the Traders tab is for the quarter.</span></div></li>
         </ul>
@@ -858,7 +858,7 @@ HARD RULES
           <article class="card">
             <span class="card-num">Planned</span>
             <h3>Managed service.</h3>
-            <p>A hosted option, for people who don't want to run the VM themselves.</p>
+            <p>A hosted option, for people who don't want to run it themselves.</p>
           </article>
         </div>
       </div>
