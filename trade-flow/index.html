@@ -251,6 +251,10 @@
     .live-stats strong { display: block; font: 600 32px/1 "IBM Plex Mono", monospace; letter-spacing: -.02em; }
     .live-stats span { display: block; color: var(--muted); font-size: 12.5px; margin-top: 9px; line-height: 1.45; }
     .demo-cta { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-bottom: 44px; }
+    .live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--mint-deep); margin-right: 9px; animation: live-pulse 2s ease-in-out infinite; vertical-align: 1px; }
+    @keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+    .demo-fresh { font: 500 12.5px/1.5 "IBM Plex Mono", monospace; color: var(--muted); margin: 14px 0 0; }
+    .demo-fresh strong { color: var(--ink); }
     .demo-note { color: var(--muted); font-size: 14px; margin: 0; max-width: 520px; line-height: 1.55; }
     .shot { margin: 0 auto 56px; max-width: 940px; }
     .shot img {
@@ -557,8 +561,9 @@
           </div>
         </div>
         <div class="panel-head kicker-only">
-          <span class="kicker">Live demo</span>
-          <p>Below is Trading Floor, a dashboard built with TradeFlow, running on live data from a real WhatsApp trading group. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
+          <span class="kicker"><span class="live-dot" aria-hidden="true"></span>Live</span>
+          <p>This isn&rsquo;t a mockup &mdash; it&rsquo;s the actual dashboard I use. Every hour it reads the WhatsApp trading group I&rsquo;m in, scores each call, and publishes the anonymized results here. You&rsquo;d get the same trade tape, outcome badges, crowd insights, and per-trader cards running it yourself.</p>
+          <p class="demo-fresh" id="statFreshWrap">Live data &mdash; refreshes hourly.</p>
         </div>
         <div class="live-stats" aria-label="Real usage numbers">
           <div><strong id="statMembers">21</strong><span>active traders tracked</span></div>
@@ -566,12 +571,12 @@
           <div><strong id="statScored">217</strong><span>outcomes scored</span></div>
         </div>
         <div class="demo-cta">
-          <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open the live demo <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open the live dashboard <span aria-hidden="true">↗</span></a>
           <p class="demo-note">No sign-up, no keys — it's a simple web page reading live data, refreshed hourly. Your own deployment reads from your database.</p>
         </div>
         <figure class="shot">
           <img src="demo-screenshot.png" alt="Trading Floor dashboard showing the trade tape, outcome badges, and trader stats" width="1440" height="900" />
-          <figcaption>The <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">live demo</a> — the real dashboard, fully anonymized.</figcaption>
+          <figcaption>The <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">real dashboard</a> — fully anonymized.</figcaption>
         </figure>
         <div class="demo-nudge">
           <p><strong>Like what you see?</strong> Point it at your own WhatsApp group — the Get started tab has the checklist and the setup prompt.</p>
@@ -812,7 +817,7 @@ HARD RULES
             </div>
             <div class="actions">
               <button class="btn btn-primary" id="ctaCopyPrompt" type="button">Copy the setup prompt</button>
-              <a class="btn btn-secondary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open demo ↗</a>
+              <a class="btn btn-secondary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open the live dashboard ↗</a>
             </div>
           </div>
         </section>
@@ -882,7 +887,7 @@ HARD RULES
 
   <footer class="wrap">
     <span>Free and open source · built to run on your hardware.</span>
-    <span><a href="https://github.com/vibhortayal/wa-trade-bot" target="_blank" rel="noopener">Star / fork on GitHub</a> · <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Live demo</a></span>
+    <span><a href="https://github.com/vibhortayal/wa-trade-bot" target="_blank" rel="noopener">Star / fork on GitHub</a> · <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Live dashboard</a></span>
   </footer>
 
   <script>
@@ -945,6 +950,32 @@ HARD RULES
           els.members.textContent = new Set(rows.map((t) => t.trader)).size.toLocaleString('en-US');
         })
         .catch(() => { /* keep the baked-in fallback numbers */ });
+    })();
+    // Freshness proof: read wa_meta.last_cycle so the page can say exactly
+    // when the live data was last refreshed. A mockup couldn't do this.
+    (function () {
+      const wrap = document.getElementById('statFreshWrap');
+      if (!wrap) return;
+      const ANON_KEY = 'sb_publishable_r2fiWknUdG1k6ImlRpk5ww_VQlVGghY';
+      fetch('https://wzaafasvbzpgakyyscjx.supabase.co/rest/v1/wa_meta?select=key,value', {
+        headers: { apikey: ANON_KEY, Authorization: 'Bearer ' + ANON_KEY }
+      })
+        .then((r) => { if (!r.ok) throw new Error('meta fetch failed'); return r.json(); })
+        .then((rows) => {
+          const row = (rows || []).find((x) => x.key === 'last_cycle');
+          if (!row) return;
+          let c = row.value;
+          if (typeof c === 'string') { try { c = JSON.parse(c); } catch (e) { return; } }
+          if (!c || !c.ended_at) return;
+          const mins = Math.max(0, Math.round((Date.now() - new Date(c.ended_at).getTime()) / 60000));
+          const ago = mins < 1 ? 'just now' : mins < 60 ? mins + ' min ago' : Math.round(mins / 60) + ' hr ago';
+          let detail = '';
+          if (c.status === 'ok' && c.messages != null) {
+            detail = ' · last cycle: ' + c.messages + ' new messages, ' + (c.new_actions || 0) + ' new trades';
+          }
+          wrap.innerHTML = 'Last refresh: <strong>' + ago + '</strong>' + detail;
+        })
+        .catch(() => { /* keep the baked-in fallback line */ });
     })();
   </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="6d4c020c-affc-474c-aed2-271abfde1035"></script>
