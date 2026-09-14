@@ -214,6 +214,8 @@
     }
     .card .card-num { font: 600 12px/1 "IBM Plex Mono", monospace; color: var(--mint-deep); letter-spacing: .08em; }
     .card h3 { margin: 12px 0 10px; font-size: 22px; letter-spacing: -.025em; line-height: 1.2; }
+    .card h3 a { color: inherit; text-decoration: none; border-bottom: 2px solid var(--mint); padding-bottom: 1px; }
+    .card h3 a:hover { border-bottom-color: var(--ink); }
     .card p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 15.5px; }
     .card p + p { margin-top: 10px; }
 
@@ -591,32 +593,32 @@
         <div class="cards">
           <article class="card">
             <span class="card-num">Chat reader</span>
-            <h3>whatsapp-web.js</h3>
+            <h3><a href="https://github.com/pedroslopez/whatsapp-web.js" target="_blank" rel="noopener">whatsapp-web.js</a></h3>
             <p>Connects as a linked device, pulls messages since the last checkpoint, and disconnects. No permanent session, no spare phone.</p>
           </article>
           <article class="card">
             <span class="card-num">Language model</span>
-            <h3>Gemini API <span style="color:var(--mint-deep);font-size:14px">· free tier</span></h3>
+            <h3><a href="https://aistudio.google.com/" target="_blank" rel="noopener">Gemini API</a> <span style="color:var(--mint-deep);font-size:14px">· free tier</span></h3>
             <p>Turns chat messages into structured trade records: symbol, action, instrument, strike, expiry, quoted context. Any OpenAI-compatible LLM works.</p>
           </article>
           <article class="card">
             <span class="card-num">Market data</span>
-            <h3>TradingView</h3>
+            <h3><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a></h3>
             <p>Daily bars for the five-day outcome scoring, round-trip detection, and target checks. Yahoo Finance (free, no key) is a drop-in alternative.</p>
           </article>
           <article class="card">
             <span class="card-num">Database</span>
-            <h3>Supabase <span style="color:var(--mint-deep);font-size:14px">· free tier</span></h3>
+            <h3><a href="https://supabase.com/" target="_blank" rel="noopener">Supabase</a> <span style="color:var(--mint-deep);font-size:14px">· free tier</span></h3>
             <p>Postgres stores the pseudonymized trade records and sync metadata. The dashboard reads it live; row-level security keeps writes server-side. Any PostgREST-compatible database works.</p>
           </article>
           <article class="card">
             <span class="card-num">Runtime</span>
-            <h3>Node.js + Python</h3>
+            <h3><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a> + <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a></h3>
             <p>Node drives the WhatsApp reader and setup UI; Python handles extraction, scoring, and the database push. One shell script runs the whole cycle.</p>
           </article>
           <article class="card">
             <span class="card-num">Hosting</span>
-            <h3>Vercel + Oracle Cloud <span style="color:var(--mint-deep);font-size:14px">· free</span></h3>
+            <h3><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> + <a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener">Oracle Cloud</a> <span style="color:var(--mint-deep);font-size:14px">· free</span></h3>
             <p>The dashboard is a dependency-free static site on Vercel; the pipeline runs on an Oracle Cloud Always Free VM. Any Ubuntu VM works as the host.</p>
           </article>
         </div>
