@@ -218,6 +218,20 @@
     .card p + p { margin-top: 10px; }
 
     /* Demo panel */
+    .score-band {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 34px 34px 30px;
+      margin-bottom: 56px;
+      background: #fff;
+    }
+    .score-band h3 { margin: 14px 0 10px; font-size: 24px; letter-spacing: -.03em; }
+    .score-band > p { color: var(--muted); margin: 0 0 6px; line-height: 1.6; max-width: 780px; }
+    .score-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 24px; }
+    .score-col h4 { margin: 0 0 10px; font-size: 17px; letter-spacing: -.02em; }
+    .score-col ul { list-style: none; padding: 0; margin: 0; }
+    .score-col li { position: relative; padding-left: 20px; margin: 0 0 10px; font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+    .score-col li::before { content: "→"; position: absolute; left: 0; color: var(--mint-deep); font-weight: 700; }
     .live-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -391,6 +405,7 @@
       .live-stats { grid-template-columns: 1fr 1fr; }
       .demo-cta { align-items: flex-start; flex-direction: column; gap: 14px; }
       .privacy-strip ul { grid-template-columns: 1fr; }
+      .score-cols { grid-template-columns: 1fr; gap: 22px; }
       .cta-inner { grid-template-columns: 1fr; align-items: start; }
       .cta .actions { justify-content: flex-start; }
     }
@@ -505,6 +520,40 @@
             <h3>Who contributes useful flow?</h3>
             <p>The Traders view compares activity, active days, favorite symbols, and scored outcomes without exposing member identities. Small samples stay labeled.</p>
           </article>
+        </div>
+        <div class="score-band">
+          <span class="kicker">Outcome scoring</span>
+          <h3>Every call, checked against the market.</h3>
+          <p>Logging trades is table stakes — Trade Flow checks what actually happened. Each action is scored against real daily market data (TradingView or Yahoo Finance, your choice), and the results feed per-trader scorecards and crowd insights.</p>
+          <div class="score-cols">
+            <div class="score-col">
+              <h4>Real market data</h4>
+              <ul>
+                <li>Five-trading-day window after the call, on real daily bars</li>
+                <li>Moves inside a 1% band count as flat — the rest are favorable or unfavorable</li>
+                <li>Round trips pair opens with closes (FIFO); stated targets are watched for 14 days</li>
+                <li>Options scored on underlying direction — never fictional premium P&amp;L</li>
+              </ul>
+            </div>
+            <div class="score-col">
+              <h4>Trader scorecards</h4>
+              <ul>
+                <li>Per-member cards: activity, favorite symbols, instrument mix</li>
+                <li>Scored ✓ / ✗ / – record, plus round trips and target hits</li>
+                <li>Fully anonymized — &ldquo;You&rdquo;, Trader 01, Trader 02, and so on</li>
+                <li>Small samples stay labeled, so a 2-for-2 streak never masquerades as a track record</li>
+              </ul>
+            </div>
+            <div class="score-col">
+              <h4>Crowd insights</h4>
+              <ul>
+                <li>Deterministic rules, no black boxes: activity spikes and drops, new-trader crowds</li>
+                <li>Put/call sentiment shifts, open/close lean flips, options-share surges</li>
+                <li>Hot traders flagged at 5+ scored calls with a 60%+ hit rate</li>
+                <li>Top signals surface first — and when it&rsquo;s calm, the dashboard says so</li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="privacy-strip">
           <span class="kicker">Privacy by design</span>
