@@ -568,7 +568,7 @@
           </ul>
         </div>
         <div class="demo-nudge">
-          <p><strong>Like what you see?</strong> Point it at your own group. Setup takes an afternoon, and the prompt walks through every step.</p>
+          <p><strong>Like what you see?</strong> Point it at your own group — the Get started tab has the checklist and the setup prompt.</p>
           <a class="btn btn-secondary" data-tab="start">Get started &rarr;</a>
         </div>
       </div>
@@ -633,7 +633,7 @@
       <div class="wrap">
         <div class="panel-head">
           <span class="kicker">Get started</span>
-          <h2>From zero to live in an afternoon.</h2>
+          <h2>What you need, and the prompt that sets it up.</h2>
           <p>Gather the checklist, then hand the setup prompt to your AI agent. Every step matches the installer and setup UI.</p>
         </div>
         <ul class="check-list">
@@ -749,7 +749,7 @@ HARD RULES
           </details>
           <details>
             <summary>Can't reach the setup UI on port 3001</summary>
-            <p>Open TCP 3001 in the VM's firewall ingress rules. Also run the services as the same user that installed Chrome — a different user won't find the browser binary.</p>
+            <p>The page at <code>http://&lt;VM-IP&gt;:3001/setup.html</code> won't load. Oracle blocks all ports by default — the subnet's security list needs a TCP ingress rule for port 3001 (source <code>0.0.0.0/0</code>). Add it in the Oracle console under Networking → Security Lists; the checklist above has the exact rule.</p>
           </details>
           <details>
             <summary>Oracle says "out of capacity" when creating the VM</summary>
@@ -757,29 +757,29 @@ HARD RULES
           </details>
           <details>
             <summary>The reader pulls no messages</summary>
-            <p>The chat list takes up to a minute to load after linking — the reader polls for it. Also check the group name in the setup UI matches the WhatsApp group exactly.</p>
+            <p>Two usual causes. First, a fresh linked device takes up to a minute to sync its chat list — the reader polls and waits, so give it a moment and run the cycle again. Second, the group filter: the reader only looks at the group named in "WhatsApp group to watch" in the setup UI (case-insensitive substring match). If that doesn't match the group's actual name in WhatsApp, it finds nothing.</p>
           </details>
           <details>
             <summary>The reader fails: Chromium won't start</summary>
-            <p>The <code>chromium</code> snap's launcher wrapper refuses to run inside a systemd service — point <code>PUPPETEER_EXECUTABLE_PATH</code> at the real binary (<code>/snap/chromium/current/usr/lib/chromium-browser/chrome</code>). The installer already does this; it mostly bites hand-rolled setups.</p>
+            <p>Symptom: pairing codes never appear, or reads die instantly. The <code>chromium</code> snap's launcher wrapper refuses to run inside a systemd service — the browser starts fine over SSH but never from the timer or setup UI. The fix is <code>PUPPETEER_EXECUTABLE_PATH=/snap/chromium/current/usr/lib/chromium-browser/chrome</code> (the real binary). The installer sets this already; only hand-rolled setups need it done manually.</p>
           </details>
           <details>
             <summary>Parse errors or quota failures</summary>
-            <p>The parser retries in smaller batches; messages it can't parse are marked and skipped, not retried forever. The Gemini free tier is rate-limited — if you hit quota, point the setup UI at any OpenAI-compatible model instead.</p>
+            <p>One bad batch never blocks the rest: the parser retries failed batches smaller, and messages it can't parse are marked and skipped. The usual cause is the Gemini free tier's rate limit. Easiest fixes first: add a backup Gemini key in the setup UI (it fails over automatically when the primary hits quota), wait for the quota to reset, or point the setup UI at any OpenAI-compatible model instead.</p>
           </details>
           <details>
             <summary>Cycle skipped: "outside 06:00–18:00 window"</summary>
-            <p>That's the timer doing its job — it only runs daytime PT. Use "Run a cycle now" in the setup UI for an immediate run.</p>
+            <p>Not an error — the timer only runs 06:00–18:00 America/Los_Angeles by design; nothing runs overnight. For an immediate run, "Run a cycle now" in the setup UI bypasses the time gate.</p>
           </details>
           <details>
             <summary>Dashboard looks stale</summary>
-            <p>Check the last-cycle timestamp in the setup UI log. Scoring failures never block new trades — if the tape is fresh but scores are missing, the market-data source is the thing to check.</p>
+            <p>Check Status first. If "Last pull" is old, the pipeline isn't running — check the timer and the cycle log. If the tape is fresh but outcome badges are missing, that's the market-data source: scoring failures never block new trades, so an expired TradingView token or an unreachable Yahoo just leaves scores blank. Reconnect it in §3 of the setup UI.</p>
           </details>
         </div>
         <section class="cta" aria-label="Get started">
           <div class="cta-inner">
             <div>
-              <h2>Live on your group by tonight.</h2>
+              <h2>One prompt sets it all up.</h2>
               <p>One free VM, your existing WhatsApp, one API key. Hand the setup prompt to your AI agent.</p>
             </div>
             <div class="actions">
