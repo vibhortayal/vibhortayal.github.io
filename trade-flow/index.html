@@ -725,7 +725,7 @@ HARD RULES
           <h3>Things that broke for us.</h3>
           <details>
             <summary>Pairing never completes</summary>
-            <p>Don't close the browser early — the session only saves after WhatsApp confirms the link. If it keeps failing, wipe the session folder (<code>.wwebjs_auth</code>) and pair fresh; stale sessions and stray browser processes are the usual cause.</p>
+            <p>Pairing is a round trip: the setup UI shows a code, you type it into WhatsApp on your phone, and WhatsApp confirms back to the VM. The link only counts once the UI reports <code>wa_paired: true</code>. Type the code in right away — codes expire within minutes — and wait for that confirmation before moving on. If it keeps failing, the VM is holding a stale half-paired session: click "Get a fresh code" in the setup UI, which wipes it and starts clean.</p>
           </details>
           <details>
             <summary>Can't reach the setup UI on port 3001</summary>
