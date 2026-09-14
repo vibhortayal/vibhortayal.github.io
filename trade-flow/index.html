@@ -216,6 +216,8 @@
     .card h3 { margin: 12px 0 10px; font-size: 22px; letter-spacing: -.025em; line-height: 1.2; }
     .card h3 a { color: inherit; text-decoration: none; border-bottom: 2px solid var(--mint); padding-bottom: 1px; }
     .card h3 a:hover { border-bottom-color: var(--ink); }
+    .check-list a { color: inherit; text-decoration: none; border-bottom: 2px solid var(--mint); }
+    .check-list a:hover { border-bottom-color: var(--ink); }
     .card p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 15.5px; }
     .card p + p { margin-top: 10px; }
 
@@ -635,11 +637,11 @@
           <p>Gather the checklist, then hand the setup prompt to your AI agent. Every step matches the installer and setup UI.</p>
         </div>
         <ul class="check-list">
-          <li><span class="tick">✓</span><div><strong>Oracle Cloud account</strong><span>Always Free tier (any Ubuntu VM works). Ubuntu 24.04, Ampere A1, 4 OCPUs / 24 GB RAM, public subnet with TCP ingress on port 3001.</span></div></li>
-          <li><span class="tick">✓</span><div><strong>WhatsApp on your phone</strong><span>The bot pairs as a linked device with a one-time code. No spare SIM, no number changes.</span></div></li>
-          <li><span class="tick">✓</span><div><strong>Gemini API key</strong><span>Free tier from Google AI Studio — or any OpenAI-compatible LLM (base URL + key + model) via the setup UI.</span></div></li>
-          <li><span class="tick">✓</span><div><strong>Supabase project</strong><span>Free tier — or any PostgREST database. You need the project URL and service_role key. The schema is in the repo and the setup UI.</span></div></li>
-          <li><span class="tick">✓</span><div><strong>TradingView account<span class="opt-tag">OPTIONAL</span></strong><span>Optional. Yahoo Finance (free, no key) needs no setup, and the pipeline runs without either — outcome scoring is simply skipped.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener">Oracle Cloud</a> account</strong><span>Always Free tier (any Ubuntu VM works). Ubuntu 24.04, Ampere A1, 4 OCPUs / 24 GB RAM, public subnet with TCP ingress on port 3001.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://www.whatsapp.com/" target="_blank" rel="noopener">WhatsApp</a> on your phone</strong><span>The bot pairs as a linked device with a one-time code. No spare SIM, no number changes.</span></div></li>
+          <li><span class="tick">✓</span><div><strong>Gemini API key</strong><span>Free tier from <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google AI Studio</a> — or any OpenAI-compatible LLM (base URL + key + model) via the setup UI.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://supabase.com/" target="_blank" rel="noopener">Supabase</a> project</strong><span>Free tier — or any PostgREST database. You need the project URL and service_role key. The schema is in the repo and the setup UI.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Optional. Yahoo Finance (free, no key) needs no setup, and the pipeline runs without either — outcome scoring is simply skipped.</span></div></li>
         </ul>
         <div class="prompt-head">
           <h3>The setup prompt</h3>
