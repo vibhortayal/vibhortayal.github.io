@@ -642,7 +642,7 @@
           <li><span class="tick">✓</span><div><strong>Gemini API key</strong><span>Free tier from <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google AI Studio</a> — or any OpenAI-compatible LLM (base URL + key + model) via the setup UI.</span></div></li>
           <li><span class="tick">✓</span><div><strong><a href="https://supabase.com/" target="_blank" rel="noopener">Supabase</a> project</strong><span>Free tier — or any PostgREST database. You need the project URL and service_role key. The schema is in the repo and the setup UI.</span></div></li>
           <li><span class="tick">✓</span><div><strong><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Yahoo Finance (free, no key) needs no setup, and the pipeline runs without either — outcome scoring is simply skipped.</span></div></li>
-          <li><span class="tick">✓</span><div><strong><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Only if you want the dashboard as a standalone site — the bot already serves it on port 3001.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> account</strong><span>Free tier. The dashboard's canonical home — import the repo with root directory <code>dashboard/</code> and it deploys on every push. Point <code>dashboard/supabase-config.js</code> at your Supabase project first.</span></div></li>
         </ul>
         <div class="prompt-head">
           <h3>The setup prompt</h3>
@@ -659,7 +659,7 @@ PREREQUISITES — I have all of these ready:
 - Gemini API key (free tier; or any OpenAI-compatible LLM base URL + key + model)
 - Supabase project URL + service_role key (or any PostgREST endpoint)
 - TradingView account (optional — for outcome scoring; or use free Yahoo Finance instead)
-- Vercel account (optional — only if you want the dashboard as a standalone site)
+- Vercel account (free tier — hosts the dashboard)
 
 DO THIS IN ORDER. Verify each step before moving on.
 
@@ -693,8 +693,8 @@ It pulls recent messages, parses trades, scores outcomes, and pushes to Supabase
 8. CONFIRM THE SCHEDULE
 sudo systemctl status wa-trade-bot-cycle.timer — the hourly pipeline runs 06:00–18:00 America/Los_Angeles only. Never schedule it overnight.
 
-9. OPEN THE DASHBOARD
-http://&lt;VM-IP&gt;:3001/ — it reads live from Supabase.
+9. DEPLOY THE DASHBOARD
+Vercel is the dashboard's canonical home — the bot only runs the pipeline and the setup UI. Edit dashboard/supabase-config.js with your Supabase project URL and anon key, commit, and push. In Vercel, import the repo with the root directory set to dashboard/ — it redeploys automatically on every push. Open the Vercel URL; it reads live from Supabase.
 
 HARD RULES
 - Never print, log, or commit: .env contents, data/messages.jsonl (raw chat), data/pseudonyms.json, phone numbers, sender names, group IDs, API keys, the admin password, or pairing codes. They are gitignored — keep them that way.
