@@ -284,6 +284,19 @@
       display: grid; place-items: center;
       font-weight: 700; font-size: 14px;
     }
+    .check-list .n {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--ink); color: #fff;
+      display: grid; place-items: center;
+      font: 600 13px/1 "IBM Plex Mono", monospace;
+    }
+    .check-list code {
+      font: 600 12.5px/1.6 "IBM Plex Mono", monospace;
+      background: rgba(17,24,23,.07);
+      padding: 2px 6px; border-radius: 4px;
+      white-space: nowrap;
+    }
     .check-list strong { display: block; font-size: 16.5px; letter-spacing: -.01em; }
     .check-list span { display: block; color: var(--muted); font-size: 14.5px; margin-top: 4px; line-height: 1.55; }
     .opt-tag {
@@ -375,6 +388,7 @@
       <a data-goto="demo">Demo</a>
       <a data-goto="how">How it works</a>
       <a data-goto="start">Get started</a>
+      <a data-goto="tips">Best practices</a>
       <a class="nav-cta" href="https://github.com/vibhortayal/wa-trade-bot" target="_blank" rel="noopener">Star or fork on GitHub ↗</a>
     </nav>
   </header>
@@ -407,6 +421,7 @@
         <button class="tab-btn active" data-tab="demo" role="tab" aria-selected="true">Demo</button>
         <button class="tab-btn" data-tab="how" role="tab" aria-selected="false">How it works</button>
         <button class="tab-btn" data-tab="start" role="tab" aria-selected="false">Get started</button>
+        <button class="tab-btn" data-tab="tips" role="tab" aria-selected="false">Best practices</button>
       </div>
     </div>
 
@@ -616,6 +631,26 @@ HARD RULES
       </div>
     </section>
 
+    <!-- BEST PRACTICES -->
+    <section class="panel tab-panel" data-panel="tips">
+      <div class="wrap">
+        <div class="panel-head">
+          <span class="kicker">Best practices</span>
+          <h2>Get signal, not noise.</h2>
+          <p>The pipeline handles messy chat gracefully — but a few habits in the group make the tape dramatically cleaner and the scores more meaningful.</p>
+        </div>
+        <ul class="check-list">
+          <li><span class="n">1</span><div><strong>Point it at a signal-dense group</strong><span>The reader watches one group — make it one where people post actual trades, not memes and market chatter. Less noise means a cleaner tape, faster cycles, and fewer wasted language-model calls.</span></div></li>
+          <li><span class="n">2</span><div><strong>Agree on a post format</strong><span><code>ACTION SYMBOL details</code> — e.g. <code>ADD AMZN $300 call</code> or <code>EXIT TSLA shares</code>. The parser handles free text, but consistent posts extract flawlessly. Pin the format to the group.</span></div></li>
+          <li><span class="n">3</span><div><strong>Quote the trade you're following up on</strong><span>When you trim or exit, quote the original message. Quoted replies get linked automatically, so follow-ups attach to the right entry — and round trips get detected.</span></div></li>
+          <li><span class="n">4</span><div><strong>Post targets with plans</strong><span><code>PLAN AMZN target 300</code>. The dashboard checks whether stated targets get hit — but a plan without a target can't be scored.</span></div></li>
+          <li><span class="n">5</span><div><strong>Share the dashboard back with the group</strong><span>A visible scoreboard improves post quality on its own. Keep the pseudonyms intact — never de-anonymize anyone publicly.</span></div></li>
+          <li><span class="n">6</span><div><strong>Judge on samples, not single calls</strong><span>The Traders tab flags small samples for a reason. Give a member 10+ scored trades before weighting their calls — and remember &#10003;/&#10007; is five-day underlying direction, not premium P&amp;L.</span></div></li>
+          <li><span class="n">7</span><div><strong>Review weekly, not hourly</strong><span>Outcomes need five trading days to mature, so the dashboard compounds over time. The tape is for today; the Traders tab is for the quarter.</span></div></li>
+        </ul>
+      </div>
+    </section>
+
     <section class="cta wrap">
       <div class="cta-inner">
         <div>
@@ -658,7 +693,7 @@ HARD RULES
       document.getElementById('tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }));
     const initial = location.hash.replace('#', '');
-    selectTab(['demo', 'how', 'start'].includes(initial) ? initial : 'demo', false);
+    selectTab(['demo', 'how', 'start', 'tips'].includes(initial) ? initial : 'demo', false);
 
     // Copy setup prompt
     const copyBtn = document.getElementById('copyPrompt');
