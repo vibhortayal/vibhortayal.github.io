@@ -474,7 +474,7 @@
       <span><i></i> Only pseudonymized records published</span>
       <span><i></i> No permanent WhatsApp session</span>
       <span><i></i> Read-only — places no trades</span>
-      <span><i></i> Every call scored against real market data</span>
+      <span><i></i> Calls scored against real market data</span>
       </div>
       </div>
 
@@ -641,8 +641,8 @@
           <li><span class="tick">✓</span><div><strong><a href="https://www.whatsapp.com/" target="_blank" rel="noopener">WhatsApp</a> on your phone</strong><span>The bot pairs as a linked device with a one-time code. No spare SIM, no number changes.</span></div></li>
           <li><span class="tick">✓</span><div><strong>Gemini API key</strong><span>Free tier from <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google AI Studio</a> — or any OpenAI-compatible LLM (base URL + key + model) via the setup UI.</span></div></li>
           <li><span class="tick">✓</span><div><strong><a href="https://supabase.com/" target="_blank" rel="noopener">Supabase</a> project</strong><span>Free tier — or any PostgREST database. You need the project URL and service_role key. The schema is in the repo and the setup UI.</span></div></li>
-          <li><span class="tick">✓</span><div><strong><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Optional. Yahoo Finance (free, no key) needs no setup, and the pipeline runs without either — outcome scoring is simply skipped.</span></div></li>
-          <li><span class="tick">✓</span><div><strong><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Optional. Only if you want the dashboard as a standalone site — the bot already serves it on port 3001.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Yahoo Finance (free, no key) needs no setup, and the pipeline runs without either — outcome scoring is simply skipped.</span></div></li>
+          <li><span class="tick">✓</span><div><strong><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> account<span class="opt-tag">OPTIONAL</span></strong><span>Only if you want the dashboard as a standalone site — the bot already serves it on port 3001.</span></div></li>
         </ul>
         <div class="prompt-head">
           <h3>The setup prompt</h3>
@@ -658,7 +658,8 @@ PREREQUISITES — I have all of these ready:
 - My WhatsApp account on my phone (I can type in a pairing code)
 - Gemini API key (free tier; or any OpenAI-compatible LLM base URL + key + model)
 - Supabase project URL + service_role key (or any PostgREST endpoint)
-- TradingView account (for outcome scoring; or use free Yahoo Finance instead)
+- TradingView account (optional — for outcome scoring; or use free Yahoo Finance instead)
+- Vercel account (optional — only if you want the dashboard as a standalone site)
 
 DO THIS IN ORDER. Verify each step before moving on.
 
@@ -700,7 +701,7 @@ HARD RULES
 - No git pull on the VM. Ever. Deploy with scp.
 - PUPPETEER_EXECUTABLE_PATH must be /snap/chromium/current/usr/lib/chromium-browser/chrome (the real binary). /snap/bin/chromium does NOT work inside systemd services.
 - Keep whatsapp-web.js's default Chrome/101 user agent; newer user agents land on WhatsApp's unsupported-browser page.
-- If anything fails, show me the exact error plus the log tail (the UI "Logs" section, or logs/cycle.log on the VM) before retrying.</span></div>
+- If anything fails, show me the exact error plus the log tail (the UI "Status" section, or logs/cycle.log on the VM) before retrying.</span></div>
         <div class="faq">
           <h3>Questions people actually ask</h3>
           <details>
