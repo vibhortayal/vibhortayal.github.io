@@ -255,6 +255,14 @@
     @keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
     .demo-fresh { font: 500 12.5px/1.5 "IBM Plex Mono", monospace; color: var(--muted); margin: 14px 0 0; }
     .demo-fresh strong { color: var(--ink); }
+    .tech-note { max-width: 780px; color: var(--muted); font-size: 15px; line-height: 1.6; margin: -24px 0 44px; }
+    .tech-note a { color: var(--mint-deep); cursor: pointer; }
+    .note-box { border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 20px 24px; margin-bottom: 44px; max-width: 900px; }
+    .note-box p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--muted); }
+    .note-box strong { color: var(--ink); }
+    .note-box .btn { margin-top: 14px; }
+    .card .interest-btn { margin-top: 16px; }
+    .interest-btn[disabled] { cursor: default; }
     .demo-note { color: var(--muted); font-size: 14px; margin: 0; max-width: 520px; line-height: 1.55; }
     .shot { margin: 0 auto 56px; max-width: 940px; }
     .shot img {
@@ -609,6 +617,7 @@
           <h2>What happens every hour.</h2>
           <p>The code includes the reader, parser, outcome scorer, setup UI, database, and dashboard. It runs on your own hardware — a free Oracle cloud server is enough.</p>
         </div>
+        <p class="tech-note">Fair warning: this is the self-serve path — it assumes you&rsquo;re comfortable with the terminal, API keys, and a cloud server. A hosted version for everyone else is on the <a data-tab="roadmap">roadmap</a>.</p>
         <div class="flow" aria-label="Data pipeline">
           <div class="flow-step"><b>01</b><h3>Pull</h3><p>Connect as a linked device, get new messages since the last check, disconnect. Hourly 8:30am–5pm ET, plus a midnight run.</p></div>
           <div class="flow-step"><b>02</b><h3>Parse</h3><p>Turn buys, sells, plans, options, and quoted replies into organized trade records.</p></div>
@@ -668,6 +677,10 @@
         <div class="panel-head">
           <h2>What you need, and the prompt that sets it up.</h2>
           <p>Gather the checklist, then hand the setup prompt to your AI agent. Every step matches the installer and setup UI.</p>
+        </div>
+        <div class="note-box">
+          <p><strong>Heads up — the steps below are technical.</strong> You&rsquo;ll need to be comfortable with the terminal, API keys, and renting a small cloud server. If that&rsquo;s not you, a hosted option is planned: you plug in your own keys, pick your WhatsApp group, and get a private dashboard behind a login — paid, just enough to cover hosting costs.</p>
+          <button class="btn btn-secondary interest-btn" type="button">I&rsquo;m interested &rarr;</button>
         </div>
         <ul class="check-list">
           <li><span class="tick">✓</span><div><strong><a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener">Oracle Cloud</a> account</strong><span>Always Free tier (any Ubuntu server works). Ubuntu 24.04, Ampere A1, 4 OCPUs / 24 GB RAM, with port 3001 open to the internet.</span></div></li>
@@ -863,7 +876,8 @@ HARD RULES
           <article class="card">
             <span class="card-num">Planned</span>
             <h3>Managed service.</h3>
-            <p>A hosted option, for people who don't want to run it themselves.</p>
+            <p>A hosted option — paid, just to cover costs. You plug in your own API keys and pick your WhatsApp group; your data stays in accounts you control, and you get a private dashboard behind a login.</p>
+            <button class="btn btn-secondary interest-btn" type="button">I&rsquo;m interested &rarr;</button>
           </article>
         </div>
       </div>
@@ -951,6 +965,15 @@ HARD RULES
         })
         .catch(() => { /* keep the baked-in fallback numbers */ });
     })();
+    // Managed-hosting interest gauge: count clicks as a custom Umami event
+    // (visible in the Umami dashboard under Events).
+    document.querySelectorAll('.interest-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        try { if (window.umami) window.umami.track('managed_interest'); } catch (e) {}
+        btn.textContent = '✓ Noted — thanks!';
+        btn.disabled = true;
+      });
+    });
     // Freshness proof: read wa_meta.last_cycle so the page can say exactly
     // when the live data was last refreshed. A mockup couldn't do this.
     (function () {
