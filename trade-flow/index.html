@@ -490,7 +490,6 @@
           <div><strong>36</strong><span>members in the group it runs on</span></div>
           <div><strong>91</strong><span>trade actions parsed</span></div>
           <div><strong>82</strong><span>outcomes scored</span></div>
-          <div><strong>4</strong><span>round trips detected</span></div>
         </div>
         <div class="demo-cta">
           <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open the live demo <span aria-hidden="true">↗</span></a>
@@ -514,7 +513,7 @@
           <article class="card">
             <span class="card-num">03</span>
             <h3>Did the call work?</h3>
-            <p>Every call gets a five-trading-day direction check: favorable, unfavorable, or flat. Round trips and stated targets are tracked separately. Options are scored on the stock's direction, not the contract's profit.</p>
+            <p>Every call gets a five-trading-day direction check: favorable, unfavorable, or flat. Stated targets are tracked separately. Options are scored on the stock's direction, not the contract's profit.</p>
           </article>
           <article class="card">
             <span class="card-num">04</span>
@@ -532,7 +531,7 @@
               <ul>
                 <li>Five-trading-day window after the call, on real daily bars</li>
                 <li>Moves inside a 1% band count as flat — the rest are favorable or unfavorable</li>
-                <li>Round trips pair opens with closes (FIFO); stated targets are watched for 14 days</li>
+                <li>Stated targets are watched for 14 days</li>
                 <li>Options scored on underlying direction — never fictional premium P&amp;L</li>
               </ul>
             </div>
@@ -540,7 +539,7 @@
               <h4>Trader scorecards</h4>
               <ul>
                 <li>Per-member cards: activity, favorite symbols, instrument mix</li>
-                <li>Scored ✓ / ✗ / – record, plus round trips and target hits</li>
+                <li>Scored ✓ / ✗ / – record, plus target hits</li>
                 <li>Fully anonymized — Trader 01, Trader 02, and so on</li>
                 <li>Small samples stay labeled, so a 2-for-2 streak never masquerades as a track record</li>
               </ul>
@@ -585,7 +584,7 @@
         <div class="flow" aria-label="Data pipeline">
           <div class="flow-step"><b>01</b><h3>Pull</h3><p>Connect as a linked device, fetch messages since the last checkpoint, disconnect. Hourly, 06:00–18:00.</p></div>
           <div class="flow-step"><b>02</b><h3>Parse</h3><p>Split buys, sells, plans, options, and quoted context into structured trade actions.</p></div>
-          <div class="flow-step"><b>03</b><h3>Score</h3><p>Check five-trading-day direction and closed round trips against market data.</p></div>
+          <div class="flow-step"><b>03</b><h3>Score</h3><p>Check five-trading-day direction against market data.</p></div>
           <div class="flow-step"><b>04</b><h3>Explore</h3><p>Review flow, outcomes, clusters, and trader activity on the dashboard.</p></div>
         </div>
         <div class="panel-head" style="margin-bottom:36px">
@@ -809,7 +808,7 @@ HARD RULES
         <ul class="check-list">
           <li><span class="n">1</span><div><strong>Point it at a signal-dense group</strong><span>The reader watches one group — make it one where people post actual trades, not memes and market chatter. Less noise means a cleaner tape, faster cycles, and fewer wasted language-model calls.</span></div></li>
           <li><span class="n">2</span><div><strong>Agree on a post format</strong><span><code>ACTION SYMBOL details</code> — e.g. <code>ADD AMZN $300 call</code> or <code>EXIT TSLA shares</code>. The parser handles free text, but consistent posts extract reliably. Pin the format to the group.</span></div></li>
-          <li><span class="n">3</span><div><strong>Quote the trade you're following up on</strong><span>When you trim or exit, quote the original message. Quoted replies get linked automatically, so follow-ups attach to the right entry — and round trips get detected.</span></div></li>
+          <li><span class="n">3</span><div><strong>Quote the trade you're following up on</strong><span>When you trim or exit, quote the original message. Quoted replies get linked automatically, so follow-ups attach to the right entry — and exits score on the actual return.</span></div></li>
           <li><span class="n">4</span><div><strong>Post targets with plans</strong><span><code>PLAN AMZN target 300</code>. The dashboard checks whether stated targets get hit — but a plan without a target can't be scored.</span></div></li>
           <li><span class="n">5</span><div><strong>Share the dashboard back with the group</strong><span>A visible scoreboard improves post quality on its own. Keep the pseudonyms intact — never de-anonymize anyone publicly.</span></div></li>
           <li><span class="n">6</span><div><strong>Judge on samples, not single calls</strong><span>The Traders tab flags small samples for a reason. Give a member 10+ scored trades before weighting their calls — and remember &#10003;/&#10007; is five-day underlying direction, not premium P&amp;L.</span></div></li>
