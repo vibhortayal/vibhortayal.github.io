@@ -703,6 +703,26 @@ HARD RULES
 - Keep whatsapp-web.js's default Chrome/101 user agent; newer user agents land on WhatsApp's unsupported-browser page.
 - If anything fails, show me the exact error plus the log tail (the UI "Status" section, or logs/cycle.log on the VM) before retrying.</span></div>
         <div class="faq">
+          <h3>After the prompt runs: the setup UI.</h3>
+          <p>The agent does the deploying and installing. Three steps need you: typing the pairing code into WhatsApp on your phone, pasting your API keys, and running the Supabase schema once. It all happens in the setup UI, section by section:</p>
+          <ul class="check-list">
+            <li><span class="n">S</span><div><strong>Status — the at-a-glance check</strong><span>Yes/no pills for WhatsApp linked, LLM keys, Supabase, and market data, plus counts of messages pulled and trade actions parsed, with last pull and parse times. When something looks wrong, start here.</span></div></li>
+            <li><span class="n">1</span><div><strong>Link WhatsApp — the one step that needs your phone</strong><span>Enter your number, take the code, type it into WhatsApp → Settings → Linked devices → "Link with phone number instead". Done when Status reads <em>WhatsApp linked: yes</em>. If a code expires or the link stalls, "Get a fresh code" wipes the half-finished session and starts over.</span></div></li>
+            <li><span class="n">2</span><div><strong>API keys &amp; group</strong><span>Paste the Gemini key (or any OpenAI-compatible base URL + key + model), the Supabase URL + service_role key, and the trading group's name. Each field shows whether it's set — change or reset any of them later.</span></div></li>
+            <li><span class="n">2b</span><div><strong>Database tables — one-time</strong><span>Copy the SQL from the box into the Supabase SQL editor and run it. Creates the tables with read-only public access.</span></div></li>
+            <li><span class="n">3</span><div><strong>Market data for outcome scoring</strong><span>Connect TradingView with one click, or switch to Yahoo Finance (nothing to connect). Skip it and outcome scoring is simply skipped.</span></div></li>
+            <li><span class="n">4</span><div><strong>Run a cycle — the log tail lives here</strong><span>"Run a cycle now" pulls recent messages, parses trades, scores outcomes, and pushes to Supabase. The log below the button shows it happening, with Refresh and Copy buttons beside it.</span></div></li>
+          </ul>
+          <p><strong>How to know it worked:</strong></p>
+          <ul class="check-list">
+            <li><span class="tick">✓</span><div><strong>Status shows all yes</strong><span>WhatsApp linked, LLM keys, Supabase, market data.</span></div></li>
+            <li><span class="tick">✓</span><div><strong>A cycle exits 0</strong><span>"Run a cycle now" finishes; the log tail says so.</span></div></li>
+            <li><span class="tick">✓</span><div><strong>Rows land in Supabase</strong><span>New records appear in the <code>wa_trades</code> table.</span></div></li>
+            <li><span class="tick">✓</span><div><strong>The dashboard shows your tape</strong><span>Open the Vercel URL — it reads live from Supabase.</span></div></li>
+            <li><span class="tick">✓</span><div><strong>The timer is set</strong><span><code>sudo systemctl status wa-trade-bot-cycle.timer</code> — hourly, 06:00–18:00 PT, never overnight.</span></div></li>
+          </ul>
+        </div>
+        <div class="faq">
           <h3>Questions people actually ask</h3>
           <details>
             <summary>Does it read my personal chats?</summary>
