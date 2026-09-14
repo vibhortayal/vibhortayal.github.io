@@ -230,6 +230,12 @@ a { color: inherit; }
 .shelf-item[open] .shelf-chevron { transform: rotate(225deg); }
 .shelf-body { padding: 4px 0 28px; max-width: 640px; }
 .shelf-body p { color: var(--ink-soft); margin-bottom: 20px; }
+
+/* ---------- toys ---------- */
+.toys { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.toy { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; background: #fff; }
+.toy h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 10px; }
+.toy p { color: var(--ink-soft); font-size: 16px; margin-bottom: 18px; }
 .principle-ex { color: var(--ink-soft); }
 .contact-links { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
 .contact-fine { font-size: 14px; color: var(--ink-soft); font-style: italic; }
@@ -255,6 +261,7 @@ a { color: inherit; }
   .project, .project-flip .project-media, .project-flip .project-body { order: initial; }
   .project { grid-template-columns: 1fr; gap: 28px; }
   .principles { grid-template-columns: 1fr; }
+  .toys { grid-template-columns: 1fr; }
   .log li { grid-template-columns: 1fr; gap: 6px; }
   .hero { padding: 64px 24px 52px; }
   .hero-stats { gap: 32px; }

@@ -1,7 +1,7 @@
 // Subtle reveal-on-scroll for sections and project cards.
 (function () {
   var els = document.querySelectorAll(
-    ".hero > *, .project, .shelf-item, .log li, .principle, .collab-inner > *"
+    ".hero > *, .project, .toy, .shelf-item, .log li, .principle, .collab-inner > *"
   );
   els.forEach(function (el) { el.classList.add("reveal"); });
 
