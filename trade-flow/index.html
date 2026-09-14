@@ -196,6 +196,7 @@
     }
     .panel-head.kicker-only { margin-bottom: 22px; }
     .panel-head.kicker-only .kicker { margin-bottom: 0; }
+    .panel-head.kicker-only p { margin-top: 14px; }
     .panel-head h2 {
       margin: 0;
       font-size: clamp(34px, 4.4vw, 54px);
@@ -247,7 +248,7 @@
     .score-col li::before { content: "→"; position: absolute; left: 0; color: var(--mint-deep); font-weight: 700; }
     .live-stats {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 14px;
       margin-bottom: 44px;
     }
@@ -573,9 +574,8 @@
             <li>Every data boundary is inspectable in the source</li>
           </ul>
         </div>
-        <div class="panel-head">
+        <div class="panel-head kicker-only">
           <span class="kicker">Live demo</span>
-          <h2>See what your WhatsApp group looks like as data.</h2>
           <p>Below is Trading Floor, a dashboard built with TradeFlow, running on live data from a real WhatsApp trading group. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
         </div>
         <div class="live-stats" aria-label="Real usage numbers">
