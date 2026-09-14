@@ -388,6 +388,7 @@
       gap: 20px;
       flex-wrap: wrap;
       margin-top: 44px;
+      margin-bottom: 56px;
       padding: 22px 26px;
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -504,6 +505,9 @@
             <p>Not financial advice. It reports what happened; it doesn't recommend what to do.</p>
           </article>
         </div>
+        <div class="panel-head">
+          <h2>What it shows.</h2>
+        </div>
         <div class="cards signal-grid">
           <article class="card">
             <span class="card-num">01</span>
@@ -563,19 +567,6 @@
           </div>
         </div>
         <div class="panel-head kicker-only">
-          <span class="kicker">Privacy by design</span>
-        </div>
-        <div class="privacy-strip">
-          <h3>It runs on your machine.</h3>
-          <p>Raw chat and WhatsApp identities never reach the dashboard. Each message goes to the language model you pick for extraction, and only structured, pseudonymized trade records get stored.</p>
-          <ul>
-            <li>Stable pseudonyms replace names and phone numbers</li>
-            <li>Secrets and the WhatsApp session stay on your machine</li>
-            <li>Hourly pull-and-disconnect — no permanent session</li>
-            <li>Every data boundary is inspectable in the source</li>
-          </ul>
-        </div>
-        <div class="panel-head kicker-only">
           <span class="kicker">Live demo</span>
           <p>Below is Trading Floor, a dashboard built with TradeFlow, running on live data from a real WhatsApp trading group. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
         </div>
@@ -602,6 +593,19 @@
         <div class="demo-nudge">
           <p><strong>Like what you see?</strong> Point it at your own WhatsApp group — the Get started tab has the checklist and the setup prompt.</p>
           <a class="btn btn-secondary" data-tab="start">Get started &rarr;</a>
+        </div>
+        <div class="panel-head kicker-only">
+          <span class="kicker">Privacy by design</span>
+        </div>
+        <div class="privacy-strip">
+          <h3>It runs on your machine.</h3>
+          <p>Raw chat and WhatsApp identities never reach the dashboard. Each message goes to the language model you pick for extraction, and only structured, pseudonymized trade records get stored.</p>
+          <ul>
+            <li>Stable pseudonyms replace names and phone numbers</li>
+            <li>Secrets and the WhatsApp session stay on your machine</li>
+            <li>Hourly pull-and-disconnect — no permanent session</li>
+            <li>Every data boundary is inspectable in the source</li>
+          </ul>
         </div>
       </div>
     </section>
