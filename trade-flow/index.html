@@ -480,17 +480,17 @@
           <article class="card">
             <span class="card-num">The problem</span>
             <h3>Ideas get buried in chat.</h3>
-            <p>Trade ideas are posted in a group chat and scroll out of view. Weeks later it's hard to find who suggested what, or whether the idea worked.</p>
+            <p>Trade ideas are posted in a WhatsApp group chat and scroll out of view. Weeks later it's hard to find who suggested what, or whether the idea worked.</p>
           </article>
           <article class="card">
             <span class="card-num">Who it's for</span>
-            <h3>Members of trading group chats.</h3>
-            <p>For groups that share stock, options, or futures ideas in chat and want a record of what was suggested and how it turned out.</p>
+            <h3>Members of trading groups on WhatsApp.</h3>
+            <p>For WhatsApp groups that share stock, options, or futures ideas in chat and want a record of what was suggested and how it turned out.</p>
           </article>
           <article class="card">
             <span class="card-num">What it's for</span>
             <h3>A record of ideas and outcomes.</h3>
-            <p>It lists what the group traded, who posted, and how each idea performed five trading days later.</p>
+            <p>It lists what the WhatsApp group traded, who posted, and how each idea performed five trading days later.</p>
           </article>
           <article class="card">
             <span class="card-num">What it's not</span>
@@ -507,13 +507,13 @@
         <div class="cards signal-grid">
           <article class="card">
             <span class="card-num">01</span>
-            <h3>What did the group trade?</h3>
+            <h3>What did the WhatsApp group trade?</h3>
             <p>One chronological tape of actual trades, minus the questions and chatter around them. Filter by symbol, instrument, action, outcome, or trader.</p>
           </article>
           <article class="card">
             <span class="card-num">02</span>
             <h3>Where is the crowd leaning?</h3>
-            <p>Whether the group is opening or closing, put/call balance, the busiest symbols, and names several members are piling into.</p>
+            <p>Whether the WhatsApp group is opening or closing, put/call balance, the busiest symbols, and names several members are piling into.</p>
           </article>
           <article class="card">
             <span class="card-num">03</span>
@@ -573,8 +573,8 @@
         </div>
         <div class="panel-head">
           <span class="kicker">Live demo</span>
-          <h2>See what your group looks like as data.</h2>
-          <p>Below is Trading Floor, a dashboard built with TradeFlow, running on live data from a real trading group. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
+          <h2>See what your WhatsApp group looks like as data.</h2>
+          <p>Below is Trading Floor, a dashboard built with TradeFlow, running on live data from a real WhatsApp trading group. Same trade tape, outcome badges, crowd insights, and per-trader cards — fully anonymized.</p>
         </div>
         <div class="live-stats" aria-label="Real usage numbers">
           <div><strong id="statMembers">21</strong><span>active traders tracked</span></div>
@@ -597,7 +597,7 @@
         <span><i></i> Calls scored against real market data</span>
         </div>
         <div class="demo-nudge">
-          <p><strong>Like what you see?</strong> Point it at your own group — the Get started tab has the checklist and the setup prompt.</p>
+          <p><strong>Like what you see?</strong> Point it at your own WhatsApp group — the Get started tab has the checklist and the setup prompt.</p>
           <a class="btn btn-secondary" data-tab="start">Get started &rarr;</a>
         </div>
       </div>
@@ -686,7 +686,7 @@
         </div>
         <div class="terminal prompt-scroll" aria-label="Setup prompt"><div class="terminal-bar"><i></i><i></i><i></i></div><span id="setupPrompt">Set up TradeFlow end to end: https://github.com/vibhortayal/wa-trade-bot
 
-WHAT IT IS: an hourly pipeline on a VM. A WhatsApp linked-device reader pulls new messages from one trading group, an LLM (Gemini by default, any OpenAI-compatible API works) extracts structured trade actions, market data (TradingView by default, Yahoo Finance works too) scores each outcome over five trading days, and pseudonymized records land in Postgres (Supabase by default, any PostgREST endpoint works) for a static dashboard.
+WHAT IT IS: an hourly pipeline on a VM. A WhatsApp linked-device reader pulls new messages from one WhatsApp trading group, an LLM (Gemini by default, any OpenAI-compatible API works) extracts structured trade actions, market data (TradingView by default, Yahoo Finance works too) scores each outcome over five trading days, and pseudonymized records land in Postgres (Supabase by default, any PostgREST endpoint works) for a static dashboard.
 
 PREREQUISITES — I have all of these ready:
 - Oracle Cloud Always Free account (any Ubuntu VM works; Oracle is the free suggestion)
@@ -715,7 +715,7 @@ In the UI, enter my phone number in international format (e.g. 15551234567) and 
 4. SAVE THE KEYS
 In the UI, paste the Gemini API key, the Supabase URL, and the Supabase service_role key. Then run the SQL shown in the UI's schema box once in the Supabase SQL editor — it creates the wa_trades and wa_meta tables with anon read-only access. Leave GEMINI_MODEL unset; the default model is used.
 
-5. SET THE GROUP
+5. SET THE WHATSAPP GROUP
 In the setup UI, enter the trading group's name in the "WhatsApp group to watch" field and save (it also shows the current value, and you can change or reset it any time). Alternatively, set WA_GROUP_QUERY in ~/wa-trade-bot/.env over SSH.
 (Substring match on the WhatsApp group name; the reader only touches group chats and stays within this one group.)
 
@@ -733,7 +733,7 @@ sudo systemctl status wa-trade-bot-cycle.timer — the hourly pipeline runs 08:3
 Vercel is the dashboard's canonical home — the bot only runs the pipeline and the setup UI. Edit dashboard/supabase-config.js with your Supabase project URL and anon key, commit, and push. In Vercel, import the repo with the root directory set to dashboard/ — it redeploys automatically on every push. Open the Vercel URL; it reads live from Supabase.
 
 HARD RULES
-- Never print, log, or commit: .env contents, data/messages.jsonl (raw chat), data/pseudonyms.json, phone numbers, sender names, group IDs, API keys, the admin password, or pairing codes. They are gitignored — keep them that way.
+- Never print, log, or commit: .env contents, data/messages.jsonl (raw chat), data/pseudonyms.json, phone numbers, sender names, WhatsApp group IDs, API keys, the admin password, or pairing codes. They are gitignored — keep them that way.
 - No git pull on the VM. Ever. Deploy with scp.
 - PUPPETEER_EXECUTABLE_PATH must be /snap/chromium/current/usr/lib/chromium-browser/chrome (the real binary). /snap/bin/chromium does NOT work inside systemd services.
 - Keep whatsapp-web.js's default Chrome/101 user agent; newer user agents land on WhatsApp's unsupported-browser page.
@@ -744,7 +744,7 @@ HARD RULES
           <ul class="check-list">
             <li><span class="n">S</span><div><strong>Status — the at-a-glance check</strong><span>Yes/no pills for WhatsApp linked, LLM keys, Supabase, and market data, plus counts of messages pulled and trade actions parsed, with last pull and parse times. When something looks wrong, start here.</span></div></li>
             <li><span class="n">1</span><div><strong>Link WhatsApp — the one step that needs your phone</strong><span>Enter your number, take the code, type it into WhatsApp → Settings → Linked devices → "Link with phone number instead". Done when Status reads <em>WhatsApp linked: yes</em>. If a code expires or the link stalls, "Get a fresh code" wipes the half-finished session and starts over.</span></div></li>
-            <li><span class="n">2</span><div><strong>API keys &amp; group</strong><span>Paste the Gemini key (or any OpenAI-compatible base URL + key + model), the Supabase URL + service_role key, and the trading group's name. Each field shows whether it's set — change or reset any of them later.</span></div></li>
+            <li><span class="n">2</span><div><strong>API keys &amp; WhatsApp group</strong><span>Paste the Gemini key (or any OpenAI-compatible base URL + key + model), the Supabase URL + service_role key, and the WhatsApp trading group's name. Each field shows whether it's set — change or reset any of them later.</span></div></li>
             <li><span class="n">2b</span><div><strong>Database tables — one-time</strong><span>Copy the SQL from the box into the Supabase SQL editor and run it. Creates the tables with read-only public access.</span></div></li>
             <li><span class="n">3</span><div><strong>Market data for outcome scoring</strong><span>Connect TradingView with one click, or switch to Yahoo Finance (nothing to connect). Skip it and outcome scoring is simply skipped.</span></div></li>
             <li><span class="n">4</span><div><strong>Run a cycle — the log tail lives here</strong><span>"Run a cycle now" pulls recent messages, parses trades, scores outcomes, and pushes to Supabase. The log below the button shows it happening, with Refresh and Copy buttons beside it.</span></div></li>
@@ -762,7 +762,7 @@ HARD RULES
           <h3>Questions people actually ask</h3>
           <details>
             <summary>Does it read my personal chats?</summary>
-            <p>No. It watches exactly one group chat — the trading group you name in the setup UI — and only group messages. Your 1:1 chats are never touched.</p>
+            <p>No. It watches exactly one WhatsApp group chat — the trading group you name in the setup UI — and only messages from that group. Your 1:1 chats are never touched.</p>
           </details>
           <details>
             <summary>Do I need a spare phone or SIM?</summary>
@@ -833,14 +833,14 @@ HARD RULES
         <div class="panel-head">
           <span class="kicker">Best practices</span>
           <h2>Get signal, not noise.</h2>
-          <p>The pipeline handles messy chat — but a few group habits make the tape cleaner and the scores more meaningful.</p>
+          <p>The pipeline handles messy chat — but a few WhatsApp group habits make the tape cleaner and the scores more meaningful.</p>
         </div>
         <ul class="check-list">
-          <li><span class="n">1</span><div><strong>Point it at a signal-dense group</strong><span>The reader watches one group — make it one where people post actual trades, not memes and market chatter. Less noise means a cleaner tape, faster cycles, and fewer wasted language-model calls.</span></div></li>
-          <li><span class="n">2</span><div><strong>Agree on a post format</strong><span><code>ACTION SYMBOL details</code> — e.g. <code>ADD AMZN $300 call</code> or <code>EXIT TSLA shares</code>. The parser handles free text, but consistent posts extract reliably. Pin the format to the group.</span></div></li>
+          <li><span class="n">1</span><div><strong>Point it at a signal-dense WhatsApp group</strong><span>The reader watches one WhatsApp group — make it one where people post actual trades, not memes and market chatter. Less noise means a cleaner tape, faster cycles, and fewer wasted language-model calls.</span></div></li>
+          <li><span class="n">2</span><div><strong>Agree on a post format</strong><span><code>ACTION SYMBOL details</code> — e.g. <code>ADD AMZN $300 call</code> or <code>EXIT TSLA shares</code>. The parser handles free text, but consistent posts extract reliably. Pin the format to the WhatsApp group.</span></div></li>
           <li><span class="n">3</span><div><strong>Quote the trade you're following up on</strong><span>When you trim or exit, quote the original message. Quoted replies get linked automatically, so follow-ups attach to the right entry — and exits score on the actual return.</span></div></li>
           <li><span class="n">4</span><div><strong>Post targets with plans</strong><span><code>PLAN AMZN target 300</code>. The dashboard checks whether stated targets get hit — but a plan without a target can't be scored.</span></div></li>
-          <li><span class="n">5</span><div><strong>Share the dashboard back with the group</strong><span>A visible scoreboard improves post quality on its own. Keep the pseudonyms intact — never de-anonymize anyone publicly.</span></div></li>
+          <li><span class="n">5</span><div><strong>Share the dashboard back with the WhatsApp group</strong><span>A visible scoreboard improves post quality on its own. Keep the pseudonyms intact — never de-anonymize anyone publicly.</span></div></li>
           <li><span class="n">6</span><div><strong>Judge on samples, not single calls</strong><span>The Traders tab flags small samples for a reason. Give a member 10+ scored trades before weighting their calls — and remember &#10003;/&#10007; is five-day underlying direction, not premium P&amp;L.</span></div></li>
           <li><span class="n">7</span><div><strong>Review weekly, not hourly</strong><span>Outcomes need five trading days to mature. The tape is for today; the Traders tab is for the quarter.</span></div></li>
         </ul>
