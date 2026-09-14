@@ -7,10 +7,10 @@
   <meta name="theme-color" content="#f4f3ee" />
   <link rel="icon" href="data:," />
   <title>Trade Flow — Free, open-source WhatsApp trade intelligence</title>
-  <meta name="description" content="Free and open source under MIT: turn a WhatsApp trading group into a privacy-first trade tape on hardware you control." />
+  <meta name="description" content="Free and open source: turn a WhatsApp trading group into a privacy-first trade tape on hardware you control." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Trade Flow — Free, open-source WhatsApp trade intelligence" />
-  <meta property="og:description" content="Turn a WhatsApp trading group into a structured, anonymized trade tape with outcome scoring. MIT-licensed, read-only, runs on your own hardware." />
+  <meta property="og:description" content="Turn a WhatsApp trading group into a structured, anonymized trade tape with outcome scoring. Open source, read-only, runs on your own hardware." />
   <meta property="og:url" content="https://vibhortayal.github.io/trade-flow/" />
   <meta property="og:image" content="https://vibhortayal.github.io/trade-flow/demo-screenshot.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -462,7 +462,7 @@
       <div class="hero-copy">
       <div class="eyebrow">Free and open source · MIT</div>
       <h1>Your trading chat, made legible.</h1>
-      <p>Trade Flow turns a noisy WhatsApp group into a structured trade tape — what the crowd is trading, who's active, and how those calls played out. Runs on hardware you control, and it's strictly read-only: it watches and scores, never places trades.</p>
+      <p>Trade Flow turns a WhatsApp group into a structured trade tape — what the crowd is trading, who's active, and how those calls played out. Runs on your hardware. Read-only: it watches and scores, never trades.</p>
       <div class="actions">
       <a class="btn btn-primary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Explore the live demo <span aria-hidden="true">↗</span></a>
       </div>
@@ -481,7 +481,7 @@
         <div class="panel-head">
           <span class="kicker">Overview</span>
           <h2>See what your group looks like as data.</h2>
-          <p>The live demo runs the real dashboard against sample data — the trade tape, outcome badges, crowd insights, and per-trader cards, all fully anonymized.</p>
+          <p>The live demo is the real dashboard on sample data — trade tape, outcome badges, crowd insights, per-trader cards. Fully anonymized.</p>
         </div>
         <div class="live-stats" aria-label="Real usage numbers">
           <div><strong>36</strong><span>members in the group it runs on</span></div>
@@ -495,7 +495,7 @@
         </div>
         <figure class="shot">
           <img src="demo-screenshot.png" alt="Trade Flow dashboard showing the trade tape, outcome badges, and trader stats" width="1440" height="900" />
-          <figcaption>Screenshot of the <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">live demo</a> — the real dashboard, fully anonymized.</figcaption>
+          <figcaption>The <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">live demo</a> — the real dashboard, fully anonymized.</figcaption>
         </figure>
         <div class="cards signal-grid">
           <article class="card">
@@ -522,7 +522,7 @@
         <div class="score-band">
           <span class="kicker">Outcome scoring</span>
           <h3>Every call, checked against the market.</h3>
-          <p>Logging trades is table stakes — Trade Flow checks what actually happened. Each action is scored against real daily market data (TradingView or Yahoo Finance, your choice), and the results feed per-trader scorecards and crowd insights.</p>
+          <p>Each action is scored against real daily market data (TradingView or Yahoo Finance, your choice), feeding per-trader scorecards and crowd insights.</p>
           <div class="score-cols">
             <div class="score-col">
               <h4>Real market data</h4>
@@ -538,7 +538,7 @@
               <ul>
                 <li>Per-member cards: activity, favorite symbols, instrument mix</li>
                 <li>Scored ✓ / ✗ / – record, plus round trips and target hits</li>
-                <li>Fully anonymized — &ldquo;You&rdquo;, Trader 01, Trader 02, and so on</li>
+                <li>Fully anonymized — Trader 01, Trader 02, and so on</li>
                 <li>Small samples stay labeled, so a 2-for-2 streak never masquerades as a track record</li>
               </ul>
             </div>
@@ -548,7 +548,7 @@
                 <li>Deterministic rules, no black boxes: activity spikes and drops, new-trader crowds</li>
                 <li>Put/call sentiment shifts, open/close lean flips, options-share surges</li>
                 <li>Hot traders flagged at 5+ scored calls with a 60%+ hit rate</li>
-                <li>Top signals surface first — and when it&rsquo;s calm, the dashboard says so</li>
+                <li>Top signals surface first — and when it&rsquo;s calm, it says so</li>
               </ul>
             </div>
           </div>
@@ -556,16 +556,16 @@
         <div class="privacy-strip">
           <span class="kicker">Privacy by design</span>
           <h3>Your server. Your schedule. Your keys.</h3>
-          <p>Raw chat and WhatsApp identities never reach the dashboard. The pipeline sends each message to the language model you configure for extraction, then stores only structured, pseudonymized trade records.</p>
+          <p>Raw chat and WhatsApp identities never reach the dashboard. Each message goes to the language model you configure for extraction; only structured, pseudonymized trade records are stored.</p>
           <ul>
             <li>Stable pseudonyms replace names and phone numbers</li>
             <li>Secrets and the WhatsApp session stay on your machine</li>
             <li>Hourly pull-and-disconnect — no permanent session</li>
-            <li>Open-source code makes every data boundary inspectable</li>
+            <li>Every data boundary is inspectable in the source</li>
           </ul>
         </div>
         <div class="demo-nudge">
-          <p><strong>Like what you see?</strong> Point it at your own group — setup takes an afternoon, and the prompt does the heavy lifting.</p>
+          <p><strong>Like what you see?</strong> Point it at your own group — setup takes an afternoon; the prompt does the heavy lifting.</p>
           <a class="btn btn-secondary" data-tab="start">Get started &rarr;</a>
         </div>
       </div>
@@ -577,7 +577,7 @@
         <div class="panel-head">
           <span class="kicker">How it works</span>
           <h2>The complete pipeline, yours to inspect.</h2>
-          <p>The MIT-licensed repository includes the reader, parser, outcome scorer, setup UI, database schema, and dashboard. Run it on your own hardware — a free Oracle Cloud VM is enough — and keep control of every connection.</p>
+          <p>The repository includes the reader, parser, outcome scorer, setup UI, database schema, and dashboard. Runs on your own hardware — a free Oracle Cloud VM is enough.</p>
         </div>
         <div class="flow" aria-label="Data pipeline">
           <div class="flow-step"><b>01</b><h3>Pull</h3><p>Connect as a linked device, fetch messages since the last checkpoint, disconnect. Hourly, 06:00–18:00.</p></div>
@@ -587,7 +587,7 @@
         </div>
         <div class="panel-head" style="margin-bottom:36px">
           <span class="kicker">The stack</span>
-          <h2 style="font-size:clamp(28px,3.4vw,40px)">Boring tools, composed well.</h2>
+          <h2 style="font-size:clamp(28px,3.4vw,40px)">Every layer is swappable.</h2>
         </div>
         <div class="cards">
           <article class="card">
@@ -621,7 +621,7 @@
             <p>The dashboard is a dependency-free static site on Vercel; the pipeline runs on an Oracle Cloud Always Free VM. Any Ubuntu VM works as the host.</p>
           </article>
         </div>
-        <div class="stack-note">Each layer is swappable — the stack above is the free-tier default, not a requirement. Any Ubuntu VM, any OpenAI-compatible LLM, any PostgREST database works.</div>
+        <div class="stack-note">The above is the free-tier default, not a requirement.</div>
       </div>
     </section>
 
@@ -631,14 +631,14 @@
         <div class="panel-head">
           <span class="kicker">Get started</span>
           <h2>From zero to live in an afternoon.</h2>
-          <p>Gather the checklist below, then hand the setup prompt to your AI agent. Every step is verified against the actual installer and setup UI — no guesswork.</p>
+          <p>Gather the checklist, then hand the setup prompt to your AI agent. Every step matches the installer and setup UI.</p>
         </div>
         <ul class="check-list">
           <li><span class="tick">✓</span><div><strong>Oracle Cloud account</strong><span>Always Free tier, suggested default — any Ubuntu VM works. Ubuntu 24.04, Ampere A1 (4 OCPUs / 24 GB RAM), public subnet with TCP ingress on port 3001.</span></div></li>
           <li><span class="tick">✓</span><div><strong>WhatsApp on your phone</strong><span>The bot pairs as a linked device with a one-time code. No spare SIM, no number changes.</span></div></li>
           <li><span class="tick">✓</span><div><strong>Gemini API key</strong><span>Free tier from Google AI Studio — or any OpenAI-compatible LLM (base URL + key + model) via the setup UI.</span></div></li>
           <li><span class="tick">✓</span><div><strong>Supabase project</strong><span>Free tier, suggested default — or any PostgREST database. You need the project URL and service_role key; the schema ships in the repo and the setup UI.</span></div></li>
-          <li><span class="tick">✓</span><div><strong>TradingView account<span class="opt-tag">OPTIONAL</span></strong><span>Only if you pick TradingView as the market-data source. Yahoo Finance (free, no key) needs nothing to connect — and the pipeline runs fine without either.</span></div></li>
+          <li><span class="tick">✓</span><div><strong>TradingView account<span class="opt-tag">OPTIONAL</span></strong><span>Optional. Yahoo Finance (free, no key) needs no setup, and the pipeline runs without either — outcome scoring is simply skipped.</span></div></li>
         </ul>
         <div class="prompt-head">
           <h3>The setup prompt</h3>
@@ -720,7 +720,7 @@ HARD RULES
           <div class="cta-inner">
             <div>
               <h2>Live on your group by tonight.</h2>
-              <p>One free VM, your existing WhatsApp, one API key — then hand the setup prompt to your AI agent and it does the rest.</p>
+              <p>One free VM, your existing WhatsApp, one API key. Hand the setup prompt to your AI agent.</p>
             </div>
             <div class="actions">
               <button class="btn btn-primary" id="ctaCopyPrompt" type="button">Copy the setup prompt</button>
@@ -737,16 +737,16 @@ HARD RULES
         <div class="panel-head">
           <span class="kicker">Best practices</span>
           <h2>Get signal, not noise.</h2>
-          <p>The pipeline handles messy chat gracefully — but a few habits in the group make the tape dramatically cleaner and the scores more meaningful.</p>
+          <p>The pipeline handles messy chat — but a few group habits make the tape cleaner and the scores more meaningful.</p>
         </div>
         <ul class="check-list">
           <li><span class="n">1</span><div><strong>Point it at a signal-dense group</strong><span>The reader watches one group — make it one where people post actual trades, not memes and market chatter. Less noise means a cleaner tape, faster cycles, and fewer wasted language-model calls.</span></div></li>
-          <li><span class="n">2</span><div><strong>Agree on a post format</strong><span><code>ACTION SYMBOL details</code> — e.g. <code>ADD AMZN $300 call</code> or <code>EXIT TSLA shares</code>. The parser handles free text, but consistent posts extract flawlessly. Pin the format to the group.</span></div></li>
+          <li><span class="n">2</span><div><strong>Agree on a post format</strong><span><code>ACTION SYMBOL details</code> — e.g. <code>ADD AMZN $300 call</code> or <code>EXIT TSLA shares</code>. The parser handles free text, but consistent posts extract reliably. Pin the format to the group.</span></div></li>
           <li><span class="n">3</span><div><strong>Quote the trade you're following up on</strong><span>When you trim or exit, quote the original message. Quoted replies get linked automatically, so follow-ups attach to the right entry — and round trips get detected.</span></div></li>
           <li><span class="n">4</span><div><strong>Post targets with plans</strong><span><code>PLAN AMZN target 300</code>. The dashboard checks whether stated targets get hit — but a plan without a target can't be scored.</span></div></li>
           <li><span class="n">5</span><div><strong>Share the dashboard back with the group</strong><span>A visible scoreboard improves post quality on its own. Keep the pseudonyms intact — never de-anonymize anyone publicly.</span></div></li>
           <li><span class="n">6</span><div><strong>Judge on samples, not single calls</strong><span>The Traders tab flags small samples for a reason. Give a member 10+ scored trades before weighting their calls — and remember &#10003;/&#10007; is five-day underlying direction, not premium P&amp;L.</span></div></li>
-          <li><span class="n">7</span><div><strong>Review weekly, not hourly</strong><span>Outcomes need five trading days to mature, so the dashboard compounds over time. The tape is for today; the Traders tab is for the quarter.</span></div></li>
+          <li><span class="n">7</span><div><strong>Review weekly, not hourly</strong><span>Outcomes need five trading days to mature. The tape is for today; the Traders tab is for the quarter.</span></div></li>
         </ul>
       </div>
     </section>
@@ -757,7 +757,7 @@ HARD RULES
     <div class="contact-inner">
       <div>
         <h2>Building with it? Found a rough edge?</h2>
-        <p>Trade Flow is a side project and it gets better with feedback — feature requests, collaboration ideas, and bug reports are all welcome.</p>
+        <p>A side project — feedback, feature requests, and bug reports welcome.</p>
       </div>
       <div class="clinks">
         <a href="mailto:vibhor15@gmail.com?subject=Trade%20Flow%3A%20feature%20request">Request a feature &rarr;</a>
@@ -768,7 +768,7 @@ HARD RULES
   </section>
 
   <footer class="wrap">
-    <span>Free and open source under MIT · built to run on your hardware.</span>
+    <span>Free and open source · built to run on your hardware.</span>
     <span><a href="https://github.com/vibhortayal/wa-trade-bot" target="_blank" rel="noopener">Star / fork on GitHub</a> · <a href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Live demo</a></span>
   </footer>
 
