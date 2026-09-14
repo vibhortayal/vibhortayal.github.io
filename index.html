@@ -227,33 +227,35 @@
   <section id="shelf" class="section section-tight">
     <p class="eyebrow">On hold</p>
     <h2 class="section-title">On the shelf</h2>
-    <p class="shelf-lede">Not everything ships. Parked, with the lessons attached.</p>
-    <article class="project">
-      <div class="project-body">
-        <div class="project-head">
-          <h3>Set Diff</h3>
-          <span class="pill pill-paused">On hold</span>
-        </div>
+    <p class="shelf-lede">Not everything ships. These are parked.</p>
+    <details class="shelf-item">
+      <summary>
+        <span class="shelf-summary-title">Set Diff</span>
+        <span class="pill pill-paused">On hold</span>
+        <span class="shelf-chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="shelf-body">
         <p>Upload a recording of your stand-up set; see where the laughs land, get a transcript.</p>
         <p class="shelf-label">Why it&rsquo;s shelved</p>
-        <p>Its transcription API started returning empty transcripts. I burned a day debugging before concluding the failure was on the provider&rsquo;s side &mdash; out of my reach.</p>
+        <p>The transcription API started returning empty transcripts. A day of debugging convinced me the bug was on the provider&rsquo;s side &mdash; nothing I could fix from here.</p>
         <p class="shelf-label">What it taught me</p>
-        <p>Don&rsquo;t debug someone else&rsquo;s black box. I moved to local open-source transcription instead, which worked &mdash; and keeping everything on-device became the better architecture. Parked until that local pipeline is worth productizing.</p>
+        <p>I switched to local open-source transcription, which worked &mdash; and keeping everything on-device turned out to be the better setup anyway. Parked until that pipeline is worth productizing.</p>
       </div>
-    </article>
-    <article class="project">
-      <div class="project-body">
-        <div class="project-head">
-          <h3>Agent-first advertising</h3>
-          <span class="pill pill-paused">Shelved</span>
-        </div>
+    </details>
+    <details class="shelf-item">
+      <summary>
+        <span class="shelf-summary-title">Agent-first advertising</span>
+        <span class="pill pill-paused">Shelved</span>
+        <span class="shelf-chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="shelf-body">
         <p>Take a brand&rsquo;s existing ads and landing pages, and optimize them for the AI agents doing the shortlisting instead of humans.</p>
         <p class="shelf-label">Why it&rsquo;s shelved</p>
-        <p>I mapped the space before writing a line of code: 20+ funded GEO tools, $255M+ raised, Profound at a $1B valuation. The lane I wanted was the most crowded one in it.</p>
+        <p>I mapped the space before writing a line of code: 20+ funded GEO tools, $255M+ raised, Profound at a $1B valuation. I was eyeing the most crowded lane in it.</p>
         <p class="shelf-label">What it taught me</p>
-        <p>Distribution beats decoration: agents buy through protocols and tool surfaces, not landing pages. The exits (Adobe&ndash;Semrush, Sitecore&ndash;Scrunch) all went to buyers wanting the execution layer, not another dashboard. <a href="shelf/agent-first-advertising.html">Read the full competitive map &rarr;</a></p>
+        <p>Agents buy through protocols and tool surfaces, not landing pages &mdash; and every exit (Adobe&ndash;Semrush, Sitecore&ndash;Scrunch) went to buyers who wanted the execution layer, not another dashboard. <a href="shelf/agent-first-advertising.html">Read the full competitive map &rarr;</a></p>
       </div>
-    </article>
+    </details>
   </section>
 
   <!-- METHOD -->
