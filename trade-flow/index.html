@@ -717,6 +717,34 @@ HARD RULES
             <p>$0 a month on free tiers: an Oracle Cloud Always Free VM, the Gemini free tier, Supabase free tier, and Vercel free tier. Every layer is swappable if you'd rather use your own providers.</p>
           </details>
         </div>
+        <div class="faq">
+          <span class="kicker">Troubleshooting</span>
+          <h3>Things that broke for us.</h3>
+          <details>
+            <summary>Pairing never completes</summary>
+            <p>Don't close the browser early — the session only saves after WhatsApp confirms the link. If it keeps failing, wipe the session folder and pair fresh; stale sessions and stray browser processes are the usual cause.</p>
+          </details>
+          <details>
+            <summary>Can't reach the setup UI on port 3001</summary>
+            <p>Open TCP 3001 in the VM's firewall ingress rules. Also run the services as the same user that installed Chrome — a different user won't find the browser binary.</p>
+          </details>
+          <details>
+            <summary>The reader pulls no messages</summary>
+            <p>The chat list takes up to a minute to load after linking — the reader polls for it. Also check the group name in the setup UI matches the WhatsApp group exactly.</p>
+          </details>
+          <details>
+            <summary>Parse errors or quota failures</summary>
+            <p>The parser retries in smaller batches; messages it can't parse are marked and skipped, not retried forever. The Gemini free tier is rate-limited — if you hit quota, point the setup UI at any OpenAI-compatible model instead.</p>
+          </details>
+          <details>
+            <summary>Cycle skipped: "outside 06:00–18:00 window"</summary>
+            <p>That's the timer doing its job — it only runs daytime PT. Use "Run a cycle now" in the setup UI for an immediate run.</p>
+          </details>
+          <details>
+            <summary>Dashboard looks stale</summary>
+            <p>Check the last-cycle timestamp in the setup UI log. Scoring failures never block new trades — if the tape is fresh but scores are missing, the market-data source is the thing to check.</p>
+          </details>
+        </div>
         <section class="cta" aria-label="Get started">
           <div class="cta-inner">
             <div>
