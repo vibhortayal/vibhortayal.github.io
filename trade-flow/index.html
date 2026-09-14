@@ -44,24 +44,64 @@
     a { color: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
     .wrap { width: min(1160px, calc(100% - 42px)); margin: 0 auto; }
-    .nav {
+    /* Single sticky top nav: brand + page tabs + GitHub action */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(244, 243, 238, .93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topnav-inner {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 24px;
-      padding: 22px 0;
+      gap: 26px;
+      padding: 13px 0;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      margin-right: auto;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -.02em;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .brand i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--mint-deep);
+      margin-right: 8px;
+    }
+    .toplinks { display: flex; align-items: center; gap: 22px; }
+    .toplinks a {
+      text-decoration: none;
+      color: var(--muted);
       font-size: 14px;
       font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
     }
-    .nav > a:not(.nav-cta) { text-decoration: none; color: var(--muted); cursor: pointer; }
-    .nav > a:not(.nav-cta):hover { color: var(--ink); }
+    .toplinks a:hover { color: var(--ink); }
+    .toplinks a.active { color: var(--ink); border-bottom-color: var(--ink); }
     .nav-cta {
       text-decoration: none;
       padding: 10px 15px;
       background: var(--ink);
       color: white;
       border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
     }
+    main { scroll-margin-top: 72px; }
     .hero {
       min-height: 480px;
       padding: 72px 0 84px;
@@ -133,38 +173,6 @@
     .proof span { display: inline-flex; gap: 7px; align-items: center; }
     .proof i { width: 6px; height: 6px; background: var(--mint-deep); border-radius: 50%; }
 
-    /* Sticky tab bar */
-    .tabs {
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      background: rgba(244, 243, 238, .93);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .tabs-inner {
-      display: flex;
-      gap: 8px;
-      padding: 12px 0;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .tabs-inner::-webkit-scrollbar { display: none; }
-    .tab-btn {
-      flex: 0 0 auto;
-      border: 1px solid transparent;
-      background: transparent;
-      font: 700 16px/1 "DM Sans", sans-serif;
-      color: var(--muted);
-      padding: 13px 24px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background .15s ease, color .15s ease;
-    }
-    .tab-btn:hover { color: var(--ink); background: rgba(17,24,23,.06); }
-    .tab-btn.active { background: var(--ink); color: #fff; }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; animation: panelIn .28s ease; }
     @keyframes panelIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
@@ -337,12 +345,43 @@
     .faq details[open] summary::after { content: "–"; }
     .faq details p { color: var(--muted); margin: 12px 0 4px; line-height: 1.65; font-size: 15px; max-width: 700px; }
 
-    .cta { padding: 96px 0 38px; }
-    .cta-inner { background: var(--coral); padding: clamp(34px, 6vw, 68px); border-radius: 12px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 40px; align-items: end; }
-    .cta h2 { max-width: 700px; margin: 0; font-size: clamp(34px, 4vw, 56px); letter-spacing: -.045em; line-height: 1.04; }
-    .cta p { margin: 18px 0 0; max-width: 580px; color: #45251f; font-size: 17px; line-height: 1.55; }
+    .cta { padding: 52px 0 6px; }
+    .cta-inner { background: var(--mint); padding: clamp(30px, 5vw, 54px); border-radius: 10px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 40px; align-items: center; }
+    .cta h2 { max-width: 700px; margin: 0; font-size: clamp(32px, 4vw, 50px); letter-spacing: -.045em; line-height: 1.02; color: var(--ink); }
+    .cta p { margin: 16px 0 0; max-width: 580px; color: #2c3a12; font-size: 17px; line-height: 1.55; font-weight: 500; }
     .cta .actions { justify-content: flex-end; margin: 0; }
-    .cta .btn-secondary { border-color: rgba(17,24,23,.38); background: rgba(255,255,255,.18); }
+    .cta .btn-secondary { border-color: rgba(17,24,23,.45); background: transparent; color: var(--ink); }
+    /* Quiet hand-off at the end of the Demo tab toward Get started */
+    .demo-nudge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+      padding: 22px 26px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--white);
+    }
+    .demo-nudge p { margin: 0; font-size: 15.5px; color: var(--muted); max-width: 640px; line-height: 1.55; }
+    .demo-nudge p strong { color: var(--ink); }
+    .demo-nudge .btn { min-height: 44px; flex-shrink: 0; cursor: pointer; }
+    /* Contact strip: feature requests, collaboration, direct contact */
+    .contact { padding: 10px 0 34px; }
+    .contact-inner {
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .contact-inner h2 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.02em; }
+    .contact-inner p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; max-width: 560px; }
+    .contact-inner .actions { margin: 0; }
+    .contact-inner .btn { min-height: 44px; font-size: 14px; }
     footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 31px 0 38px; color: var(--muted); font-size: 12px; }
     footer a { color: var(--ink); font-weight: 600; text-decoration: none; }
 
@@ -356,9 +395,12 @@
     }
     @media (max-width: 620px) {
       .wrap { width: min(100% - 28px, 1160px); }
-      .nav { gap: 14px; padding: 16px 0; }
-      .nav > a:not(.nav-cta) { display: none; }
-      .nav-cta { width: 100%; text-align: center; }
+      .topnav-inner { flex-wrap: wrap; gap: 10px 14px; padding: 11px 0; }
+      .toplinks { order: 3; flex-basis: 100%; overflow-x: auto; scrollbar-width: none; gap: 16px; padding-bottom: 2px; }
+      .toplinks::-webkit-scrollbar { display: none; }
+      .brand { font-size: 16px; }
+      .toplinks a { font-size: 13px; }
+      .nav-cta { padding: 8px 12px; font-size: 12.5px; margin-left: auto; }
       .hero { min-height: auto; padding: 42px 0 66px; gap: 48px; }
       h1 { font-size: 49px; }
       .hero-copy > p { font-size: 17px; }
@@ -371,29 +413,32 @@
       .flow-step { padding-right: 8px; }
       .terminal { font-size: 10px; padding: 15px; box-shadow: 7px 7px 0 var(--mint); }
       .prompt-head { flex-direction: column; align-items: flex-start; }
-      .cta { padding-top: 70px; }
+      .cta { padding-top: 44px; }
       .cta-inner { padding: 30px 22px; }
       footer { flex-direction: column; align-items: flex-start; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .btn, .tab-btn { transition: none; }
+      .btn { transition: none; }
       .tab-panel.active { animation: none; }
     }
   </style>
 </head>
 <body>
-  <header class="wrap">
-    <nav class="nav" aria-label="Page navigation">
-      <a data-goto="demo">Demo</a>
-      <a data-goto="how">How it works</a>
-      <a data-goto="start">Get started</a>
-      <a data-goto="tips">Best practices</a>
+  <header class="topnav">
+    <nav class="wrap topnav-inner" aria-label="Page navigation">
+      <a class="brand" data-tab="demo"><i aria-hidden="true"></i>Trade Flow</a>
+      <div class="toplinks" role="tablist" aria-label="Page sections">
+        <a data-tab="demo" role="tab" aria-selected="true" class="active">Demo</a>
+        <a data-tab="how" role="tab" aria-selected="false">How it works</a>
+        <a data-tab="start" role="tab" aria-selected="false">Get started</a>
+        <a data-tab="tips" role="tab" aria-selected="false">Best practices</a>
+      </div>
       <a class="nav-cta" href="https://github.com/vibhortayal/wa-trade-bot" target="_blank" rel="noopener">Star or fork on GitHub ↗</a>
     </nav>
   </header>
 
-  <main>
+  <main id="panels">
     <section class="hero wrap">
       <div class="hero-copy">
         <div class="eyebrow">Free and open source · MIT</div>
@@ -415,15 +460,6 @@
       </div>
 
     </section>
-
-    <div class="tabs" id="tabs">
-      <div class="wrap tabs-inner" role="tablist" aria-label="Page sections">
-        <button class="tab-btn active" data-tab="demo" role="tab" aria-selected="true">Demo</button>
-        <button class="tab-btn" data-tab="how" role="tab" aria-selected="false">How it works</button>
-        <button class="tab-btn" data-tab="start" role="tab" aria-selected="false">Get started</button>
-        <button class="tab-btn" data-tab="tips" role="tab" aria-selected="false">Best practices</button>
-      </div>
-    </div>
 
     <!-- DEMO -->
     <section class="panel tab-panel active" data-panel="demo">
@@ -479,6 +515,10 @@
             <li>Hourly pull-and-disconnect — no permanent session</li>
             <li>Open-source code makes every data boundary inspectable</li>
           </ul>
+        </div>
+        <div class="demo-nudge">
+          <p><strong>Like what you see?</strong> Point it at your own group — setup takes an afternoon, and the prompt does the heavy lifting.</p>
+          <a class="btn btn-secondary" data-tab="start">Get started &rarr;</a>
         </div>
       </div>
     </section>
@@ -628,6 +668,18 @@ HARD RULES
             <p>$0 a month on free tiers: an Oracle Cloud Always Free VM, the Gemini free tier, Supabase free tier, and Vercel free tier. Every layer is swappable if you'd rather use your own providers.</p>
           </details>
         </div>
+        <section class="cta" aria-label="Get started">
+          <div class="cta-inner">
+            <div>
+              <h2>Live on your group by tonight.</h2>
+              <p>One free VM, your existing WhatsApp, one API key — then hand the setup prompt to your AI agent and it does the rest.</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-primary" id="ctaCopyPrompt" type="button">Copy the setup prompt</button>
+              <a class="btn btn-secondary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open demo ↗</a>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -651,19 +703,21 @@ HARD RULES
       </div>
     </section>
 
-    <section class="cta wrap">
-      <div class="cta-inner">
-        <div>
-          <h2>Fork it for your group.</h2>
-          <p>Trade Flow is open source under the MIT license. Star the project, run it on your own hardware, or try the live demo first.</p>
-        </div>
-        <div class="actions">
-          <a class="btn btn-primary" href="https://github.com/vibhortayal/wa-trade-bot" target="_blank" rel="noopener">Star or fork ↗</a>
-          <a class="btn btn-secondary" href="https://wa-trade-flow.vercel.app" target="_blank" rel="noopener">Open demo ↗</a>
-        </div>
-      </div>
-    </section>
   </main>
+
+  <section class="contact wrap" aria-label="Get in touch">
+    <div class="contact-inner">
+      <div>
+        <h2>Building with it? Found a rough edge?</h2>
+        <p>Trade Flow is a side project and it gets better with feedback — feature requests, collaboration ideas, and bug reports are all welcome.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="mailto:vibhor15@gmail.com?subject=Trade%20Flow%3A%20feature%20request">Request a feature</a>
+        <a class="btn btn-secondary" href="mailto:vibhor15@gmail.com?subject=Trade%20Flow%3A%20collaboration">Collaborate</a>
+        <a class="btn btn-secondary" href="mailto:vibhor15@gmail.com?subject=Trade%20Flow%3A%20hello">Contact me</a>
+      </div>
+    </div>
+  </section>
 
   <footer class="wrap">
     <span>Free and open source under MIT · built to run on your hardware.</span>
@@ -674,23 +728,22 @@ HARD RULES
     // Main section tabs (deep-linkable via #demo / #how / #start)
     const tabBtns = document.querySelectorAll('[data-tab]');
     const panels = document.querySelectorAll('[data-panel]');
+    const panelsTop = document.getElementById('panels');
     function selectTab(name, push = true) {
       tabBtns.forEach(b => {
         const on = b.dataset.tab === name;
         b.classList.toggle('active', on);
-        b.setAttribute('aria-selected', on ? 'true' : 'false');
+        if (b.getAttribute('role') === 'tab') b.setAttribute('aria-selected', on ? 'true' : 'false');
       });
       panels.forEach(p => p.classList.toggle('active', p.dataset.panel === name));
       if (push) history.replaceState(null, '', '#' + name);
     }
+    function scrollToPanels() {
+      if (panelsTop) panelsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     tabBtns.forEach(b => b.addEventListener('click', () => {
       selectTab(b.dataset.tab);
-      document.getElementById('tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }));
-    document.querySelectorAll('[data-goto]').forEach(a => a.addEventListener('click', e => {
-      e.preventDefault();
-      selectTab(a.dataset.goto);
-      document.getElementById('tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollToPanels();
     }));
     const initial = location.hash.replace('#', '');
     selectTab(['demo', 'how', 'start', 'tips'].includes(initial) ? initial : 'demo', false);
@@ -702,6 +755,12 @@ HARD RULES
       try { await navigator.clipboard.writeText(text); e.target.textContent = 'Copied ✓'; }
       catch (err) { e.target.textContent = 'Copy failed'; }
       setTimeout(() => { e.target.textContent = 'Copy prompt'; }, 2000);
+    });
+    // Mint card CTA reuses the same copy action
+    const ctaCopy = document.getElementById('ctaCopyPrompt');
+    if (ctaCopy && copyBtn) ctaCopy.addEventListener('click', () => {
+      document.getElementById('copyPrompt').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      copyBtn.click();
     });
   </script>
 </body>
