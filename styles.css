@@ -146,6 +146,7 @@ a { color: inherit; }
   border-bottom: 2px solid transparent;
 }
 .text-link:hover { border-bottom-color: var(--accent); }
+.project-links { display: flex; gap: 24px; flex-wrap: wrap; margin: 0; }
 
 /* ---------- css app mocks ---------- */
 .mock { background: #fff; overflow: hidden; }
