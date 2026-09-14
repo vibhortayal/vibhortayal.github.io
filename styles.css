@@ -193,6 +193,7 @@ a { color: inherit; }
 .shelf-item[open] .shelf-chevron { transform: rotate(225deg); }
 .shelf-body { padding: 4px 0 28px; max-width: 640px; }
 .shelf-body p { color: var(--ink-soft); margin-bottom: 20px; }
+.shelf-body .mock.shot { margin: 4px 0 22px; }
 
 /* ---------- toys ---------- */
 .toys { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
