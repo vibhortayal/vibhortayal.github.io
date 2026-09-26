@@ -110,6 +110,20 @@ a { color: inherit; }
   margin-bottom: 48px;
 }
 
+/* ---------- collapsible sections ---------- */
+.section-collapse > summary {
+  list-style: none; display: flex; align-items: center;
+  justify-content: space-between; gap: 16px;
+  cursor: pointer; padding: 12px 0;
+}
+.section-collapse > summary::-webkit-details-marker { display: none; }
+.section-collapse > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.section-collapse .eyebrow { display: block; margin-bottom: 12px; }
+.section-collapse .section-title { margin-bottom: 0; }
+.section-count { font-size: 20px; color: var(--ink-faint); font-weight: 400; margin-left: 12px; letter-spacing: 0; }
+.section-collapse[open] > summary .shelf-chevron { transform: rotate(225deg); }
+.section-collapse-body { padding-bottom: 12px; }
+
 /* ---------- projects ---------- */
 .project {
   display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px;

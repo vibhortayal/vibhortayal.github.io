@@ -20,7 +20,8 @@
   els.forEach(function (el) { io.observe(el); });
 })();
 
-// Hero stat links: jump to the section and expand the matching project rows.
+// Hero stat links: expand the relevant section(s), collapse the others,
+// and open the matching project rows inside.
 (function () {
   function track(name, data) {
     if (window.umami && typeof window.umami.track === "function") {
@@ -28,11 +29,18 @@
     }
   }
 
+  var CONTAINERS = ["collapse-projects", "collapse-toys", "collapse-shelf"];
+  function isContainer(d) { return CONTAINERS.indexOf(d.id) !== -1; }
+
   var STATS = {
-    projects: { section: "#projects", match: function (d) { return d.closest("#projects"); } },
-    live:     { section: "#projects", match: function (d) { return d.querySelector(".pill-live"); } },
-    building: { section: "#projects", match: function (d) { return d.querySelector(".pill-building"); } },
-    shelved:  { section: "#shelf",    match: function (d) { return d.closest("#shelf"); } }
+    projects: { sections: ["collapse-projects"], scrollTo: "#projects",
+                match: function (d) { return !isContainer(d) && d.closest("#projects"); } },
+    live:     { sections: ["collapse-projects", "collapse-toys"], scrollTo: "#projects",
+                match: function (d) { return !isContainer(d) && d.querySelector(".pill-live"); } },
+    building: { sections: ["collapse-projects"], scrollTo: "#projects",
+                match: function (d) { return !isContainer(d) && d.querySelector(".pill-building"); } },
+    shelved:  { sections: ["collapse-shelf"], scrollTo: "#shelf",
+                match: function (d) { return !isContainer(d) && d.closest("#shelf"); } }
   };
 
   document.querySelectorAll(".hero-stats a[data-stat]").forEach(function (a) {
@@ -40,12 +48,26 @@
       var cfg = STATS[a.getAttribute("data-stat")];
       if (!cfg) return;
       e.preventDefault();
+      CONTAINERS.forEach(function (id) { document.getElementById(id).open = false; });
+      document.querySelectorAll("details.shelf-item, details.section-collapse").forEach(function (d) {
+        if (!isContainer(d)) d.open = false;
+      });
+      cfg.sections.forEach(function (id) { document.getElementById(id).open = true; });
       document.querySelectorAll("details.shelf-item").forEach(function (d) {
         if (cfg.match(d)) d.open = true;
       });
       track("stat_click", { stat: a.getAttribute("data-stat") });
-      var target = document.querySelector(cfg.section);
+      var target = document.querySelector(cfg.scrollTo);
       if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // In-page nav links should land on an open section, not a collapsed one.
+  document.querySelectorAll('a[href="#projects"], a[href="#shelf"]').forEach(function (a) {
+    if (a.hasAttribute("data-stat")) return;
+    a.addEventListener("click", function () {
+      var c = document.getElementById(a.getAttribute("href") === "#projects" ? "collapse-projects" : "collapse-shelf");
+      if (c) c.open = true;
     });
   });
 })();
