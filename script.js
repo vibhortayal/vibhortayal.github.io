@@ -20,6 +20,36 @@
   els.forEach(function (el) { io.observe(el); });
 })();
 
+// Hero stat links: jump to the section and expand the matching project rows.
+(function () {
+  function track(name, data) {
+    if (window.umami && typeof window.umami.track === "function") {
+      try { window.umami.track(name, data); } catch (e) { /* analytics must never break the page */ }
+    }
+  }
+
+  var STATS = {
+    projects: { section: "#projects", match: function (d) { return d.closest("#projects"); } },
+    live:     { section: "#projects", match: function (d) { return d.querySelector(".pill-live"); } },
+    building: { section: "#projects", match: function (d) { return d.querySelector(".pill-building"); } },
+    shelved:  { section: "#shelf",    match: function (d) { return d.closest("#shelf"); } }
+  };
+
+  document.querySelectorAll(".hero-stats a[data-stat]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var cfg = STATS[a.getAttribute("data-stat")];
+      if (!cfg) return;
+      e.preventDefault();
+      document.querySelectorAll("details.shelf-item").forEach(function (d) {
+        if (cfg.match(d)) d.open = true;
+      });
+      track("stat_click", { stat: a.getAttribute("data-stat") });
+      var target = document.querySelector(cfg.section);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+})();
+
 // Umami custom events: which project rows get opened, which links get clicked.
 (function () {
   function track(name, data) {

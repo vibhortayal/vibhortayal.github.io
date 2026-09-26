@@ -92,6 +92,10 @@ a { color: inherit; }
 .hero-quote cite { display: block; margin-top: 16px; font-style: normal; font-size: 15px; color: var(--ink-soft); }
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
 .hero-stats { display: flex; gap: 48px; border-top: 1px solid var(--line); padding-top: 28px; }
+.hero-stats a { text-decoration: none; border-radius: 6px; }
+.hero-stats a:hover strong, .hero-stats a:focus-visible strong { color: var(--accent); }
+.hero-stats a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.section { scroll-margin-top: 84px; }
 .hero-stats div { display: flex; flex-direction: column; }
 .hero-stats strong { font-family: var(--font-display); font-size: 38px; font-weight: 600; line-height: 1; }
 .hero-stats span { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
