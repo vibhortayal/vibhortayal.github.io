@@ -58,7 +58,10 @@
       });
       track("stat_click", { stat: a.getAttribute("data-stat") });
       var target = document.querySelector(cfg.scrollTo);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (target) {
+        var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      }
     });
   });
 
