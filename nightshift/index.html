@@ -109,6 +109,35 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
   .line li{padding:0 0 0 36px}
   .slug span:last-child,footer span:last-child{display:none}
 }
+
+/* ---------- video intro: click a team member to light them up and show their line ---------- */
+/* Added for recording the video. With nobody picked, the page looks and reads as before.
+   Click a team member in the picture, or a name underneath, to pick them; click the same
+   one again to clear. Keys: 1-4 pick, the right arrow steps through, 0 or Esc clears,
+   C hides or shows the caption. A member can also be set by ending the address with #1 to #4 */
+.crew{cursor:pointer}
+.crew img.art{transition:filter .45s ease}
+.crew.on img.art:not(.lit){filter:brightness(.3) saturate(.55)}
+.crew img.lit{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .35s ease;
+  -webkit-mask-image:linear-gradient(to right,transparent calc(var(--l) - 2.5%),#000 calc(var(--l) + 3.5%),#000 calc(var(--r) - 3.5%),transparent calc(var(--r) + 2.5%)),linear-gradient(to bottom,transparent 0,#000 6%,#000 92%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent calc(var(--l) - 2.5%),#000 calc(var(--l) + 3.5%),#000 calc(var(--r) - 3.5%),transparent calc(var(--r) + 2.5%)),linear-gradient(to bottom,transparent 0,#000 6%,#000 92%,transparent 100%);
+  mask-composite:intersect}
+.crew.on img.lit{opacity:1}
+.roster li{cursor:pointer}
+.roster li.now .name{color:var(--sodium)}
+.rosterwrap{position:relative}
+/* the caption sits where the names are, and grows upwards for a longer line */
+.cc{position:absolute;left:0;right:0;bottom:0;min-height:100%;display:grid;grid-template-columns:auto 1fr;column-gap:26px;align-items:center;
+  background:var(--night);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);border-left:5px solid var(--sodium);
+  padding:14px 24px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.cc.show{opacity:1}
+.cc .who{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:2rem;line-height:1;color:var(--sodium);letter-spacing:.02em}
+.cc .who small{display:block;margin-top:6px;font-family:var(--text);font-weight:500;font-size:.72rem;letter-spacing:.14em;color:var(--dust)}
+.cc .says{margin:0;font-size:clamp(1.05rem,1.5vw,1.45rem);line-height:1.35;font-weight:500;font-stretch:87.5%}
+@media(max-width:900px){
+  .cc{grid-template-columns:1fr;row-gap:8px;padding:12px 14px}
+}
 </style>
 </head>
 <body>
@@ -126,7 +155,7 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
     </figure>
 
     <ol class="roster" aria-label="On shift">
-      <li><span class="no">01</span><span class="name">Vibhor</span><span class="role">Founder and product owner</span><span class="kind">human</span></li>
+      <li><span class="no">01</span><span class="name">Vibhor</span><span class="role">Product owner</span><span class="kind">human</span></li>
       <li><span class="no">02</span><span class="name">Spark</span><span class="role">Program manager</span><span class="kind">AI agent</span></li>
       <li><span class="no">03</span><span class="name">Instinct</span><span class="role">QA and release manager</span><span class="kind">AI agent</span></li>
       <li><span class="no">04</span><span class="name">Claude</span><span class="role">Platform engineer</span><span class="kind">AI agent</span></li>
@@ -192,7 +221,7 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
       <h2>Before the night shift</h2>
       <figure>
         <img src="assets/vibhor.jpg" width="900" height="869" alt="Illustrated portrait of Vibhor, drawn half human and half robot.">
-        <figcaption>Vibhor, founder and product owner</figcaption>
+        <figcaption>Vibhor, product owner</figcaption>
       </figure>
     </div>
     <div>
@@ -204,5 +233,89 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
   <footer><span>Team Nightshift</span><span>Built for the Band Dark Factory hackathon</span></footer>
 
 </div>
+<script>
+// Video intro. One entry per team member, in the order of the picture. l and r are the left
+// and right edges of the character in the artwork, in % of its width. Change a name or a
+// line here; nothing else needs editing.
+const SPEAKERS = [
+  {name:"Vibhor", role:"Product owner", l:0, r:30.5,
+   says:"Hi, I'm Vibhor. I'm the Product Owner and the only \u201chuman in the loop\u201d."},
+  {name:"Spark", role:"Program manager", l:29.5, r:51.5,
+   says:"Hi, I'm Spark. I'm the program manager. I coordinate the team, watch the rooms, and keep the runs and the milestones honest."},
+  {name:"Instinct", role:"QA and release manager", l:49.5, r:69.5,
+   says:"Hi, I'm Instinct. I'm the QA and release manager. I double-check everyone's work, signing off or pushing back."},
+  {name:"Claude", role:"Platform engineer", l:68, r:94,
+   says:"Hi, I'm Claude. I'm the platform engineer. I do the hands-on platform work, but Vibhor decides what we're building, what done means, and when we run. Nothing goes out until Spark and Instinct have checked it and Vibhor approves it."},
+];
+
+const crew = document.querySelector(".crew");
+const roster = document.querySelector(".roster");
+
+// a second copy of the artwork, shown only over the member who is picked
+const lit = crew.querySelector("img.art").cloneNode();
+lit.classList.add("lit");
+lit.alt = "";
+crew.append(lit);
+
+// the caption goes in a wrapper around the names, so it can cover exactly that row
+const wrap = document.createElement("div");
+wrap.className = "rosterwrap";
+roster.replaceWith(wrap);
+const cc = document.createElement("div");
+cc.className = "cc";
+cc.setAttribute("role", "status");
+cc.setAttribute("aria-live", "polite");
+const who = document.createElement("div");
+who.className = "who";
+const says = document.createElement("p");
+says.className = "says";
+cc.append(who, says);
+wrap.append(roster, cc);
+
+let current = 0;        // 0 means nobody is picked
+let captions = true;
+
+function speak(n){
+  current = (n >= 1 && n <= SPEAKERS.length) ? n : 0;
+  const on = current > 0;
+  crew.classList.toggle("on", on);
+  [...roster.children].forEach((li, i) => li.classList.toggle("now", i === current - 1));
+  if (on){
+    const s = SPEAKERS[current - 1];
+    crew.style.setProperty("--l", s.l + "%");
+    crew.style.setProperty("--r", s.r + "%");
+    who.textContent = s.name;
+    const small = document.createElement("small");
+    small.textContent = s.role;
+    who.append(small);
+    says.textContent = s.says;
+  }
+  cc.classList.toggle("show", on && captions);
+}
+
+// A click picks the member under the pointer; a click on the one already lit clears it.
+const pick = n => speak(n === current ? 0 : n);
+crew.addEventListener("click", e => {
+  const box = crew.getBoundingClientRect();
+  const x = (e.clientX - box.left) / box.width * 100;
+  // neighbours overlap a little in the artwork, so split each overlap down the middle
+  const edges = SPEAKERS.map((s, i) => i === 0 ? s.l : (s.l + SPEAKERS[i - 1].r) / 2);
+  let n = 0;
+  edges.forEach((edge, i) => { if (x >= edge && x <= SPEAKERS[SPEAKERS.length - 1].r) n = i + 1; });
+  if (n) pick(n); else speak(0);
+});
+// the caption lets clicks through, so the names underneath it still work
+[...roster.children].forEach((li, i) => li.addEventListener("click", () => pick(i + 1)));
+
+document.addEventListener("keydown", e => {
+  if (e.key >= "1" && e.key <= "4") speak(Number(e.key));
+  else if (e.key === "0" || e.key === "Escape") speak(0);
+  else if (e.key === "ArrowRight") speak(current >= SPEAKERS.length ? 0 : current + 1);
+  else if (e.key === "ArrowLeft") speak(current - 1);
+  else if (e.key.toLowerCase() === "c"){ captions = !captions; speak(current); }
+});
+
+speak(Number(location.hash.slice(1)) || 0);
+</script>
 </body>
 </html>
