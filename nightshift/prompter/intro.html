@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompter: intro</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000;color:#fff;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif}
+#bar{position:fixed;top:0;left:0;right:0;z-index:2;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 10px;background:#111;border-bottom:1px solid #333;font-size:14px}
+#bar button{font:inherit;color:#fff;background:#2a2a2a;border:1px solid #444;border-radius:6px;padding:6px 12px;cursor:pointer}
+#bar button#go{background:#b98500;border-color:#b98500;color:#000;font-weight:600;min-width:76px}
+#bar span{color:#aaa}
+#view{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:scroll;scrollbar-width:none}
+#view::-webkit-scrollbar{display:none}
+#text{max-width:900px;margin:0 auto;padding:45vh 28px 80vh;font-size:44px;line-height:1.45;font-weight:500}
+#text p{margin:0 0 1em}
+#line{position:fixed;left:0;right:0;top:45vh;height:0;border-top:2px solid #b98500;opacity:.55;z-index:1;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="bar">
+  <button id="go">Start</button>
+  <button id="top">Back to top</button>
+  <span>Speed</span><button id="slow">−</button><span id="spd"></span><button id="fast">+</button>
+  <span>Text</span><button id="small">A−</button><button id="big">A+</button>
+  <span>Space starts and pauses. Arrow keys change speed.</span>
+</div>
+<div id="line"></div>
+<div id="view">
+  <div id="text">
+    <p>Hi, I'm Vibhor. At the WeAreDevelopers conference, I thought could I enter this hackathon with a team of AI agents?</p>
+    <p>I was already building a web app for my community tennis tournament, using two AI assistants, Spark and Instinct. Tired of copy-pasting, we created a group chatroom on a cloud VM and accidentally built a coding factory.</p>
+    <p>At the conference, I learned this is where the industry is heading, and I discovered the Band platform. For the hackathon, I added Claude for coding, and Team Nightshift was born.</p>
+    <p>We are a coding factory that's building another coding factory, and I am the only human in the loop. I talk to my agents team using 2 Band chat rooms - The hackathon room, for status, and the Chatter box - for everything else.</p>
+  </div>
+</div>
+<script>
+const view = document.getElementById("view"), text = document.getElementById("text");
+const go = document.getElementById("go"), spd = document.getElementById("spd");
+let speed = Number(localStorage.getItem("prompter-speed")) || 40;   // pixels per second
+let size = Number(localStorage.getItem("prompter-size")) || 44;     // text size in pixels
+let running = false, last = 0, pos = 0;
+
+function show(){
+  spd.textContent = speed;
+  text.style.fontSize = size + "px";
+  go.textContent = running ? "Pause" : "Start";
+  localStorage.setItem("prompter-speed", speed);
+  localStorage.setItem("prompter-size", size);
+}
+function tick(now){
+  if (!running) return;
+  pos += speed * (now - last) / 1000;
+  last = now;
+  view.scrollTop = pos;
+  if (view.scrollTop + view.clientHeight >= view.scrollHeight - 1) { running = false; show(); return; }
+  requestAnimationFrame(tick);
+}
+function toggle(){
+  running = !running;
+  if (running){ pos = view.scrollTop; last = performance.now(); requestAnimationFrame(tick); }
+  show();
+}
+function setSpeed(d){ speed = Math.max(10, Math.min(200, speed + d)); show(); }
+function setSize(d){ size = Math.max(24, Math.min(96, size + d)); show(); }
+
+go.onclick = toggle;
+document.getElementById("top").onclick = () => { running = false; pos = 0; view.scrollTop = 0; show(); };
+document.getElementById("slow").onclick = () => setSpeed(-5);
+document.getElementById("fast").onclick = () => setSpeed(5);
+document.getElementById("small").onclick = () => setSize(-4);
+document.getElementById("big").onclick = () => setSize(4);
+view.addEventListener("click", toggle);
+document.addEventListener("keydown", e => {
+  if (e.code === "Space"){ e.preventDefault(); toggle(); }
+  else if (e.key === "ArrowUp" || e.key === "ArrowRight") setSpeed(5);
+  else if (e.key === "ArrowDown" || e.key === "ArrowLeft") setSpeed(-5);
+});
+show();
+</script>
+</body>
+</html>
