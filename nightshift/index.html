@@ -26,7 +26,7 @@ img{display:block;max-width:100%;height:auto}
 .page{width:min(1560px,calc(100% - 8vw));margin:0 auto}
 
 /* ---------- the board: first screen, and the video's opening shot ---------- */
-.board{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:3.6vh 0 4vh}
+.board{display:flex;flex-direction:column;gap:3vh;padding:3.6vh 0 4vh}
 .slug{display:flex;justify-content:space-between;gap:24px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dust);
   border-top:3px solid var(--sodium);padding-top:14px}
 .title{margin:1.2vh 0 0;font-family:var(--display);font-weight:900;text-transform:uppercase;white-space:nowrap;
@@ -34,7 +34,7 @@ img{display:block;max-width:100%;height:auto}
 .title .a{color:var(--sodium)}
 .title .b{color:var(--chalk)}
 
-.crew{position:relative;margin:0}
+.crew{position:relative;margin:0 auto;max-width:760px}
 .crew img.art{width:100%;height:auto;
   -webkit-mask-image:linear-gradient(to right,transparent 0,#000 3%,#000 97%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 6%,#000 92%,transparent 100%);
   -webkit-mask-composite:source-in;
@@ -82,7 +82,7 @@ h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size
 
 /* ---------- where it started ---------- */
 .origin{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:7vw;padding:14vh 0 10vh;align-items:start}
-.origin figure{margin:5vh 0 0;max-width:340px}
+.origin figure{margin:5vh 0 0;max-width:240px}
 .origin figcaption{margin-top:10px;color:var(--dust);font-size:.82rem}
 .origin p{margin:0 0 14px;max-width:48ch}
 .origin p.q{color:var(--dust)}
@@ -220,7 +220,7 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
 
   <section class="origin">
     <div>
-      <h2>Before the night shift</h2>
+      <h2>Before the Nightshift</h2>
       <figure>
         <img src="assets/vibhor.jpg" width="900" height="869" alt="Illustrated portrait of Vibhor, drawn half human and half robot.">
         <figcaption>Vibhor, product owner</figcaption>
