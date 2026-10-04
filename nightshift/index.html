@@ -67,7 +67,7 @@ h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size
 .line li.in .st,.line li.out .st{color:var(--sodium)}
 
 .flow{margin:36px 0 0}
-.flow img{width:100%;border-radius:10px}
+.flow img{width:100%;border-radius:10px;border:1px solid var(--rule)}
 .flow figcaption{margin-top:12px;color:var(--dust);font-size:.88rem}
 
 /* ---------- for the judges ---------- */
@@ -173,7 +173,7 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
     </div>
 
     <figure class="flow">
-      <a href="assets/stage-flow.png"><img src="assets/stage-flow.png" width="1800" height="1369" alt="How one stage runs: one human message starts it. 1, the Architect turns the spec into a checklist. 2, one handoff gives the Implementer and the Verifier the same brief. 3, the Implementer builds while the Verifier writes its own tests from the spec. 4, the Implementer tests its own work and hands over one exact version. 5, the Verifier tests that version and sends one verdict. 8, the Architect decides: on a valid PASS the stage is accepted and the next one starts; on a BLOCK, 6, the defect report goes back and, 7, the Implementer fixes it and hands over a new version; on a fifth BLOCK the stage is blocked and the run ends."></a>
+      <a href="assets/stage-flow-dark.svg"><img src="assets/stage-flow-dark.svg" width="1400" height="1060" alt="How one stage runs: one human message starts it. 1, the Architect turns the spec into a checklist. 2, one handoff gives the Implementer and the Verifier the same brief. 3, the Implementer builds while the Verifier writes its own tests from the spec. 4, the Implementer tests its own work and hands over one exact version. 5, the Verifier tests that version and sends one verdict. 8, the Architect decides: on a valid PASS the stage is accepted and the next one starts; on a BLOCK, 6, the defect report goes back and, 7, the Implementer fixes it and hands over a new version; on a fifth BLOCK the stage is blocked and the run ends."></a>
       <figcaption>How one stage runs. The same loop repeats for each of the four stages.</figcaption>
     </figure>
   </section>
