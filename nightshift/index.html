@@ -148,6 +148,11 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
 .team-story p:last-child{margin-top:24px;margin-bottom:0}
 .board .team-story{margin-top:0}
 @media(max-width:900px){.team-story{margin-top:24px;padding-top:24px}.team-story p{font-size:1rem}.board{gap:28px}}
+
+/* ---------- submission video: always plays the file attached to the GitHub release ---------- */
+.film{padding:72px 0 0;border-top:1px solid var(--rule);margin-top:72px}
+.film video{display:block;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;margin-top:18px}
+.film p{margin:14px 0 0;color:var(--dust);max-width:62ch}
 </style>
 </head>
 <body>
@@ -180,6 +185,17 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
 <p>At the conference, I learned this is where the industry is heading, and I discovered the <a href="https://www.band.ai/">Band</a> platform. </p>
 <p>For the hackathon, I added Claude for more coding power, and Team Nightshift was born. We are a coding factory that&#x27;s building another coding factory</p>
 </article>
+
+  <section class="film" id="video">
+    <div class="intro">
+      <h2>The video</h2>
+      <p>Team Nightshift's submission video: the room, a handoff and the result.</p>
+    </div>
+    <video controls preload="metadata" playsinline aria-label="Team Nightshift submission video">
+      <source src="https://github.com/vibhortayal/nightshift-pocketful/releases/download/video/team-nightshift-dark-factory.mp4" type="video/mp4">
+      Your browser can't play this video here. <a href="https://github.com/vibhortayal/nightshift-pocketful/releases/tag/video">Open it on GitHub</a>.
+    </video>
+  </section>
 
   <section class="below">
     <div class="intro">
@@ -368,4 +384,5 @@ speak(Number(location.hash.slice(1)) || 0);
 </script>
 </body>
 </html>
+
 
