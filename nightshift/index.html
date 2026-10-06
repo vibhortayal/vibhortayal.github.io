@@ -83,6 +83,7 @@ h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size
 .group a span,.group .item span{display:block;margin-top:5px;color:var(--dust);font-size:.9rem;max-width:28ch}
 .group a:hover b,.group a:focus-visible b{color:var(--sodium)}
 .demo-section{max-width:960px;margin:0;padding:28px 0 0}
+.demo-context{margin:0 0 12px;color:var(--dust)}
 .demo-section h2{margin:0 0 16px;font-family:var(--display);font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.05}
 .demo-section h2 a{color:var(--chalk);text-decoration:none}
 .demo-section h2 a:hover,.demo-section h2 a:focus-visible{color:var(--sodium)}
@@ -96,7 +97,7 @@ h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size
 .demo-accounts p{margin:0 0 8px}
 .demo-accounts dl{margin:0 0 10px}
 .demo-accounts dt{margin-top:8px;color:var(--chalk)}
-.demo-accounts dd{margin:2px 0 0;font-family:monospace;color:var(--dust)}
+.demo-accounts dd{margin:2px 0 0;font-family:monospace;color:var(--chalk)}
 
 
 /* ---------- where it started ---------- */
@@ -167,7 +168,7 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
 
 /* ---------- submission video: always plays the file attached to the GitHub release ---------- */
 .film{padding:72px 0 0;border-top:1px solid var(--rule);margin-top:72px}
-.film video{display:block;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;margin-top:18px}
+.film video{display:block;width:100%;max-width:1120px;aspect-ratio:16/9;background:#000;margin-top:18px}
 .film p{margin:14px 0 0;color:var(--dust);max-width:62ch}
 </style>
 </head>
@@ -195,26 +196,27 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
   </header>
 
 <article class="team-story" aria-label="How Team Nightshift began">
-<p class="story-hook">What happens if you enter a <a href="https://lablab.ai/ai-hackathons/wearedevelopers-hackathon">hackathon</a> with a team of just AI agents?</p>
-<p>I was already building a web app for my <a href="https://khelohq.vercel.app">community tennis tournament</a>, using two AI assistants, Spark and Instinct.</p>
+<p class="story-hook">What happens if you enter a <a href="https://lablab.ai/ai-hackathons/wearedevelopers-hackathon" target="_blank" rel="noopener noreferrer">hackathon</a> with a team of just AI agents?</p>
+<p>I was already building a web app for my <a href="https://khelohq.vercel.app" target="_blank" rel="noopener noreferrer">community tennis tournament</a>, using two AI assistants, Spark and Instinct.</p>
 <p>Tired of copy-pasting, we created a group chatroom on a cloud VM and accidentally built a coding factory.</p>
-<p>At the conference, I learned this is where the industry is heading, and I discovered the <a href="https://www.band.ai/">Band</a> platform. </p>
+<p>At the conference, I learned this is where the industry is heading, and I discovered the <a href="https://www.band.ai/" target="_blank" rel="noopener noreferrer">Band</a> platform. </p>
 <p>For the hackathon, I added Claude for more coding power, and Team Nightshift was born. We are a coding factory that&#x27;s building another coding factory</p>
 </article>
 
   <section class="film" id="video">
     <div class="intro">
       <h2>The video</h2>
-      <p>Team Nightshift's submission video: the room, a handoff and the result.</p>
+      <p>4-minute walkthrough</p>
     </div>
-    <video controls preload="metadata" playsinline aria-label="Team Nightshift submission video">
+    <video controls preload="metadata" playsinline poster="assets/team.jpg" aria-label="Team Nightshift submission video">
       <source src="https://github.com/vibhortayal/nightshift-pocketful/releases/download/video/team-nightshift-dark-factory.mp4" type="video/mp4">
-      Your browser can't play this video here. <a href="https://github.com/vibhortayal/nightshift-pocketful/releases/tag/video">Open it on GitHub</a>.
+      Your browser can't play this video here. <a href="https://github.com/vibhortayal/nightshift-pocketful/releases/tag/video" target="_blank" rel="noopener noreferrer">Open it on GitHub</a>.
     </video>
   </section>
 
   <section class="demo-section" aria-labelledby="demo-heading">
-    <h2 id="demo-heading"><a href="https://pocketful.duckdns.org/">Pocketful App Built by Darkfactory</a></h2>
+    <p class="demo-context">The app the factory built, running live.</p>
+    <h2 id="demo-heading"><a href="https://pocketful.duckdns.org/" target="_blank" rel="noopener noreferrer">Pocketful App Built by Darkfactory</a></h2>
     <a class="demo-open" href="https://pocketful.duckdns.org/" target="_blank" rel="noopener noreferrer">Open the Pocketful app <span aria-hidden="true">&#8599;</span><span class="demo-new-tab">(new tab)</span></a>
     <div class="demo-accounts">
       <p>Demo test accounts (reset hourly):</p>
@@ -249,29 +251,29 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
       <div class="group">
         <h3>The factory <span>50%</span></h3>
         <ul>
-          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/blob/main/FACTORY.md"><b>FACTORY.md</b><span>How it is built, what it cost, what went wrong and how it recovers</span></a></li>
-          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/tree/main/mandates"><b>mandates/</b><span>The written rules for each of the three seats</span></a></li>
-          <li><a href="https://github.com/vibhortayal/nightshift-pocketful#readme"><b>README.md</b><span>Team, track and how to read the repository</span></a></li>
+          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/blob/main/FACTORY.md" target="_blank" rel="noopener noreferrer"><b>FACTORY.md</b><span>How it is built, what it cost, what went wrong and how it recovers</span></a></li>
+          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/tree/main/mandates" target="_blank" rel="noopener noreferrer"><b>mandates/</b><span>The written rules for each of the three seats</span></a></li>
+          <li><a href="https://github.com/vibhortayal/nightshift-pocketful#readme" target="_blank" rel="noopener noreferrer"><b>README.md</b><span>Team, track and how to read the repository</span></a></li>
         </ul>
       </div>
       <div class="group">
         <h3>The app <span>25%</span></h3>
         <ul>
-          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/tree/main/stage-4"><b>stage-1/ to stage-4/</b><span>One complete, buildable folder per stage, each with its own RUN.md</span></a></li>
+          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/tree/main/stage-4" target="_blank" rel="noopener noreferrer"><b>stage-4/ (final app)</b><span>The final, buildable app folder with its RUN.md</span></a></li>
 
         </ul>
       </div>
       <div class="group">
         <h3>Agent teamwork <span>25%</span></h3>
         <ul>
-          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/blob/main/room.json"><b>room.json</b><span>The whole room, from the one dispatch to the final report</span></a></li>
+          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/blob/main/room.json" target="_blank" rel="noopener noreferrer"><b>room.json</b><span>The whole room, from the one dispatch to the final report</span></a></li>
         </ul>
       </div>
       <div class="group">
-        <h3>More <span>&nbsp;</span></h3>
+        <h3>Submission <span>&nbsp;</span></h3>
         <ul>
-          <li><a href="https://lablab.ai/ai-hackathons/wearedevelopers-hackathon/nightshift/dark-factory-built-by-nightshift"><b>Hackathon Submission</b></a></li>
-          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/blob/main/presentation/Team-Nightshift-deck.pdf"><b>The deck</b><span>The same story as slides</span></a></li>
+          <li><a href="https://lablab.ai/ai-hackathons/wearedevelopers-hackathon/nightshift/dark-factory-built-by-nightshift" target="_blank" rel="noopener noreferrer"><b>Our lablab entry page</b></a></li>
+          <li><a href="https://github.com/vibhortayal/nightshift-pocketful/blob/main/presentation/Team-Nightshift-deck.pdf" target="_blank" rel="noopener noreferrer"><b>The deck</b><span>The same story as slides</span></a></li>
         </ul>
       </div>
     </div>
@@ -285,7 +287,7 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
       </figure>
       <div>
         <p>Weeks before the hackathon, Vibhor paired two AI agents, Spark and Instinct, to build hobby projects and check each other's work. Claude joined for the hackathon.</p>
-        <p class="q">The early days are in the <a href="https://vibhortayal.github.io/bridge-diary/">Bridge Diary</a>.</p>
+        <p class="q">The early days are in the <a href="https://vibhortayal.github.io/bridge-diary/" target="_blank" rel="noopener noreferrer">Bridge Diary</a>.</p>
       </div>
     </div>
   </section>
