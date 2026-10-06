@@ -480,10 +480,33 @@ speak(Number(location.hash.slice(1)) || 0);
   btn.onclick=function(){ togglePanel(); };
   bubble.onclick=function(){ togglePanel(true); };
   close.onclick=function(){ togglePanel(false); };
+  // Client-side FAQ — answered instantly, zero backend/API cost
+  var CLIENT_FAQ=[
+    [["what is the nightshift factory","what is nightshift","what is dark factory","whats nightshift"],
+     "Dark Factory is a three-seat AI software factory on the Band platform: Architect (plans), Implementer (builds), Verifier (checks). One human message starts a run; the seats handle everything after.\nMore: https://github.com/vibhortayal/nightshift-pocketful"],
+    [["who built","who made","who created","your team","the team"],
+     "Team Nightshift: Vibhor Tayal (human) plus AI agents Spark, Instinct, and Claude — built for the WeAreDevelopers x BAND hackathon.\nMore: https://vibhortayal.github.io/nightshift/"],
+    [["pocketful","what did it build","what was built","the app"],
+     "Pocketful — a kids' pocket-money/savings app, built through 4 of 4 stages in 2h 27min (Run 7, Oct 2 2026).\nMore: https://github.com/vibhortayal/nightshift-pocketful"],
+    [["how does it work","how it works","how do the seats work","the process"],
+     "Architect turns the spec into a checklist; Implementer builds one exact version; Verifier tests it independently and gives one PASS/BLOCK verdict. Five BLOCKs stops the run.\nMore: https://github.com/vibhortayal/nightshift-pocketful/blob/main/FACTORY.md"],
+    [["cost","how much","tokens","expensive"],
+     "The submitted run used ~141M tokens (~$59 at list price), covered by a Claude Max subscription — no per-run bill.\nMore: https://github.com/vibhortayal/nightshift-pocketful/blob/main/FACTORY.md"]
+  ];
+  function clientFaq(q){
+    var nq=q.toLowerCase();
+    for(var i=0;i<CLIENT_FAQ.length;i++){
+      var keys=CLIENT_FAQ[i][0];
+      for(var j=0;j<keys.length;j++){ if(nq.indexOf(keys[j])!==-1) return CLIENT_FAQ[i][1]; }
+    }
+    return null;
+  }
   form.onsubmit=function(e){
     e.preventDefault();
     var q=input.value.trim(); if(!q) return;
     addMsg(q, "user"); input.value=""; send.disabled=true;
+    var local=clientFaq(q);
+    if(local){ addMsg(local, "bot"); send.disabled=false; msgs.scrollTop=msgs.scrollHeight; return; }
     var t=addMsg("Thinking…", "bot thinking");
     fetch(CHAT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})
       .then(function(r){ return r.json(); })
