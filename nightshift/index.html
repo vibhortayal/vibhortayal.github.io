@@ -469,7 +469,22 @@ speak(Number(location.hash.slice(1)) || 0);
       form=document.getElementById('nsc-chat-form'), input=document.getElementById('nsc-chat-input'),
       send=document.getElementById('nsc-chat-send'), bubble=document.getElementById('nsc-chat-bubble');
   function addMsg(text, cls){
-    var d=document.createElement('div'); d.className='nsc-msg '+cls; d.textContent=text;
+    var d=document.createElement('div'); d.className='nsc-msg '+cls;
+    if(cls.indexOf('bot')!==-1){
+      // Linkify http(s) URLs safely: text nodes + anchor elements, never innerHTML
+      var urlRe=/(https?:\/\/[^\s)]+)/g, last=0, m;
+      while((m=urlRe.exec(text))!==null){
+        if(m.index>last) d.appendChild(document.createTextNode(text.slice(last,m.index)));
+        var a=document.createElement('a');
+        a.href=m[1]; a.textContent=m[1]; a.target='_blank'; a.rel='noopener';
+        a.style.color='var(--sodium)'; a.style.wordBreak='break-all';
+        d.appendChild(a); last=m.index+m[1].length;
+      }
+      if(last<text.length) d.appendChild(document.createTextNode(text.slice(last)));
+      if(last===0) d.textContent=text;
+    } else {
+      d.textContent=text;
+    }
     msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; return d;
   }
   addMsg("Hi! Ask me anything about the Nightshift factory, the hackathon, or how we built Pocketful.", "bot");
