@@ -416,11 +416,11 @@ speak(Number(location.hash.slice(1)) || 0);
 </script>
 <style>
 /* ---------- nightshift chat widget ---------- */
-#nsc-chat-btn{position:fixed;right:22px;bottom:22px;z-index:9999;width:58px;height:58px;border-radius:50%;
-  background:var(--sodium);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 20px rgba(255,184,28,.35);transition:transform .15s}
+#nsc-chat-btn{position:fixed;right:22px;bottom:22px;z-index:9999;width:62px;height:62px;border-radius:50%;
+  background:#0a1128;border:2px solid var(--sodium);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(255,184,28,.35);transition:transform .15s;overflow:hidden;padding:0}
 #nsc-chat-btn:hover{transform:scale(1.06)}
-#nsc-chat-btn svg{width:26px;height:26px;fill:#020716}
+#nsc-chat-btn img{width:100%;height:100%;object-fit:cover}
 #nsc-chat-bubble{position:fixed;right:90px;bottom:34px;z-index:9999;background:#16213a;color:var(--chalk);
   border:1px solid var(--rule);border-radius:14px 14px 4px 14px;padding:8px 14px;font-size:.85rem;
   box-shadow:0 4px 16px rgba(0,0,0,.4);white-space:nowrap;cursor:pointer}
@@ -447,9 +447,9 @@ speak(Number(location.hash.slice(1)) || 0);
 #nsc-chat-send:disabled{opacity:.5;cursor:default}
 </style>
 <button id="nsc-chat-btn" aria-label="Chat about Nightshift">
-  <svg viewBox="0 0 24 24"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4L12 2zM19 14l1.1 3.4L23.5 18l-3.4 1.1L19 22.5l-1.1-3.4L14.5 18l3.4-1.1L19 14zM5 15l.9 2.6 2.6.9-2.6.9L5 22l-.9-2.6-2.6-.9 2.6-.9L5 15z"/></svg>
+  <img src="assets/spark-avatar.jpg" alt="Spark">
 </button>
-<div id="nsc-chat-bubble"><b>Questions?</b> Ask the factory ✦</div>
+<div id="nsc-chat-bubble"><b>Questions?</b> Ask Spark ✦</div>
 <div id="nsc-chat-panel" role="dialog" aria-label="Nightshift chat">
   <div id="nsc-chat-head"><b>Ask <span>Nightshift</span></b><button id="nsc-chat-close" aria-label="Close">×</button></div>
   <div id="nsc-chat-msgs"></div>
