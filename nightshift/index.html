@@ -543,7 +543,7 @@ speak(Number(location.hash.slice(1)) || 0);
     CLIENT_FAQ.forEach(function(entry, idx){
       entry[0].forEach(function(k){ fuseIndex.push({key:k, idx:idx}); });
     });
-    FUSE=new Fuse(fuseIndex, {keys:['key'], threshold:0.4, ignoreLocation:true});
+    FUSE=new Fuse(fuseIndex, {keys:['key'], threshold:0.3, ignoreLocation:true, minMatchCharLength:4});
   }catch(e){ FUSE=null; }
 
   function clientFaq(q){
@@ -557,10 +557,10 @@ speak(Number(location.hash.slice(1)) || 0);
         if(nq===k||nq.indexOf(k+" ")===0||endsWith(nq," "+k)) return CLIENT_FAQ[i][1];
       }
     }
-    // Fuse.js fuzzy fallback
+    // Fuse.js fuzzy fallback — strict score to avoid false positives like "weakness"
     if(FUSE){
       var res=FUSE.search(nq);
-      if(res.length&&res[0].score<0.5) return CLIENT_FAQ[res[0].item.idx][1];
+      if(res.length&&res[0].score<0.3) return CLIENT_FAQ[res[0].item.idx][1];
     }
     return null;
   }
