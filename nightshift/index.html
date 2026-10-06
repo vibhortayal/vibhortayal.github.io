@@ -452,7 +452,8 @@ speak(Number(location.hash.slice(1)) || 0);
 <div id="nsc-chat-bubble"><b>Questions?</b> Ask Spark ✦</div>
 <div id="nsc-chat-panel" role="dialog" aria-label="Nightshift chat">
   <div id="nsc-chat-head"><b>Ask <span>Nightshift</span></b><button id="nsc-chat-close" aria-label="Close">×</button></div>
-  <div style="padding:6px 16px;font-size:.75rem;color:var(--dust);border-bottom:1px solid var(--rule)">AI assistant — answers from the project repo. Questions may be logged to improve answers.</div>
+  <div style="padding:6px 16px;font-size:.75rem;color:var(--dust);border-bottom:1px solid var(--rule)">AI assistant — answers from the project repo. Questions are logged for 30 days to improve answers.</div>
+  <div id="nsc-chips" style="display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px 0"></div>
   <div id="nsc-chat-msgs"></div>
   <form id="nsc-chat-form">
     <input id="nsc-chat-input" type="text" placeholder="Ask about the factory…" autocomplete="off" maxlength="500">
@@ -472,6 +473,16 @@ speak(Number(location.hash.slice(1)) || 0);
     msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; return d;
   }
   addMsg("Hi! Ask me anything about the Nightshift factory, the hackathon, or how we built Pocketful.", "bot");
+  // Suggested question chips — zero API cost, tap to ask
+  var CHIPS=["What is the Nightshift factory?","Who built this?","What is Pocketful?","How does it work?"];
+  var chipsEl=document.getElementById('nsc-chips');
+  CHIPS.forEach(function(c){
+    var b=document.createElement('button');
+    b.type='button'; b.textContent=c;
+    b.style.cssText='background:#16213a;border:1px solid var(--rule);border-radius:20px;color:var(--chalk);padding:6px 12px;font-size:.8rem;cursor:pointer;font-family:var(--text)';
+    b.onclick=function(){ input.value=c; form.requestSubmit(); chipsEl.style.display='none'; };
+    chipsEl.appendChild(b);
+  });
   function togglePanel(force){
     var open = force!==undefined ? force : !panel.classList.contains('open');
     panel.classList.toggle('open', open);
