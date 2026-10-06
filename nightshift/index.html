@@ -82,6 +82,12 @@ h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size
 .group a b,.group .item b{display:block;font-family:var(--display);font-weight:700;font-size:1.55rem;line-height:1.05;letter-spacing:.01em;color:var(--chalk)}
 .group a span,.group .item span{display:block;margin-top:5px;color:var(--dust);font-size:.9rem;max-width:28ch}
 .group a:hover b,.group a:focus-visible b{color:var(--sodium)}
+.demo-section{max-width:var(--max);margin:0 auto;padding:0 0 38px}
+.demo-section h2{margin:0 0 16px;font-family:var(--display);font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.05}
+.demo-section h2 a{color:var(--chalk);text-decoration:none}
+.demo-section h2 a:hover,.demo-section h2 a:focus-visible{color:var(--sodium)}
+.demo-section .demo-accounts dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media(max-width:700px){.demo-section .demo-accounts dl{grid-template-columns:1fr;gap:4px}}
 .demo-accounts{padding:0 0 14px;font-size:.85rem;color:var(--dust);overflow-wrap:anywhere}
 .demo-accounts p{margin:0 0 8px}
 .demo-accounts dl{margin:0 0 10px}
@@ -203,6 +209,19 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
     </video>
   </section>
 
+  <section class="demo-section" aria-labelledby="demo-heading">
+    <h2 id="demo-heading"><a href="https://pocketful.duckdns.org/">Pocketful App Built by Darkfactory</a></h2>
+    <div class="demo-accounts">
+      <p>Demo test accounts (reset hourly):</p>
+      <dl>
+        <div><dt>ada@example.com</dt><dd>fEqmhWPN5LCX</dd></div>
+        <div><dt>bob@example.com</dt><dd>YJP3tWT-sqpw</dd></div>
+        <div><dt>cy@example.com</dt><dd>tALK46zn04uu</dd></div>
+      </dl>
+      <p>Demo-only passwords, used nowhere else.</p>
+    </div>
+  </section>
+
   <section class="below">
     <div class="intro">
       <h2>The software factory we built</h2>
@@ -234,18 +253,7 @@ footer{border-top:1px solid var(--rule);padding:18px 0 34px;display:flex;justify
         <h3>The app <span>25%</span></h3>
         <ul>
           <li><a href="https://github.com/vibhortayal/nightshift-pocketful/tree/main/stage-4"><b>stage-1/ to stage-4/</b><span>One complete, buildable folder per stage, each with its own RUN.md</span></a></li>
-          <li>
-            <a href="https://pocketful.duckdns.org/"><b>Pocketful App Built by Darkfactory</b></a>
-            <div class="demo-accounts">
-              <p>Demo test accounts (reset hourly):</p>
-              <dl>
-                <dt>ada@example.com</dt><dd>fEqmhWPN5LCX</dd>
-                <dt>bob@example.com</dt><dd>YJP3tWT-sqpw</dd>
-                <dt>cy@example.com</dt><dd>tALK46zn04uu</dd>
-              </dl>
-              <p>Demo-only passwords, used nowhere else.</p>
-            </div>
-          </li>
+
         </ul>
       </div>
       <div class="group">
