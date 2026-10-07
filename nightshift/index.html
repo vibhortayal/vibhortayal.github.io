@@ -485,13 +485,15 @@ speak(Number(location.hash.slice(1)) || 0);
     msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; return d;
   }
   function linkify(el, text){
-    // Linkify http(s) URLs safely: text nodes + anchor elements, never innerHTML
-    var urlRe=/(https?:\/\/[^\s)]+)/g, last=0, m, found=false;
+    // Linkify URLs safely: text nodes + anchor elements, never innerHTML
+    // Matches https:// URLs and bare domains (github.com/..., band.ai, *.github.io/...)
+    var urlRe=/(https?:\/\/[^\s)]+|(?:[a-z0-9-]+\.)+(?:com|ai|io|org|net)(?:\/[^\s)]*)?)/gi, last=0, m, found=false;
     while((m=urlRe.exec(text))!==null){
       found=true;
       if(m.index>last) el.appendChild(document.createTextNode(text.slice(last,m.index)));
+      var raw=m[1], href=/^https?:\/\//i.test(raw)?raw:'https://'+raw;
       var a=document.createElement('a');
-      a.href=m[1]; a.textContent=m[1]; a.target='_blank'; a.rel='noopener';
+      a.href=href; a.textContent=raw; a.target='_blank'; a.rel='noopener';
       a.style.color='var(--sodium)'; a.style.wordBreak='break-all';
       el.appendChild(a); last=m.index+m[1].length;
     }
@@ -534,7 +536,9 @@ speak(Number(location.hash.slice(1)) || 0);
     [["how does it work","how it works","how do the seats work","the process"],
      "Architect turns the spec into a checklist; Implementer builds one exact version; Verifier tests it independently and gives one PASS/BLOCK verdict. Five BLOCKs stops the run.\nMore: https://github.com/vibhortayal/nightshift-pocketful/blob/main/FACTORY.md"],
     [["cost","how much","tokens","expensive"],
-     "The submitted run used ~141M tokens (~$59 at list price), covered by a Claude Max subscription — no per-run bill.\nMore: https://github.com/vibhortayal/nightshift-pocketful/blob/main/FACTORY.md"]
+     "The submitted run used ~141M tokens (~$59 at list price), covered by a Claude Max subscription — no per-run bill.\nMore: https://github.com/vibhortayal/nightshift-pocketful/blob/main/FACTORY.md"],
+    [["human message","the human message","one message"],
+     "One human message starts a run — you describe what you want built, and the three seats (Architect, Implementer, Verifier) handle every stage after that with no further input.\nMore: https://github.com/vibhortayal/nightshift-pocketful/blob/main/FACTORY.md"]
   ];
   // Background knowledge repository — static glossary, searched not suggested (no chips)
   var KNOWLEDGE=[
@@ -552,8 +556,8 @@ speak(Number(location.hash.slice(1)) || 0);
      "An API is a defined way for two programs to talk to each other — like a menu: you send a request, the server returns data.\nSource: https://en.wikipedia.org/wiki/API"],
     [["what is ai","whats ai","artificial intelligence"],
      "AI is software that can understand language, recognize patterns, and make decisions — instead of only following fixed instructions.\nSource: https://en.wikipedia.org/wiki/Artificial_intelligence"],
-    [["what is an ai agent","whats an ai agent","what is ai agent"],
-     "An AI agent is an AI program that can pursue goals, use software or other tools, and take actions with some level of autonomy.\nSource: https://en.wikipedia.org/wiki/AI_agent"],
+    [["what is an ai agent","whats an ai agent","what is ai agent","what is agent","whats agent"],
+     "An AI agent is an AI program that can pursue goals, use tools, and take actions with some autonomy. In Dark Factory, the three seats are AI agents: Architect (plans), Implementer (builds), Verifier (checks).\nSource: https://en.wikipedia.org/wiki/AI_agent"],
     [["what is an llm","whats an llm","what is llm"],
      "An LLM is a language model trained with self-supervised machine learning on a vast amount of text, designed for natural language processing tasks, especially language generation. Examples: Claude, GPT, Grok.\nSource: https://en.wikipedia.org/wiki/Large_language_model"],
     [["what is a prompt","whats a prompt"],
@@ -597,7 +601,7 @@ speak(Number(location.hash.slice(1)) || 0);
   }catch(e){ FUSE=null; KFUSE=null; }
 
   var NEG_RE=/\b(not|no|never|don't|doesn't|isn't|aren't)\b|n't/;
-  function searchStore(store, fuse, q, nq){
+  function searchStore(store, fuse, q, nq, minWords){
     function endsWith(str, suffix){ return str.slice(-suffix.length)===suffix; }
     for(var i=0;i<store.length;i++){
       var keys=store[i][0];
@@ -607,7 +611,7 @@ speak(Number(location.hash.slice(1)) || 0);
       }
     }
     try{
-      if(fuse && nq.split(" ").length>=3 && !NEG_RE.test(nq)){
+      if(fuse && nq.split(" ").length>=(minWords||3) && !NEG_RE.test(nq)){
         var res=fuse.search(nq);
         if(res.length && res[0].score<=0.15 &&
            (res.length<2 || res[1].score-res[0].score>=0.1)){
@@ -619,8 +623,8 @@ speak(Number(location.hash.slice(1)) || 0);
   }
   function clientFaq(q){
     var nq=q.toLowerCase().replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();
-    // Project FAQ first, then background knowledge repository
-    return searchStore(CLIENT_FAQ, FUSE, q, nq) || searchStore(KNOWLEDGE, KFUSE, q, nq);
+    // Project FAQ first (3+ words for fuzzy), then background knowledge (2+ words)
+    return searchStore(CLIENT_FAQ, FUSE, q, nq, 3) || searchStore(KNOWLEDGE, KFUSE, q, nq, 2);
   }
   form.onsubmit=function(e){
     e.preventDefault();
