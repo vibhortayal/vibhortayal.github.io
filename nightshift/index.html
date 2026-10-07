@@ -487,15 +487,24 @@ speak(Number(location.hash.slice(1)) || 0);
   function linkify(el, text){
     // Linkify URLs safely: text nodes + anchor elements, never innerHTML
     // Matches https:// URLs and bare domains (github.com/..., band.ai, *.github.io/...)
+    // Only allowlisted hosts become clickable; others render as plain text.
+    var ALLOWED_HOSTS = /^(github\.com|raw\.githubusercontent\.com|vibhortayal\.github\.io|[\w-]+\.github\.io|lablab\.ai|band\.ai|pocketful\.duckdns\.org|en\.wikipedia\.org)$/i;
     var urlRe=/(https?:\/\/[^\s)]+|(?:[a-z0-9-]+\.)+(?:com|ai|io|org|net)(?:\/[^\s)]*)?)/gi, last=0, m, found=false;
     while((m=urlRe.exec(text))!==null){
       found=true;
       if(m.index>last) el.appendChild(document.createTextNode(text.slice(last,m.index)));
       var raw=m[1], href=/^https?:\/\//i.test(raw)?raw:'https://'+raw;
-      var a=document.createElement('a');
-      a.href=href; a.textContent=raw; a.target='_blank'; a.rel='noopener';
-      a.style.color='var(--sodium)'; a.style.wordBreak='break-all';
-      el.appendChild(a); last=m.index+m[1].length;
+      var host='';
+      try { host=new URL(href).hostname; } catch(e){}
+      if(ALLOWED_HOSTS.test(host)){
+        var a=document.createElement('a');
+        a.href=href; a.textContent=raw; a.target='_blank'; a.rel='noopener';
+        a.style.color='var(--sodium)'; a.style.wordBreak='break-all';
+        el.appendChild(a);
+      } else {
+        el.appendChild(document.createTextNode(raw));
+      }
+      last=m.index+m[1].length;
     }
     if(last<text.length) el.appendChild(document.createTextNode(text.slice(last)));
     if(!found) el.textContent=text;
