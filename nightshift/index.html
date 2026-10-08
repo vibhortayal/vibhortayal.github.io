@@ -478,9 +478,31 @@ speak(Number(location.hash.slice(1)) || 0);
     d.innerHTML='Spark is typing<span class="nsc-typing-dots"><span>.</span><span>.</span><span>.</span></span>';
     msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; return d;
   }
-  function addMsg(text, cls){
+  var FEEDBACK_API = "https://nightshift-chat-vibhor-t.vercel.app/api/feedback";
+  function qhash(s){ var h=0; for(var i=0;i<s.length;i++){ h=((h<<5)-h+s.charCodeAt(i))|0; } return "q"+Math.abs(h).toString(36); }
+  function sendFeedback(qh, vote, btn){
+    try{
+      fetch(FEEDBACK_API, {method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({qhash: qh, vote: vote})});
+      var wrap = btn.parentNode;
+      wrap.innerHTML = '<span style="font-size:.75rem;color:var(--chalk);opacity:.7">Thanks!</span>';
+    }catch(e){}
+  }
+  function addMsg(text, cls, qh){
     var d=document.createElement('div'); d.className='nsc-msg '+cls;
-    if(cls.indexOf('bot')!==-1){ linkify(d, text); }
+    if(cls.indexOf('bot')!==-1){
+      linkify(d, text);
+      if(qh){
+        var fb=document.createElement('div');
+        fb.style.cssText='margin-top:6px;display:flex;gap:8px;';
+        fb.innerHTML='<button style="background:none;border:1px solid var(--rule);border-radius:12px;padding:2px 10px;font-size:.75rem;cursor:pointer;color:var(--chalk)" data-v="up">\uD83D\uDC4D</button><button style="background:none;border:1px solid var(--rule);border-radius:12px;padding:2px 10px;font-size:.75rem;cursor:pointer;color:var(--chalk)" data-v="down">\uD83D\uDC4E</button>';
+        var btns=fb.querySelectorAll('button');
+        for(var i=0;i<btns.length;i++){
+          (function(b){ b.onclick=function(){ sendFeedback(qh, b.getAttribute('data-v'), b); }; })(btns[i]);
+        }
+        d.appendChild(fb);
+      }
+    }
     else { d.textContent=text; }
     msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; return d;
   }
@@ -509,10 +531,20 @@ speak(Number(location.hash.slice(1)) || 0);
     if(last<text.length) el.appendChild(document.createTextNode(text.slice(last)));
     if(!found) el.textContent=text;
   }
-  function setBotText(el, text){
+  function setBotText(el, text, qh){
     el.classList.remove('thinking');
     el.innerHTML='';
     linkify(el, text);
+    if(qh){
+      var fb=document.createElement('div');
+      fb.style.cssText='margin-top:6px;display:flex;gap:8px;';
+      fb.innerHTML='<button style="background:none;border:1px solid var(--rule);border-radius:12px;padding:2px 10px;font-size:.75rem;cursor:pointer;color:var(--chalk)" data-v="up">\uD83D\uDC4D</button><button style="background:none;border:1px solid var(--rule);border-radius:12px;padding:2px 10px;font-size:.75rem;cursor:pointer;color:var(--chalk)" data-v="down">\uD83D\uDC4E</button>';
+      var btns=fb.querySelectorAll('button');
+      for(var i=0;i<btns.length;i++){
+        (function(b){ b.onclick=function(){ sendFeedback(qh, b.getAttribute('data-v'), b); }; })(btns[i]);
+      }
+      el.appendChild(fb);
+    }
   }
   addMsg("Hi! Ask me anything about the Nightshift factory, the hackathon, or how we built Pocketful.", "bot");
   // Suggested question chips — zero API cost, tap to ask
@@ -748,11 +780,11 @@ var CLIENT_FAQ=[
     var q=input.value.trim(); if(!q) return;
     addMsg(q, "user"); input.value=""; send.disabled=true;
     var local=clientFaq(q);
-    if(local){ addMsg(local, "bot"); send.disabled=false; msgs.scrollTop=msgs.scrollHeight; return; }
+    if(local){ addMsg(local, "bot", qhash(q)); send.disabled=false; msgs.scrollTop=msgs.scrollHeight; return; }
     var t=showTyping();
     fetch(CHAT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})
       .then(function(r){ return r.json(); })
-      .then(function(d){ setBotText(t, d.answer||d.error||"Sorry, something went wrong."); })
+      .then(function(d){ setBotText(t, d.answer||d.error||"Sorry, something went wrong.", qhash(q)); })
       .catch(function(){ setBotText(t, "Couldn't reach the chat backend. Try again in a moment."); })
       .finally(function(){ send.disabled=false; msgs.scrollTop=msgs.scrollHeight; });
   };
